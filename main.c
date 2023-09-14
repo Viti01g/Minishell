@@ -20,5 +20,5 @@ int	main(int argc, char **argv)
 		view = readline("\e[1;32mminishell$ \e[0m");
 	}
 	return (EXIT_SUCCESS);
-	// Comentario
+	// Comentarioooooooooooooo
 }
