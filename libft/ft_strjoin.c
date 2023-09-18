@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uliherre <uliherre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/11 18:03:01 by uherrero          #+#    #+#             */
-/*   Updated: 2022/07/17 21:54:22 by uliherre         ###   ########.fr       */
+/*   Created: 2022/04/01 22:08:10 by drubio-m          #+#    #+#             */
+/*   Updated: 2022/04/10 20:05:03 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,46 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	register char	*nw_str;
-	register char	*start;
+	char	*str;
+	int		i;
+	int		j;
 
-	if (NULL == s1 || NULL == s2)
+	i = 0;
+	j = 0;
+	if (!s1 || !s2)
 		return (NULL);
-	nw_str = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
-	start = nw_str;
-	if (NULL != nw_str)
+	str = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), 1);
+	if (str == (0))
+		return (0);
+	while (s1[i] != '\0')
 	{
-		while ('\0' != *s1)
-			*(nw_str++) = *(s1++);
-		while ('\0' != *s2)
-			*(nw_str++) = *(s2++);
+		str[i] = s1[i];
+		i++;
 	}
-	return (start);
+	while (s2[j] != '\0')
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	return (str);
 }
+// ***************************************************************************
+// INPUT
+// #1. La string prefijo.
+// #2. La string sufijo.
+// ***************************************************************************
+// OUTPUT
+// La nueva string. NULL si la reserva falla.
+// ***************************************************************************
+// DESCRIPTION
+// Reserva con malloc(3) una nueva string, basada en
+// la unión de las dos strings dadas como parámetros.
+// ***************************************************************************
+/*
+int main(void)
+{
+	char	s1[]= "hola";
+	char	s2[]= "que tal";
+	printf("%s\n", ft_strjoin(s1, s2));
+}
+*/

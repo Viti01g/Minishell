@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uliherre <uliherre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/16 02:19:13 by uherrero          #+#    #+#             */
-/*   Updated: 2023/06/06 18:18:21 by uliherre         ###   ########.fr       */
+/*   Created: 2022/04/09 18:40:49 by drubio-m          #+#    #+#             */
+/*   Updated: 2022/04/10 23:21:17 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,24 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*new_lst;
+	t_list	*lstret;
+	t_list	*noderet;
+	t_list	*contentret;
 
-	if (NULL != lst)
+	if (!lst)
+		return (NULL);
+	lstret = NULL;
+	while (lst)
 	{
-		new_lst = ft_lstnew(f(lst->content));
-		if (NULL == new_lst)
-			return (NULL);
-		if (lst->next != NULL)
+		contentret = (*f)(lst->content);
+		noderet = ft_lstnew(contentret);
+		if (!noderet)
 		{
-			new_lst->next = ft_lstmap(lst->next, f, del);
-			if (NULL == new_lst->next)
-				ft_lstdelone(new_lst, del);
-		}
-		return (new_lst);
-	}
-	return (NULL);
-}
-
-t_list_d	*ft_lstmap_d(t_list_d *lst, void *(*f)(void *), void (*del)(void *))
-{
-	t_list_d	*new_lst;
-
-	if (NULL != lst)
-	{
-		new_lst = ft_lstnew_d(f(lst->content));
-		if (NULL == new_lst)
+			ft_lstclear(&noderet, del);
 			return (NULL);
-		if (lst->next != NULL)
-		{
-			new_lst->next = ft_lstmap_d(lst->next, f, del);
-			if (NULL == new_lst->next)
-				ft_lstdelone((t_list *) new_lst, del);
-			else
-				new_lst->prev = lst->prev;
 		}
-		return (new_lst);
+		ft_lstadd_back(&lstret, noderet);
+		lst = lst->next;
 	}
-	return (NULL);
+	return (lstret);
 }

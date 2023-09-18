@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   memcpy.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulherrer <ulherrer@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 12:49:39 by uherrero          #+#    #+#             */
-/*   Updated: 2022/04/04 15:48:29 by ulherrer         ###   ########.fr       */
+/*   Created: 2022/03/22 17:37:22 by drubio-m          #+#    #+#             */
+/*   Updated: 2022/04/10 20:03:56 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,19 @@
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	register const unsigned char	*source;
-	register unsigned char			*destiny;
-	register size_t					x;
+	char	*cast_dst;
+	char	*cast_src;
+	size_t	i;
 
-	source = src;
-	destiny = dst;
-	x = -1;
-	if (NULL != dst || NULL != src)
-		while (++x < n)
-			destiny[x] = source[x];
-	return (dst);
-}
-
-void	*ft_memcpy_r(void *dst, const void *src, size_t n)
-{
-	register const unsigned char	*source;
-	register unsigned char			*destiny;
-
-	source = src;
-	destiny = dst;
-	if (NULL != dst || NULL != src)
-		while (ZERO < n--)
-			destiny[n] = source[n];
-	return (dst);
+	cast_dst = (char *) dst;
+	cast_src = (char *) src;
+	i = 0;
+	if (dst == 0 && src == 0)
+		return (0);
+	while (i < n)
+	{
+		cast_dst[i] = cast_src[i];
+		i++;
+	}
+	return (cast_dst);
 }

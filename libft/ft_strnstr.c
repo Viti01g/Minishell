@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulherrer <ulherrer@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/07 13:16:50 by uherrero          #+#    #+#             */
-/*   Updated: 2022/03/08 14:35:43 by ulherrer         ###   ########.fr       */
+/*   Created: 2022/03/29 17:14:36 by drubio-m          #+#    #+#             */
+/*   Updated: 2023/03/03 18:49:29 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,39 @@
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	register unsigned int	flag;
-	size_t					len_aux;
-	register const char		*needle_aux;
-	register const char		*hayst_aux;
+	size_t	i;
+	size_t	j;
 
-	if (!(*needle))
-		return ((char *)haystack);
-	while (*haystack && len--)
+	i = 0;
+	j = 0;
+	if (*needle == '\0')
+		return ((char *) haystack);
+	if (len == 0)
+		return (0);
+	while (i <= len && haystack[i])
 	{
-		needle_aux = (const char *)needle;
-		hayst_aux = (const char *)haystack;
-		if (*needle_aux == *hayst_aux)
+		j = 0;
+		while (i + j < len && haystack[i + j] == needle[j])
 		{
-			len_aux = len + 1;
-			flag = 1;
-			while (*needle_aux && flag)
-				if (*(needle_aux++) != *(hayst_aux++) || !len_aux--)
-					flag = ZERO;
-			if (flag)
-				return ((char *)haystack);
+			j++;
+			if (needle[j] == '\0')
+				return ((char *)haystack + i);
 		}
-		haystack++;
+		i++;
 	}
-	return (NULL);
+	if (haystack[i] == needle[j])
+		return ((char *)haystack + j);
+	else
+		return (0);
 }
+
+/*
+int main(void)
+{
+	char haystack[30] = "aaabcabcd";
+	char needle[10] = "aabc";
+	size_t	n = 0;
+//	printf("%s\n", strnstr(haystack, needle, n));
+	printf("%s", ft_strnstr(haystack, needle, n));
+}
+*/

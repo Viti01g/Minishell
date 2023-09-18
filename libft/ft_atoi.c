@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uliherre <uliherre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/07 17:09:52 by uherrero          #+#    #+#             */
-/*   Updated: 2023/06/06 18:21:43 by uliherre         ###   ########.fr       */
+/*   Created: 2022/03/29 22:46:26 by drubio-m          #+#    #+#             */
+/*   Updated: 2022/04/17 16:59:24 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,35 @@
 
 int	ft_atoi(const char *str)
 {
-	register int			negative;
-	register unsigned int	value;
+	int				i;
+	int				sign;
+	unsigned int	sol;
 
-	value = ZERO;
-	negative = TRUE;
-	while (TRUE == ft_isspace(*str))
-		str++;
-	if ('+' == *str || '-' == *str)
-		if ('-' == *(str++))
-			negative = -1;
-	while (TRUE == ft_isdigit(*str))
-		value = value * 10 + *(str++) - '0';
-	return ((int) value * negative);
+	i = 0;
+	sign = 1;
+	sol = 0;
+	while ((str[i] == 32) || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-')
+		sign *= -1;
+	if (str[i] == 45 || str[i] == 43)
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		sol = (sol * 10) + (str[i] - '0');
+		i++;
+	}
+	if (sol > 2147483647 && sign == 1)
+		return (-1);
+	if (sol > 2147483648 && sign == -1)
+		return (0);
+	return (sol * sign);
 }
+/*
+int main(void)
+{
+	char *str = "     +1023456789";
+//	printf("%d", atoi(str));
+	printf("%d", ft_atoi(str));
+}
+*/

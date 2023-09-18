@@ -3,67 +3,98 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uliherre <uliherre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/11 18:15:49 by uherrero          #+#    #+#             */
-/*   Updated: 2023/06/06 18:19:05 by uliherre         ###   ########.fr       */
+/*   Created: 2022/04/02 20:11:09 by drubio-m          #+#    #+#             */
+/*   Updated: 2022/04/28 17:56:42 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_free_split(char **str, int i)
+static size_t	ft_count_words(char const *s, char c)
 {
-	while (i-- >= ZERO)
+	size_t	word_count;
+	size_t	i;
+
+	word_count = 0;
+	i = 0;
+	while (s[i])
 	{
-		free(str[i]);
-		str[i] = NULL;
+		while (s[i] && s[i] == c)
+			i++;
+		while (s[i] && s[i] != c)
+		{
+			if (i == 0 || s[i - 1] == c)
+				word_count++;
+			i++;
+		}
 	}
-	free(str);
-	str = NULL;
+	return (word_count);
 }
 
-static size_t	ft_count_word(char const *s, char c)
+static void	ft_free_split(char **str, size_t words)
 {
-	register size_t	size;
-
-	size = ZERO;
-	while ('\0' != *s)
+	while (words > 0)
 	{
-		while (*s == c && '\0' != *s)
-			s++;
-		while (*s != c && '\0' != *s)
-			s++;
-		if (*(s - 1) != c)
-			size++;
+		free(str[words]);
+		words--;
 	}
-	return (size);
+	free(str);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	register char		**str;
-	register char const	*start;
-	register size_t		i;
-	register size_t		size;
+	size_t	i;
+	size_t	j;
+	char	**str;
+	size_t	index;
 
-	if (NULL == s)
+	index = 0;
+	i = 0;
+	if (!s)
 		return (NULL);
-	size = ft_count_word(s, c);
-	str = (char **) ft_calloc(1 + size, sizeof(char *));
-	if (NULL == str)
+	str = ft_calloc(sizeof (char *), (ft_count_words(s, c) + 1));
+	if (!str)
 		return (NULL);
-	i = ZERO;
-	while (ZERO != size--)
+	while (s[i] && (index < ft_count_words(s, c)))
 	{
-		while (*s == c)
-			s++;
-		start = s;
-		while ('\0' != *s && *s != c)
-			s++;
-		str[i++] = ft_substr(start, ZERO, s - start);
-		if (NULL == str[i - 1])
-			ft_free_split(str, i);
+		while (s[i] && s[i] == c)
+			i++;
+		j = i;
+		while (s[i] && s[i] != c)
+			i++;
+		str[index++] = ft_substr(s, j, (i - j));
 	}
+	if (!str)
+		ft_free_split(str, ft_count_words(s, c));
 	return (str);
 }
+//*****************************************************************************
+// INPUT
+// #1. La string a separar.
+// #2. El caracter delimitador.
+//*****************************************************************************
+// OUTPUT
+// El array de strings resultante. NULL si la reserva falla.
+//*****************************************************************************
+// DESCRIPTION
+// Reserva con malloc(3) y devuelve un array de strings obtenido al separar 
+// ’s’ con el caracter ’c’ como delimitador. El array debe terminar en NULL.
+//*****************************************************************************
+
+/*
+int main(void)
+{
+char s[] = "hola que tal";
+char c = ' ';
+char **res;
+res = ft_split(s, c);
+while (*res)
+{
+	printf("%s", *res++);
+}
+system("leaks a.out");
+return (0);
+}
+*/

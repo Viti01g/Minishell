@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulherrer <ulherrer@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/06 15:59:57 by uherrero          #+#    #+#             */
-/*   Updated: 2022/03/08 14:35:19 by ulherrer         ###   ########.fr       */
+/*   Created: 2022/03/25 13:40:23 by drubio-m          #+#    #+#             */
+/*   Updated: 2022/04/10 20:04:39 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,27 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	register char	*str_aux;
-	register char	chr;
+	int		i;
+	char	*cast_s;
 
-	chr = (char)c;
-	str_aux = (char *)s - TRUE;
-	while ('\0' != *(++str_aux))
-		if (*str_aux == chr)
-			return (str_aux);
-	if ('\0' != chr)
-		str_aux = NULL;
-	return (str_aux);
+	i = 0;
+	cast_s = (char *) s;
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			return ((char *)s + i);
+		i++;
+	}
+	if (c == 0)
+		return (cast_s + i);
+	return (0);
 }
+/*
+int main(void)
+{
+	char *s = "there is so \0ma\0ny \0 \\0 in t\0his stri\0ng !\0\0\0\0";
+//	int c = 111;
+	printf("%s\n", strchr(s, '\0'));
+	printf("%s\n", ft_strchr(s, '\0'));
+}
+*/

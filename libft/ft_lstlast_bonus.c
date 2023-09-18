@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uliherre <uliherre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/15 13:47:59 by uherrero          #+#    #+#             */
-/*   Updated: 2022/06/16 19:56:38 by uliherre         ###   ########.fr       */
+/*   Created: 2022/04/08 18:56:43 by drubio-m          #+#    #+#             */
+/*   Updated: 2022/04/10 20:03:13 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	if (NULL != lst)
-		while (NULL != lst->next)
-			lst = lst->next;
+	if (!lst)
+		return (NULL);
+	while (lst->next != NULL)
+		lst = lst->next;
 	return (lst);
 }

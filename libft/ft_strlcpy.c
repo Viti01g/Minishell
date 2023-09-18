@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uliherre <uliherre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/08 15:55:29 by uherrero          #+#    #+#             */
-/*   Updated: 2022/07/16 16:10:25 by uliherre         ###   ########.fr       */
+/*   Created: 2022/03/23 13:56:37 by drubio-m          #+#    #+#             */
+/*   Updated: 2022/04/10 20:05:29 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,32 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	register const char	*str;
-	register size_t		x;
+	size_t	i;
+	size_t	j;
 
-	x = dstsize;
-	str = src;
-	if (ZERO != dstsize)
+	i = 0;
+	j = 0;
+	while (src[i])
+		i++;
+	if (dstsize < 1)
+		return (i);
+	while (src[j] && j < dstsize - 1)
 	{
-		while (ZERO != --dstsize)
-		{
-			*(dst++) = *(src++);
-			if ('\0' == *(dst - 1))
-				break ;
-		}
+		dst[j] = src[j];
+		j++;
 	}
-	if (ZERO == dstsize)
-	{
-		if (ZERO != x)
-			*dst = '\0';
-		while ('\0' != *(src++))
-			;
-	}
-	return (src - str - 1);
+		dst[j] = '\0';
+	return (i);
 }
+/*
+int main(void)
+{
+	char dst[100] = "hola que tal";
+	char *src = "adios";
+	size_t n = 2;
+	//printf("%lu\n", ft_strlcpy(dst, src, n));
+	//printf("%lu\n", strlcpy(dst, src, n));
+//	printf("%lu\n", strlcpy(((void *)0), ((void *)0), 10));
+	printf("%lu\n", ft_strlcpy(((void *)0), ((void *)0), 10));
+}
+*/

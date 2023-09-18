@@ -3,32 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulherrer <ulherrer@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/14 18:57:45 by uherrero          #+#    #+#             */
-/*   Updated: 2022/06/04 14:23:58 by ulherrer         ###   ########.fr       */
+/*   Created: 2022/04/06 20:16:52 by drubio-m          #+#    #+#             */
+/*   Updated: 2022/12/09 18:22:54 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#define BASE 10
-
-static void	ft_digit(unsigned int nu, int fd)
-{
-	char	aux;
-
-	aux = nu % BASE + '0';
-	if (nu / BASE)
-		ft_digit(nu / BASE, fd);
-	write(fd, &aux, sizeof(char));
-}
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	if (ZERO > n)
+	long	num;
+
+	num = n;
+	if (num < 0)
 	{
-		n = -n;
-		write(fd, "-", sizeof(char));
+		ft_putchar_fd('-', fd);
+		num *= -1;
 	}
-	ft_digit((unsigned int) n, fd);
+	if (num > 9)
+	{
+		ft_putnbr_fd((num / 10), fd);
+		ft_putchar_fd(((num % 10) + '0'), fd);
+	}
+	else
+		ft_putchar_fd(num + '0', fd);
 }

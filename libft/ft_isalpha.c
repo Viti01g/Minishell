@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   isalpha.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uliherre <uliherre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <drubio-m@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/08 18:28:46 by uherrero          #+#    #+#             */
-/*   Updated: 2022/06/16 19:40:45 by uliherre         ###   ########.fr       */
+/*   Created: 2022/03/21 11:44:52 by drubio-m          #+#    #+#             */
+/*   Updated: 2022/04/10 20:02:35 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
 int	ft_isalpha(int c)
 {
-	if ((unsigned) c - A_LOWER < 26 || (unsigned) c - A_UPPER < 26)
-		return (TRUE);
-	return (FALSE);
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
+	else
+		return (0);
 }

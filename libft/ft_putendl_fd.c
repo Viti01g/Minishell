@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulherrer <ulherrer@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/14 18:17:47 by uherrero          #+#    #+#             */
-/*   Updated: 2022/03/08 14:34:58 by ulherrer         ###   ########.fr       */
+/*   Created: 2022/04/06 19:36:17 by drubio-m          #+#    #+#             */
+/*   Updated: 2022/04/10 20:04:18 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,26 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	if (s)
+	int	i;
+
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i])
 	{
-		write(fd, s, ft_strlen(s) * sizeof(char));
-		write(fd, "\n", sizeof(char));
+		write(fd, &s[i], 1);
+		i++;
 	}
+	write(fd, "\n", 1);
 }
+//*****************************************************************************
+// INPUT
+// s: La string a enviar.
+// fd: El file descriptor sobre el que escribir.
+//*****************************************************************************
+// OUTPUT
+// Nada
+//*****************************************************************************
+// DESCRIPTION
+// Envía la string ’s’ al file descriptor dado, seguido de un salto de línea.
+//*****************************************************************************

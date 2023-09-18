@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uliherre <uliherre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/16 16:26:02 by uliherre          #+#    #+#             */
-/*   Updated: 2022/07/16 16:26:09 by uliherre         ###   ########.fr       */
+/*   Created: 2022/03/25 11:26:19 by drubio-m          #+#    #+#             */
+/*   Updated: 2022/04/10 20:06:36 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
 int	ft_toupper(int c)
 {
-	if ((unsigned) c - A_LOWER < 26)
-		c = c TO_UPPER;
-	return (c);
+	if (c >= 97 && c <= 122)
+		return (c - 32);
+	else
+		return (c);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uliherre <uliherre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/07 13:05:35 by uherrero          #+#    #+#             */
-/*   Updated: 2022/06/16 21:10:03 by uliherre         ###   ########.fr       */
+/*   Created: 2022/03/24 17:18:22 by drubio-m          #+#    #+#             */
+/*   Updated: 2022/04/10 20:05:09 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,28 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	register size_t	n;
-	register size_t	len_src;
-	register size_t	len_dst;
+	size_t	i;
+	size_t	n;
+	size_t	z;
 
-	n = ZERO;
-	len_src = ft_strlen(src);
-	len_dst = ZERO;
-	if (ZERO != dstsize)
-		len_dst = ft_strlen(dst);
-	while (*dst && dstsize > 1)
+	i = ft_strlen(dst);
+	n = ft_strlen(src);
+	z = 0;
+	if (dstsize == 0)
+		return (n);
+	if (i > dstsize)
+		return (n + dstsize);
+	else
 	{
-		dst++;
-		dstsize--;
-		n++;
+		while (src[z] && (i + z) < dstsize)
+		{
+			dst[i + z] = src[z];
+			z++;
+		}
+		if ((i + z) == dstsize && i < dstsize)
+			dst[(i + z) - 1] = '\0';
+		else
+			dst[i + z] = '\0';
+		return (i + n);
 	}
-	while (*src && dstsize-- > 1)
-	{
-		*(dst++) = *(src++);
-		n++;
-	}
-	if (n > len_dst)
-		*dst = ZERO;
-	if (len_dst > ++n)
-		len_dst = n;
-	return (len_src + len_dst);
 }

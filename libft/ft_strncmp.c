@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uliherre <uliherre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/06 16:26:16 by uherrero          #+#    #+#             */
-/*   Updated: 2022/06/16 20:21:05 by uliherre         ###   ########.fr       */
+/*   Created: 2022/03/25 16:26:36 by drubio-m          #+#    #+#             */
+/*   Updated: 2022/04/10 20:06:01 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,29 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	register const unsigned char	*s1_aux;
-	register const unsigned char	*s2_aux;
+	size_t			i;
+	unsigned char	*cast_s1;
+	unsigned char	*cast_s2;
 
-	if (ZERO == n)
-		return (ZERO);
-	s1_aux = (const unsigned char *)s1;
-	s2_aux = (const unsigned char *)s2;
-	while (*s1_aux == *s2_aux && *s1_aux && n-- > 1)
+	i = 0;
+	cast_s1 = (unsigned char *) s1;
+	cast_s2 = (unsigned char *) s2;
+	if (n == 0)
+		return (0);
+	while ((cast_s1[i] == cast_s2[i]) && (i < n - 1))
 	{
-		s1_aux++;
-		s2_aux++;
-	}
-	return (*s1_aux - *s2_aux);
+		if ((cast_s1[i] == '\0') || (cast_s2[i] == '\0'))
+			return (0);
+		i++;
+	}	
+	if (cast_s1[i] != cast_s2[i])
+		return (cast_s1[i] - cast_s2[i]);
+	return (0);
 }
+/*
+int main(void)
+{
+	printf("%d\n", strncmp("zyxbcdefgh", "abcdwxyz", 0));
+	printf("%d", ft_strncmp("zyxbcdefgh", "abcdwxyz", 0));
+}
+*/

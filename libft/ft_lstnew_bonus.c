@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uliherre <uliherre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/14 19:27:29 by uherrero          #+#    #+#             */
-/*   Updated: 2022/07/02 14:29:16 by uliherre         ###   ########.fr       */
+/*   Created: 2022/04/08 14:14:06 by drubio-m          #+#    #+#             */
+/*   Updated: 2022/04/10 20:03:17 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,12 @@
 
 t_list	*ft_lstnew(void *content)
 {
-	t_list	*new;
+	t_list	*ret;
 
-	new = (t_list *) ft_calloc(TRUE, sizeof(t_list));
-	if (NULL != new)
-	{
-		new->next = NULL;
-		new->content = content;
-	}
-	return (new);
-}
-
-t_list_d	*ft_lstnew_d(void *content)
-{
-	t_list_d	*new;
-
-	new = (t_list_d *) ft_calloc(TRUE, sizeof(t_list_d));
-	if (NULL != new)
-	{
-		new->next = NULL;
-		new->prev = NULL;
-		new->content = content;
-	}
-	return (new);
+	ret = malloc(sizeof (t_list) * 1);
+	if (!ret)
+		return (NULL);
+	ret->content = content;
+	ret->next = NULL;
+	return (ret);
 }

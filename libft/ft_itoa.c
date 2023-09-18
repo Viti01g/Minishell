@@ -3,88 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uliherre <uliherre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/13 19:50:56 by uherrero          #+#    #+#             */
-/*   Updated: 2022/07/17 21:56:05 by uliherre         ###   ########.fr       */
+/*   Created: 2022/04/05 13:32:40 by drubio-m          #+#    #+#             */
+/*   Updated: 2022/04/10 20:02:58 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_digit_itoa(unsigned int nb, char *str)
+static int	ft_intlen(int n)
 {
-	if (nb / 10)
-		ft_digit_itoa(nb / 10, str + 1);
-	*str = '0' + (nb % 10);
+	int	i;
+
+	i = 1;
+	if (n == -2147483648)
+		return (11);
+	if (n < 0)
+	{
+		i++;
+		n = -n;
+	}
+	while (n > 9)
+	{
+		n = n / 10;
+		i++;
+	}
+	return (i);
 }
 
-static void	ft_putnbr_itoa(int nb, char *str)
-{
-	if (nb < 0)
-	{
-		nb = -nb;
-		*(str++) = '-';
-	}
-	ft_digit_itoa(nb, str);
-}
-
-static size_t	ft_numlen(int num)
-{
-	register size_t			len;
-	register unsigned int	n;
-
-	len = TRUE;
-	if (ZERO > num)
-	{
-		len++;
-		n = -num;
-	}
-	else
-		n = num;
-	while (ZERO < n / 10)
-	{
-		n /= 10;
-		len++;
-	}
-	return (len);
-}
-
-void	ft_strrev(char *str)
-{
-	register size_t	size;
-	register char	*end;
-	register char	aux;
-
-	size = ft_strlen(str);
-	end = str + size - 1;
-	while (str < end)
-	{
-		aux = *str;
-		*str = *end;
-		*end = aux;
-		str++;
-		end--;
-	}
+static int	ft_turn_to_positive(int n)
+{	
+	if (n < 0)
+		n = -n;
+	return (n);
 }
 
 char	*ft_itoa(int n)
 {
-	register size_t	num_len;
-	register char	*str_num;
+	char		*ret;
+	long int	def_num;
+	int			intlen;
 
-	str_num = NULL;
-	num_len = ft_numlen(n);
-	if (ZERO != num_len)
+	intlen = ft_intlen(n);
+	ret = ft_calloc(sizeof (char), (ft_intlen(n) + 1));
+	def_num = ft_turn_to_positive(n);
+	if (!ret)
+		return (0);
+	if (n == 0)
+		ret[0] = '0';
+	if (n == (-2147483647 -1))
+		def_num = 2147483648;
+	while (intlen-- > 0)
 	{
-		str_num = (char *) ft_calloc(num_len + 1, sizeof(char));
-		if (NULL == str_num)
-			return (NULL);
-		ft_putnbr_itoa(n, str_num);
-		if (*str_num == '-')
-			ft_strrev(str_num + 1);
-		else
-			ft_strrev(str_num);
+		ret[intlen] = ((def_num % 10) + '0');
+		def_num = def_num / 10;
 	}
-	return (str_num);
+	if (n < 0)
+		ret[0] = '-';
+	return (ret);
 }
+/*
+int	main(void)
+{
+	int n = (-2147483647 -1);
+	printf("%s\n", ft_itoa(n));
+	printf("%d", ft_intlen(-2147483647));
+}
+*/

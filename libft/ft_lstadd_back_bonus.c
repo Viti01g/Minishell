@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uliherre <uliherre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/15 13:46:15 by uherrero          #+#    #+#             */
-/*   Updated: 2022/07/16 16:07:20 by uliherre         ###   ########.fr       */
+/*   Created: 2022/04/08 19:52:53 by drubio-m          #+#    #+#             */
+/*   Updated: 2022/04/10 20:03:01 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,17 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	if (NULL != new && NULL != lst)
-	{
-		*lst = ft_lstlast(*lst);
-		if (NULL == *lst)
-			*lst = new;
-		else
-			(*lst)->next = new;
-	}
-}
+	t_list	*end;
 
-void	ft_lstadd_back_d(t_list_d **lst, t_list_d **new)
-{
-	if (NULL != new && NULL != lst)
+	if (!lst || !new)
+		return ;
+	end = *lst;
+	if (*lst == NULL)
+		*lst = new;
+	else
 	{
-		*lst = (t_list_d *) ft_lstlast((t_list *) *lst);
-		if (NULL == *lst)
-			*lst = *new;
-		else
-		{
-			(*lst)->next = *new;
-			(*new)->prev = *lst;
-		}
+		while (end->next != NULL)
+			end = end->next;
+		end->next = new;
 	}
 }
