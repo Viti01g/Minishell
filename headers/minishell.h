@@ -39,4 +39,9 @@ typedef struct s_token
 	struct s_token	*new;
 }   t_token;
 
+typedef struct s_general
+{
+	char	**lineaEntera;
+}	t_general;
+
 #endif

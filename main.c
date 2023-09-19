@@ -1,5 +1,4 @@
-//# include "headers/minishell.h"
-/*
+# include "headers/minishell.h"
 void	view_prompt(void)
 {
 	write(1, GREEN, ft_strlen(GREEN));
@@ -9,7 +8,8 @@ void	view_prompt(void)
 
 int	main(int argc, char **argv, char **env)
 {
-	char *view;
+	char        *view;
+    t_general   gen;
 
 	view = "a";
 	if (argc != 1)
@@ -18,12 +18,19 @@ int	main(int argc, char **argv, char **env)
 	{
 		// view_prompt();
 		view = readline("\e[1;32mminishell$ \e[0m");
+
+        if (ft_strlen(view) > 0)
+        {
+            add_history(view);
+            gen.lineaEntera = ft_split(view, ' ');
+            free(view);
+        }
 	}
 	return (EXIT_SUCCESS);
 	// Comentarioooooooooooooooooo
 }
-*/
 
+/*
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -59,6 +66,7 @@ int main() {
 
     return 0;
 }
+*/
 
 /*
 #include <stdio.h>
