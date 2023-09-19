@@ -7,7 +7,7 @@ SOURCES_E = /sources_executer/*.c
 SOURCES_P = /sources_parser/*.c
 SOURCES_S = /sources_shell/*.c
 MAIN = main.c
-LIBFT = libft/libft_b.a
+LIBFT = libft/libft.a
 OBJECTS = $(SOURCES:.c=.o)
 
 .PHONY: all clean fclean f re
