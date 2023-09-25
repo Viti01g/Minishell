@@ -1,56 +1,61 @@
-NAME = minishell
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -pedantic
-THR = -lpthread
-INCLUDES = /headers/minishell.h /libft/libft.h
-SOURCES_E = /sources_executer/*.c
-SOURCES_P = /sources_parser/*.c
-SOURCES_S = /sources_shell/*.c
-MAIN = main.c
-LIBFT = libft/libft.a
-OBJECTS = $(SOURCES:.c=.o)
 
-.PHONY: all clean fclean f re
+#NAME = minishell
+#CC = gcc
+#CFLAGS = -Wall -Wextra -Werror -pedantic
+#THR = -lpthread
+#INCLUDES = /headers/minishell.h /libft/libft.h
+#SOURCES_E = /sources_executer/*.c
+#SOURCES_P = /sources_parser/*.c
+#SOURCES_S = /sources_shell/*.c
+#MAIN = main.c
+#LIBFT = libft/libft.a
+#OBJECTS = $(SOURCES:.c=.o)
+#
+#.PHONY: all clean fclean f re
+#
+#$(NAME): $(LIBFT) $(OBJECTS) $(MAIN) $(INCLUDES)
+#	$(CC) $(CFLAGS) $(OBJECTS) $(MAIN) $(THR) -o $(NAME)
+#$(LIBFT):
+#	make bonus -C libft/
+#all = $(NAME)
+#clean:
+#	/bin/rm -rf $(OBJECTS)
+#	make clean -C libft/
+#fclean: clean
+#	/bin/rm -rf $(NAME)
+#	/bin/rm -rf $(LIBFT)
+#f: fclean
+#re: fclean all
 
-$(NAME): $(LIBFT) $(OBJECTS) $(MAIN) $(INCLUDES)
-	$(CC) $(CFLAGS) $(OBJECTS) $(MAIN) $(THR) -o $(NAME)
-$(LIBFT):
-	make bonus -C libft/
-all = $(NAME)
-clean:
-	/bin/rm -rf $(OBJECTS)
-	make clean -C libft/
-fclean: clean
-	/bin/rm -rf $(NAME)
-	/bin/rm -rf $(LIBFT)
-f: fclean
-re: fclean all
+
+###############################################################
 
 ## Name of the final executable
-#NAME = minishell
+NAME = minishell
 #
 ## Project's directories
-#SOURCEDIR := ./src
-#HEADERSDIR := ./headers
-#OBJECTSDIR := ./objects
+LIBFTDIR := ./libft
+SOURCEDIR := ./src
+HEADERSDIR := ./headers
+OBJECTSDIR := ./objects
 #EXEC_FOLDER = execution
 #LEX_FOLDER = lexer
 #PARS_FOLDER = parse
 #EXPA_FOLDER = expansion
 #READ_FOLDER = readline
-#LIBFT_HEADER = $(SOURCEDIR)/libft/libft.h
-#LIBFT_FOLDER = $(SOURCEDIR)/libft
+LIBFT_HEADER = $(LIBFTDIR)/libft.h
+LIBFT_FOLDER = $(LIBFTDIR)
 #
 #
 ## Name of variables
-#LIBFT_LIB = libft.a
-#LIBS = -lncurses
-#FLAGS = -Wall -Wextra -Werror
-#RED = \033[1;31m
-#GREEN = \033[1;32m
-#YELLOW = \033[1;33m
-#BLUE = \033[1;34m
-#RESET = \033[0m
+LIBFT_LIB = libft.a
+LIBS = -lncurses
+FLAGS = -Wall -Wextra -Werror
+RED = \033[1;31m
+GREEN = \033[1;32m
+YELLOW = \033[1;33m
+BLUE = \033[1;34m
+RESET = \033[0m
 #
 #
 ## Execution files variable
@@ -110,8 +115,7 @@ re: fclean all
 #
 ## Main file variable
 #
-#MAIN_FILE = last_arg.c \
-#main.c \
+MAIN_FILE = main.c \
 #minishell.c 
 #
 ## Define objects for all sources
@@ -120,64 +124,65 @@ re: fclean all
 #OBJ_EXPA = $(addprefix $(OBJECTSDIR)/$(EXPA_FOLDER)/, $(EXPA_FILES:.c=.o))
 #OBJ_PARS = $(addprefix $(OBJECTSDIR)/$(PARS_FOLDER)/, $(PARS_FILES:.c=.o))
 #OBJ_READ = $(addprefix $(OBJECTSDIR)/$(READ_FOLDER)/, $(READ_FILES:.c=.o))
-#OBJ_MAIN = $(addprefix $(OBJECTSDIR)/, $(MAIN_FILE:.c=.o))
-#OBJS := $(OBJ_EXEC) $(OBJ_LEX) $(OBJ_EXPA) $(OBJ_PARS) $(OBJ_READ) $(OBJ_MAIN)
-#LIBFT_FILE := $(LIBFT_FOLDER)/$(LIBFT_LIB)
+OBJ_MAIN = $(addprefix $(OBJECTSDIR)/, $(MAIN_FILE:.c=.o))
+OBJS := $(OBJ_MAIN) #$(OBJ_EXEC) $(OBJ_LEX) $(OBJ_EXPA) $(OBJ_PARS) $(OBJ_READ) 
+LIBFT_FILE = $(LIBFT_FOLDER)/$(LIBFT_LIB)
 #
 ## Name the compiler
-#CC = gcc
+CC = gcc
 #
 ## OS specific part
-#RM = rm -rf 
-#RMDIR = rm -rf 
-#MKDIR = mkdir -p
-#MAKE = make -C
-#ECHO = /bin/echo
-#ERRIGNORE = 2>/dev/null
+RM = rm -rf 
+RMDIR = rm -rf 
+MKDIR = mkdir -p
+MAKE = make -C
+ECHO = /bin/echo
+ERRIGNORE = 2>/dev/null
 #
 #
-#.PHONY: all fclean 
+.PHONY: all fclean 
 #
-#all: credit $(NAME)
+all: credit $(NAME)
 #	
 #libft:
-#	@echo "$(BLUE)█████████████████████████ Making LIBFT █████████████████████████$(RESET)"
-#	@$(MAKE) $(LIBFT_FOLDER)
-#	@echo "$(BLUE)███████████████████████ Making minishell ███████████████████████$(RESET)"
-#
-#$(NAME): libft $(OBJS)
-#	@$(CC) -I $(HEADERSDIR) -I $(LIBFT_FOLDER) $(OBJS) $(LIBFT_FOLDER)/$(LIBFT_LIB) $(LIBS) -o $@
-#	@echo "$(BLUE)███████████████████████ Compiling is DONE ██████████████████████$(RESET)"
-#	@echo "         Made with love by : \033[1;91mvruiz-go\033[m and \033[1;91mdrubio-m\033[m"
-#
-#$(OBJECTSDIR)/%.o : $(SOURCEDIR)/%.c $(HEADERSDIR)/*.h
-#	@$(MKDIR) $(dir $@)
-#	@echo "$(BLUE)█ $(YELLOW)Compiling$(RESET) $<:\r\t\t\t\t\t\t\t$(GREEN){DONE}$(BLUE) █$(RESET)"
-#	@$(CC) $(FLAGS) -I $(HEADERSDIR) -I $(LIBFT_HEADER) -o $@ -c $<
-#
+	@echo "$(BLUE)█████████████████████████ Making LIBFT █████████████████████████$(RESET)"
+	@echo "$(BLUE)███████████████████████ Making minishell ███████████████████████$(RESET)"
+
+$(NAME): libft $(OBJS)
+	@echo "$(BLUE)█████████████████████████ Making LIBFT █████████████████████████$(RESET)"
+	@echo "$(BLUE)███████████████████████ Making minishell ███████████████████████$(RESET)"
+	@make -C $(LIBFTDIR)
+	@$(CC) -I $(HEADERSDIR) -I $(LIBFT_FOLDER) $(OBJS) $(LIBFTDIR)/$(LIBFT_LIB) $(LIBS) -o $@
+	@echo "$(BLUE)███████████████████████ Compiling is DONE ██████████████████████$(RESET)"
+	@echo "         Made with love by : \033[1;91mvruiz-go\033[m and \033[1;91mdrubio-m\033[m"
+
+$(OBJECTSDIR)/%.o : $(SOURCEDIR)/%.c $(HEADERSDIR)/*.h
+	@$(MKDIR) $(dir $@)
+	@echo "$(BLUE)█ $(YELLOW)Compiling$(RESET) $<:\r\t\t\t\t\t\t\t$(GREEN){DONE}$(BLUE) █$(RESET)"
+	@$(CC) $(FLAGS) -I $(HEADERSDIR) -I $(LIBFT_HEADER) -o $@ -c $<
+
 ## Remove all objects, dependencies and executable files generated during the build
-#
-#clean:
-#	@echo "$(RED)deleting$(RESET): " $(OBJECTSDIR)
-#	@$(RMDIR) $(OBJECTSDIR) $(ERRIGNORE)
-#	@echo "$(RED)deleting$(RESET): " "libft objects"
-#	@$(MAKE) $(LIBFT_FOLDER) clean
-#
-#fclean: clean
-#	@echo "$(RED)deleting$(RESET): " $(LIBFT_FOLDER)/$(LIBFT_LIB)
-#	@$(RM) $(LIBFT_FOLDER)/$(LIBFT_LIB) $(ERRIGNORE)
-#	@echo "$(RED)deleting$(RESET): " $(NAME)
-#	@$(RM) $(NAME) $(ERRIGNORE)
-#
-#re: fclean $(NAME)
-#
-#credit:
-#	@echo "███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗     "
-#	@echo "████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     "
-#	@echo "██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║     "
-#	@echo "██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║     "
-#	@echo "██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗"
-#	@echo "╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝"
-#	@echo "         Made with love by : \033[1;91mvruiz-go\033[m and \033[1;91mdrubio-m\033[m"
-#
-#
+
+clean:
+	@echo "$(RED)deleting$(RESET): " $(OBJECTSDIR)
+	@$(RMDIR) $(OBJECTSDIR) $(ERRIGNORE)
+	@echo "$(RED)deleting$(RESET): " "libft objects"
+	@$(MAKE) $(LIBFT_FOLDER) clean
+
+fclean: clean
+	@echo "$(RED)deleting$(RESET): " $(LIBFT_FOLDER)/$(LIBFT_LIB)
+	@$(RM) $(LIBFT_FOLDER)/$(LIBFT_LIB) $(ERRIGNORE)
+	@echo "$(RED)deleting$(RESET): " $(NAME)
+	@$(RM) $(NAME) $(ERRIGNORE)
+
+re: fclean $(NAME)
+
+credit:
+	@echo "███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗     "
+	@echo "████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     "
+	@echo "██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║     "
+	@echo "██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║     "
+	@echo "██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗"
+	@echo "╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝"
+	@echo "         Made with love by : \033[1;91mvruiz-go\033[m and \033[1;91mdrubio-m\033[m"
+
