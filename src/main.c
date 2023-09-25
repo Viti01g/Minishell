@@ -1,5 +1,5 @@
-#include "../headers/minishell.h"
 
+#include "../headers/minishell.h"
 void	view_prompt(void)
 {
 	write(1, GREEN, ft_strlen(GREEN));
@@ -15,6 +15,7 @@ int	main(int argc, char **argv, char **env)
 
 	manolo = argv;
 	manolo = env;
+
 
 	view = "a";
 	if (argc != 1)
