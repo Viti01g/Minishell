@@ -15,7 +15,7 @@
 # include <errno.h>			    /* Para perror */
 # include <termios.h>		    /* Para tcsetattr, tcgetattr */
 # include <curses.h>			/* Para tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs */
-# include "../src/libft/libft.h"
+# include "../libft/libft.h"
 
 # define GREEN "\e[1;32m"
 # define RESET "\e[0m"
