@@ -34,6 +34,7 @@
 NAME = minishell
 #
 ## Project's directories
+LIBFTDIR := ./libft
 SOURCEDIR := ./src
 HEADERSDIR := ./headers
 OBJECTSDIR := ./objects
@@ -42,8 +43,8 @@ OBJECTSDIR := ./objects
 #PARS_FOLDER = parse
 #EXPA_FOLDER = expansion
 #READ_FOLDER = readline
-LIBFT_HEADER = $(SOURCEDIR)/libft/libft.h
-LIBFT_FOLDER = $(SOURCEDIR)/libft
+LIBFT_HEADER = $(LIBFTDIR)/libft.h
+LIBFT_FOLDER = $(LIBFTDIR)
 #
 #
 ## Name of variables
@@ -114,7 +115,7 @@ RESET = \033[0m
 #
 ## Main file variable
 #
-MAIN_FILE =main.c \
+MAIN_FILE = main.c \
 #minishell.c 
 #
 ## Define objects for all sources
@@ -125,7 +126,7 @@ MAIN_FILE =main.c \
 #OBJ_READ = $(addprefix $(OBJECTSDIR)/$(READ_FOLDER)/, $(READ_FILES:.c=.o))
 OBJ_MAIN = $(addprefix $(OBJECTSDIR)/, $(MAIN_FILE:.c=.o))
 OBJS := $(OBJ_MAIN) #$(OBJ_EXEC) $(OBJ_LEX) $(OBJ_EXPA) $(OBJ_PARS) $(OBJ_READ) 
-LIBFT_FILE := $(LIBFT_FOLDER)/$(LIBFT_LIB)
+LIBFT_FILE = $(LIBFT_FOLDER)/$(LIBFT_LIB)
 #
 ## Name the compiler
 CC = gcc
@@ -143,13 +144,15 @@ ERRIGNORE = 2>/dev/null
 #
 all: credit $(NAME)
 #	
-libft:
+#libft:
 	@echo "$(BLUE)█████████████████████████ Making LIBFT █████████████████████████$(RESET)"
-	@$(MAKE) $(LIBFT_FOLDER)
 	@echo "$(BLUE)███████████████████████ Making minishell ███████████████████████$(RESET)"
 
 $(NAME): libft $(OBJS)
-	@$(CC) -I $(HEADERSDIR) -I $(LIBFT_FOLDER) $(OBJS) $(LIBFT_FOLDER)/$(LIBFT_LIB) $(LIBS) -o $@
+	@echo "$(BLUE)█████████████████████████ Making LIBFT █████████████████████████$(RESET)"
+	@echo "$(BLUE)███████████████████████ Making minishell ███████████████████████$(RESET)"
+	@make -C $(LIBFTDIR)
+	@$(CC) -I $(HEADERSDIR) -I $(LIBFT_FOLDER) $(OBJS) $(LIBFTDIR)/$(LIBFT_LIB) $(LIBS) -o $@
 	@echo "$(BLUE)███████████████████████ Compiling is DONE ██████████████████████$(RESET)"
 	@echo "         Made with love by : \033[1;91mvruiz-go\033[m and \033[1;91mdrubio-m\033[m"
 
