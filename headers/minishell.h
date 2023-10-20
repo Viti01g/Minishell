@@ -4,6 +4,8 @@
 # include <stdio.h>             /* Para printf */
 # include <readline/readline.h> 
 # include <readline/history.h>
+# include <signal.h>
+# include <termios.h>
 # include <stdlib.h>			/* Para malloc, free */
 # include <unistd.h>			/* Para write, access, open, read, close, fork, exit, getcwd, chdir */
 # include <sys/wait.h>		    /* Para wait, waitpid, wait3, wait4 */

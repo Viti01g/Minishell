@@ -130,6 +130,7 @@ LIBFT_FILE = $(LIBFT_FOLDER)/$(LIBFT_LIB)
 #
 ## Name the compiler
 CC = gcc
+EXTRAFLAGS		=	-lreadline -L /Users/$(USER)/.brew/opt/readline/lib
 #
 ## OS specific part
 RM = rm -rf 
@@ -151,8 +152,8 @@ all: credit $(NAME)
 $(NAME): libft $(OBJS)
 	@echo "$(BLUE)█████████████████████████ Making LIBFT █████████████████████████$(RESET)"
 	@echo "$(BLUE)███████████████████████ Making minishell ███████████████████████$(RESET)"
-	@make -C $(LIBFTDIR)
-	@$(CC) -I $(HEADERSDIR) -I $(LIBFT_FOLDER) $(OBJS) $(LIBFTDIR)/$(LIBFT_LIB) $(LIBS) -o $@
+	@make -sC $(LIBFTDIR)
+	@$(CC) $(EXTRAFLAGS) -I $(HEADERSDIR) -I $(LIBFT_FOLDER) $(OBJS) $(LIBFTDIR)/$(LIBFT_LIB) $(LIBS) -o $@
 	@echo "$(BLUE)███████████████████████ Compiling is DONE ██████████████████████$(RESET)"
 	@echo "         Made with love by : \033[1;91mvruiz-go\033[m and \033[1;91mdrubio-m\033[m"
 
