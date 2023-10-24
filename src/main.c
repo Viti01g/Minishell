@@ -1,5 +1,6 @@
 
 #include "../headers/minishell.h"
+
 void	view_prompt(void)
 {
 	write(1, GREEN, ft_strlen(GREEN));
@@ -7,7 +8,7 @@ void	view_prompt(void)
 	write(1, RESET, ft_strlen(RESET));
 }
 
-int	main(int argc, char **argv, char **env)
+/* int	main(int argc, char **argv, char **env)
 {
 	char		*view;
 	t_general	gen;
@@ -32,7 +33,7 @@ int	main(int argc, char **argv, char **env)
 		}
 	}
 	return (EXIT_SUCCESS);
-}
+} */
 
 /*
 #include <stdio.h>

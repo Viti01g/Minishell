@@ -115,7 +115,7 @@ RESET = \033[0m
 #
 ## Main file variable
 #
-MAIN_FILE = main.c \
+MAIN_FILE = main.c diego.c\
 #minishell.c 
 #
 ## Define objects for all sources
