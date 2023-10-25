@@ -29,7 +29,7 @@ void	view_prompt(void)
 		{
 			add_history(view);
 			gen.lineaEntera = ft_split(view, ' ');
-			while (*gen.lineaEntera != NULL) {
+			while (*gen.linea_entera != NULL) {
 				printf("Token: %s\n", *gen.lineaEntera);
 				gen.lineaEntera++;
 			}

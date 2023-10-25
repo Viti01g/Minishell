@@ -43,7 +43,7 @@ typedef struct s_token
 
 typedef struct s_general
 {
-	char	**lineaEntera;
+	char	**linea_entera;
 }	t_general;
 
 #endif
