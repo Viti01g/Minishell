@@ -30,11 +30,11 @@ int	main(int argc, char **argv, char **env)
 	return (EXIT_SUCCESS);
 }
 
-void	classify_value(char **tokens)
+/* void	classify_value(char **tokens)
 {
 	int i = 0;
 	
-}
+} */
 
 
 /*
