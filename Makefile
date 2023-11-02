@@ -152,7 +152,7 @@ all: credit $(NAME)
 $(NAME): libft $(OBJS)
 	@echo "$(BLUE)█████████████████████████ Making LIBFT █████████████████████████$(RESET)"
 	@echo "$(BLUE)███████████████████████ Making minishell ███████████████████████$(RESET)"
-	@make -sC $(LIBFTDIR)
+	@make bonus -sC $(LIBFTDIR)
 	@$(CC) $(EXTRAFLAGS) -I $(HEADERSDIR) -I $(LIBFT_FOLDER) $(OBJS) $(LIBFTDIR)/$(LIBFT_LIB) $(LIBS) -o $@
 	@echo "$(BLUE)███████████████████████ Compiling is DONE ██████████████████████$(RESET)"
 	@echo "         Made with love by : \033[1;91mvruiz-go\033[m and \033[1;91mdrubio-m\033[m"

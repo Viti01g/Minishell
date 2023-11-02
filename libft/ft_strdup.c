@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 13:18:12 by drubio-m          #+#    #+#             */
-/*   Updated: 2022/04/10 20:04:47 by drubio-m         ###   ########.fr       */
+/*   Updated: 2023/10/31 13:02:05 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,3 +27,12 @@ char	*ft_strdup(const char *s1)
 		*(ptr++) = *(s1++);
 	return (print_ptr);
 }
+
+/*************************************
+se utiliza para duplicar una cadena de caracteres. 
+Recibe una cadena como entrada y crea una nueva copia 
+idéntica de la cadena original en una ubicación de memoria distinta. 
+Esto es útil para preservar la cadena original mientras se trabaja con una copia
+de ella, evitando así modificar la cadena original accidentalmente o 
+garantizando que la memoria se libere adecuadamente cuando ya no sea necesaria.
+**************************************/

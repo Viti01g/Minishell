@@ -36,7 +36,7 @@
 
 typedef struct s_token
 {
-	int				tipo;
+	int				type;
 	char			*str;
 	struct s_token	*new;
 }	t_token;
