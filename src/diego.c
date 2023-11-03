@@ -32,7 +32,7 @@
 	return (EXIT_SUCCESS);
 } */
 
-int main(void) {
+int	main(void) {
     char *input;
     char *fragment;
     int i;
@@ -74,8 +74,8 @@ int main(void) {
     return 0;
 }
 
-/*
-	TODO: Todo texto plano va a ser un comando
-	TODO: Se va a separar todo por operadores
-	TODO: Clasificar el resto de operadores // ! Dejar para el final la doble flecha
-*/
+/* 
+	TODO: Partir función del main
+	TODO: guardar en una lista enlazada
+ 
+ */
