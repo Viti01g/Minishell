@@ -46,7 +46,8 @@ void	view_prompt(void)
 #include <readline/readline.h>
 #include <readline/history.h>
 
-int main() {
+int main() 
+{
 	char* input;
 
 	// Bucle para leer continuamente la entrada del usuario

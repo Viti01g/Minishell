@@ -1,81 +1,73 @@
 #include "../headers/minishell.h"
 
-/* int	main(int argc, char **argv, char **env)
+void ft_leaks(void)
 {
-	char		*view;
-	t_general	gen;
-	char		**manolo;
-	int			i;
+	system("leaks -q minishell");
+}
 
-	manolo = argv;
-	manolo = env;
+void split_token(char *input)
+{
+	int	i;
+	int	j;
+	char *fragment;
 
-
-	view = "a";
-	if (argc != 1)
-		exit(EXIT_FAILURE);
-	while (1)
+	i = 0;
+	j = 0;
+	while (input[i])
 	{
-		view = readline("\e[1;32mminishell$ \e[0m");
-
-		if (ft_strlen(view) > 0)
+        if (input[i] == '|' || input[i] == '<' || input[i] == '>') 
 		{
+			fragment = ft_substr(input, j, i - j);
+			free(fragment);
+            printf("Token: %s\n", fragment);
+			if ((input[i] == '>' || input[i] == '<') && input[i] == input[i + 1])
+			{
+				fragment = ft_substr(input, i, 2);
+				printf("Token: %s\n", fragment);
+				i++;
+			}
+			else
+			{
+            	fragment = ft_substr(input, i, 1);
+            	printf("Token: %s\n", fragment);
+			}
+			free(fragment);
+			j = i + 1;
+        }
+        i++;
+    }
+    fragment = ft_substr(input, j, i - j);
+    printf("Token: %s\n", fragment);
+	free(fragment);
+}
 
-			i = -1;
-			add_history(view);
-			gen.linea_entera = ft_split(view, ' ');
-			while (gen.linea_entera[i++])
-				printf("Token: %s  tipo: %d\n", gen.linea_entera[i], -7);
-			free(view);
-		}
-	}
-	return (EXIT_SUCCESS);
-} */
-
-int	main(void) {
+int	main(void) 
+{
     char *input;
-    char *fragment;
-    int i;
-    int j;
 
-    while (1) {
+	atexit(ft_leaks);
+    while (1) 
+	{
         input = readline("\e[1;32mminishell$ \e[0m");
         if (!input) 
             break;
-        i = 0;
-        j = 0;
-        while (input[i]) 
-
-		{
-            if (input[i] == '|' || input[i] == '<' || input[i] == '>') 
-			{
-				fragment = ft_substr(input, j, i - j);
-                printf("Token: %s\n", fragment);
-				if ((input[i] == '>' || input[i] == '<') && input[i] == input[i + 1])
-				{
-					fragment = ft_substr(input, i, 2);
-					printf("Token: %s\n", fragment);
-					i++;
-				}
-				else
-				{
-                	fragment = ft_substr(input, i, 1);
-                	printf("Token: %s\n", fragment);
-				}
-                j = i + 1;
-            }
-            i++;
-        }
-        // *Imprimimos el último token después del bucle
-        fragment = ft_substr(input, j, i - j);
-        printf("Token: %s\n", fragment);
-        free(input);
+		split_token(input);
+		free(input);
     }
-    return 0;
+	return 0;
 }
 
 /* 
-	TODO: Partir función del main
+	*Pasos para almacenarlo en la lista
+
+	1: Mandar a la función de crear nodo, un char * 
+	al cual se le haga un split por espacios y se guarde en una matriz
+	
+	2. Una vez hecho el split ir guardando en cada nodo de la lista, diciendo si es o no operador
+
+ */
+
+/* 
 	TODO: guardar en una lista enlazada
  
  */
