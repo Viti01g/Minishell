@@ -1,6 +1,6 @@
 #include "../headers/minishell.h"
 
-int	main(int argc, char **argv, char **env)
+/* int	main(int argc, char **argv, char **env)
 {
 	char		*view;
 	t_general	gen;
@@ -28,13 +28,13 @@ int	main(int argc, char **argv, char **env)
 		}
 	}
 	return (EXIT_SUCCESS);
-}
-
+} */
+/* 
 void	classify_value(char **tokens)
 {
 	int i = 0;
 	
-}
+} */
 
 
 /*
