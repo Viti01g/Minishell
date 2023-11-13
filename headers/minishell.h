@@ -38,12 +38,17 @@ typedef struct s_token
 {
 	int				type;
 	char			*str;
-	struct s_token	*new;
+	struct s_token	*next;
 }	t_token;
 
 typedef struct s_general
 {
 	char	**linea_entera;
 }	t_general;
+
+
+void split_token(char *input);
+t_token	*ft_lstnew_addback(t_token **token, char *str);
+
 
 #endif
