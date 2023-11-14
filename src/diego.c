@@ -1,6 +1,8 @@
 #include "../headers/minishell.h"
 
+
 void ft_leaks(void)
+
 {
 	system("leaks -q minishell");
 }
@@ -53,6 +55,7 @@ void split_token(char *input)
 int	main(void) 
 {
     char *input;
+
 
 	atexit(ft_leaks);
     while (1) 
