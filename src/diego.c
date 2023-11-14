@@ -66,18 +66,3 @@ int	main(void)
     }
 	return 0;
 }
-
-/* 
-	*Pasos para almacenarlo en la lista
-
-	1: Mandar a la función de crear nodo, un char * 
-	al cual se le haga un split por espacios y se guarde en una matriz
-	
-	2. Una vez hecho el split ir guardando en cada nodo de la lista, diciendo si es o no operador
-
- */
-
-/* 
-	TODO: guardar en una lista enlazada
- 
- */
