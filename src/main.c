@@ -7,8 +7,6 @@ void	view_prompt(void)
 	write(1, "minishell$ ", strlen("minishell$ "));
 	write(1, RESET, ft_strlen(RESET));
 }
-
-
 int	main(int argc, char **argv, char **env)
 {
 	char		*view;
@@ -32,7 +30,7 @@ int	main(int argc, char **argv, char **env)
 		if (!view)
 			break;
 
-		if (ft_strlen(view) > 0)
+		if (ft_strlen(view) != 0)
 		{
 			add_history(view);
 			gen.linea_entera = ft_split(view, ' ');
