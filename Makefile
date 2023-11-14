@@ -1,9 +1,11 @@
 NAME = minishell
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I ./headers/minishell.h -I ./libft/libft.h
+
 DEBUG = -g3 -fsanitize=address
 RM = rm -f
 SRC = main.c signal.c
+
 INCLUDES = ./headers/minishell.h ./libft/libft.h
 LIBFT_DIR = libft/
 LIBFT = $(LIBFT_DIR)libft.a

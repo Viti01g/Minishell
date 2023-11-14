@@ -1,45 +1,71 @@
 #include "../headers/minishell.h"
 
-/* int	main(int argc, char **argv, char **env)
+
+void ft_leaks(void)
+
 {
-	char		*view;
-	t_general	gen;
-	char		**manolo;
+	system("leaks -q minishell");
+}
 
-	manolo = argv;
-	manolo = env;
+void split_token(char *input)
+{
+	t_token *tokens = NULL;
+	int	i;
+	int	j;
+	char *fragment;
 
-
-	view = "a";
-	if (argc != 1)
-		exit(EXIT_FAILURE);
-	while (1)
+	i = 0;
+	j = 0;
+	while (input[i])
 	{
-		view = readline("\e[1;32mminishell$ \e[0m");
-
-		if (ft_strlen(view) > 0)
+        if (input[i] == '|' || input[i] == '<' || input[i] == '>') 
 		{
-			int i = -1;
-			add_history(view);
-			gen.linea_entera = ft_split(view, ' ');
-			while (gen.linea_entera[i++])
-				printf("Token: %s  tipo: %d\n", gen.linea_entera[i], -7);
-			free(view);
-		}
-	}
-	return (EXIT_SUCCESS);
-} */
-/* 
-void	classify_value(char **tokens)
+			fragment = ft_substr(input, j, i - j);
+			ft_lstnew_addback(&tokens, fragment);
+			printf("%s\n", tokens->str);
+			free(fragment);
+          //  printf("Token:%s\n", fragment);
+			if ((input[i] == '>' || input[i] == '<') && input[i] == input[i + 1])
+			{
+				fragment = ft_substr(input, i, 2);
+				ft_lstnew_addback(&tokens, fragment);
+				printf("%s\n", tokens->next->str);
+				//printf("Token:%s\n", fragment);
+				i++;
+			}
+			else
+			{
+            	fragment = ft_substr(input, i, 1);
+				ft_lstnew_addback(&tokens, fragment);
+				printf("%s\n", tokens->next->str);
+           // 	printf("Token:%s\n", fragment);
+			}
+			free(fragment);
+			j = i + 1;
+        }
+        i++;
+    }
+    fragment = ft_substr(input, j, i - j);
+	ft_lstnew_addback(&tokens, fragment);
+	printf("%s\n", tokens->next->next->str);
+   // printf("Token:%s\n", fragment);
+	free(fragment);
+}
+
+int	main(void) 
 {
-	int i = 0;
-	
-} */
+    char *input;
 
 
-/*
-	TODO: Todo texto plano va a ser un comando
-	TODO: Clasificar el resto de operadores // ! Dejar para el final la doble flecha
-	TODO: Usar funciones del pipex
-	*Todas Mienten, que no se te olvide.
-*/
+	atexit(ft_leaks);
+    while (1) 
+	{
+        input = readline("\e[1;32mminishell$ \e[0m");
+		printf("%p\n", input);
+        if (!input) 
+            break ;
+		split_token(input);
+		free(input);
+    }
+	return 0;
+}
