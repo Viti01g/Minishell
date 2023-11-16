@@ -2,9 +2,9 @@ NAME = minishell
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I ./headers/minishell.h -I ./libft/libft.h
 
-DEBUG = -g3 -fsanitize=address
+#DEBUG = -g3 -fsanitize=address
 RM = rm -f
-SRC = main.c signal.c
+SRC =  diego.c prueba_lista.c
 
 INCLUDES = ./headers/minishell.h ./libft/libft.h
 LIBFT_DIR = libft/
@@ -32,6 +32,7 @@ $(LIBFT): $(LIBFT_DIR)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
+
 $(OBJ_DIR)%.o:$(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) $(RLINE_INC) -c $< -o $@
 

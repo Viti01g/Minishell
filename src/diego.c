@@ -9,11 +9,12 @@ void ft_leaks(void)
 
 void split_token(char *input)
 {
-	t_token *tokens = NULL;
+	t_token *tokens;
 	int	i;
 	int	j;
 	char *fragment;
 
+	tokens = NULL;
 	i = 0;
 	j = 0;
 	while (input[i])
@@ -24,13 +25,11 @@ void split_token(char *input)
 			ft_lstnew_addback(&tokens, fragment);
 			printf("%s\n", tokens->str);
 			free(fragment);
-          //  printf("Token:%s\n", fragment);
-			if ((input[i] == '>' || input[i] == '<') && input[i] == input[i + 1])
+			if ((input[i] == '>' || input[i] == '<') && (input[i] == input[i + 1]))
 			{
 				fragment = ft_substr(input, i, 2);
 				ft_lstnew_addback(&tokens, fragment);
 				printf("%s\n", tokens->next->str);
-				//printf("Token:%s\n", fragment);
 				i++;
 			}
 			else
@@ -38,7 +37,6 @@ void split_token(char *input)
             	fragment = ft_substr(input, i, 1);
 				ft_lstnew_addback(&tokens, fragment);
 				printf("%s\n", tokens->next->str);
-           // 	printf("Token:%s\n", fragment);
 			}
 			free(fragment);
 			j = i + 1;
@@ -48,7 +46,6 @@ void split_token(char *input)
     fragment = ft_substr(input, j, i - j);
 	ft_lstnew_addback(&tokens, fragment);
 	printf("%s\n", tokens->next->next->str);
-   // printf("Token:%s\n", fragment);
 	free(fragment);
 }
 
