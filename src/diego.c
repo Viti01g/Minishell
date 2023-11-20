@@ -7,7 +7,7 @@ void ft_leaks(void)
 	system("leaks -q minishell");
 }
 
-/* void split_token(char *input)
+void split_token(char *input)
 {
 	t_token *tokens;
 	int	i;
@@ -23,20 +23,20 @@ void ft_leaks(void)
 		{
 			fragment = ft_substr(input, j, i - j);
 			ft_lstnew_addback(&tokens, fragment);
-		//	printf("%s\n", tokens->str);
+			printf("%s\n", tokens->str);
 			free(fragment);
 			if ((input[i] == '>' || input[i] == '<') && (input[i] == input[i + 1]))
 			{
 				fragment = ft_substr(input, i, 2);
 				ft_lstnew_addback(&tokens, fragment);
-		//		printf("%s\n", tokens->next->str);
+				printf("%s\n", tokens->next->str);
 				i++;
 			}
 			else
 			{
             	fragment = ft_substr(input, i, 1);
 				ft_lstnew_addback(&tokens, fragment);
-		//		printf("%s\n", tokens->next->str);
+				printf("%s\n", tokens->next->str);
 			}
 			free(fragment);
 			j = i + 1;
@@ -45,11 +45,11 @@ void ft_leaks(void)
     }
     fragment = ft_substr(input, j, i - j);
 	ft_lstnew_addback(&tokens, fragment);
-//	printf("%s\n", tokens->next->next->str);
+	printf("%s\n", tokens->next->next->str);
 	free(fragment);
-} */
+}
 
-int is_simple_operator(char c)
+/* int is_simple_operator(char c)
 {
     return (c == '|' || c == '<' || c == '>');
 }
@@ -72,6 +72,7 @@ void process_tokens(t_token **tokens, char *input, int start, int end)
 void split_token(char *input)
 {
     t_token *tokens = NULL;
+	t_token *current = tokens;
     int i = 0;
     int j = 0;
 
@@ -89,13 +90,11 @@ void split_token(char *input)
         i++;
     }
     process_tokens(&tokens, input, j, i); // Agregar el último token
-    // Aquí podrías iterar sobre 'tokens' para hacer alguna operación con los tokens
-	t_token *current = tokens;
 	while (current) {
     	printf("%s (%p)\n", current->str, current);
     	current = current->next;
 	}
-}
+} */
 
 int	main(void)
 {
