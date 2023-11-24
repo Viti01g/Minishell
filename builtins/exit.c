@@ -3,11 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:08:08 by drubio-m          #+#    #+#             */
-/*   Updated: 2023/09/07 21:08:09 by drubio-m         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:28:06 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/minishell.h"
+#include "../headers/minishell.h"
+
+void	cmd_exit(char **line)
+{
+	(void)line;
+	exit(EXIT_SUCCESS);
+}

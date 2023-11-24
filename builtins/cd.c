@@ -3,11 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:07:00 by drubio-m          #+#    #+#             */
-/*   Updated: 2023/09/07 21:07:04 by drubio-m         ###   ########.fr       */
+/*   Updated: 2023/11/23 19:54:59 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/minishell.h"
+#include "../headers/minishell.h"
+
+void	cmd_cd(char **line)
+{
+	(void)line;
+	t_general	*gen;
+	char		path[PATH_MAX];
+
+	gen = &g_gen;
+	if (getcwd(path, sizeof(path)))
+	{
+		
+	}
+}
