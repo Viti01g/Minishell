@@ -111,9 +111,7 @@ typedef struct s_general
 	char	**linea_entera;
 }	t_general;
 
-
-
-void split_token(char *input);
+void	split_token(char *input, t_token **tokens);
 t_token	*ft_lstnew_addback(t_token **token, char *str);
 
 void	ft_signals(void);
@@ -121,6 +119,5 @@ void	ft_signal_interrupt(void);
 void	ft_signal_reset_prompt(int signal);
 void	ft_disable_ctrl_c_printing_chars(void);
 void	ft_signal_quit(void);
-
 
 #endif
