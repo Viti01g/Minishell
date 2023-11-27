@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include "../headers/minishell.h"
 
 t_token	*ft_lstnew_addback(t_token **token, char *str)
@@ -9,15 +6,13 @@ t_token	*ft_lstnew_addback(t_token **token, char *str)
 
 	if (!token)
 		return (NULL);
-	new = malloc(sizeof(t_list));
+	new = malloc(sizeof(t_token));
 	if (!new)
 		return (NULL);
-	new->str = str;
+	new->str = ft_strdup(str);
 	new->next = NULL;
 	if (*token == NULL)
-	{
 		*token = new;
-	}
 	else
 	{
 		t_token	*end = *token;

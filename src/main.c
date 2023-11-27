@@ -7,7 +7,7 @@ void	view_prompt(void)
 	write(1, "minishell$ ", strlen("minishell$ "));
 	write(1, RESET, ft_strlen(RESET));
 }
-int	main(int argc, char **argv, char **env)
+/* int	main(int argc, char **argv, char **env)
 {
 	char		*view;
 	t_general	gen;
@@ -43,4 +43,4 @@ int	main(int argc, char **argv, char **env)
 		tcsetattr(0, 0, &g_info.termios);
 	}
 	return (EXIT_SUCCESS);
-}
+} */

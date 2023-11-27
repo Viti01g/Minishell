@@ -4,4 +4,4 @@
 *.a
 minishell
 a.out
-.vscode
+.vscode/

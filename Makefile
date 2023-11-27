@@ -1,6 +1,7 @@
 NAME = minishell
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I ./headers/minishell.h -I ./libft/libft.h
+
 #DEBUG = -g3 -fsanitize=address
 RM = rm -f
 SRC = main.c ../signals/signal.c init_utils.c init_vars.c ../builtins/env.c ../builtins/pwd.c ../builtins/exit.c ../builtins/cd.c ../builtins/echo.c \
@@ -34,6 +35,7 @@ $(LIBFT): $(LIBFT_DIR)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
+
 $(OBJ_DIR)%.o:$(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) $(RLINE_INC) -c $< -o $@
 

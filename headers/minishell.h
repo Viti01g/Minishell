@@ -109,9 +109,7 @@ typedef struct s_general
 	char	*env_oldpwd;
 }	t_general;
 
-
-
-void split_token(char *input);
+void	split_token(char *input, t_token **tokens);
 t_token	*ft_lstnew_addback(t_token **token, char *str);
 
 void	ft_signals(void);
@@ -134,7 +132,6 @@ void	cmd_unset(char **line);
 void	cmd_echo(char **line);
 
 t_general	g_gen;
-
 
 #endif
  
