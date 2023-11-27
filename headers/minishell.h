@@ -16,6 +16,7 @@
 # include <errno.h>			    /* Para perror */
 # include <termios.h>		    /* Para tcsetattr, tcgetattr */
 # include <curses.h>			/* Para tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs */
+# include <limits.h>
 # include "../libft/libft.h"
 
 # define GREEN "\e[1;32m"
@@ -27,14 +28,6 @@
 # define BLUE "\e[1;34m"
 
 # define EXIT_STATUS	128
-
-/* # define CMD = 1;
-# define PIPE = 2;
-# define FLCH_IZQ = 3;
-# define DBL_FLCH_IZQ = 4;
-# define FLCH_DRCH = 5;
-# define DBL_FLCH_DRCH = 6;
-# define TXT = 7; */
 
 enum	e_tok
 {
@@ -109,6 +102,11 @@ typedef struct s_token
 typedef struct s_general
 {
 	char	**linea_entera;
+	char	**env;
+	char	*env_home;
+	char	*env_path;
+	char	*env_pwd;
+	char	*env_oldpwd;
 }	t_general;
 
 void	split_token(char *input, t_token **tokens);
@@ -119,5 +117,21 @@ void	ft_signal_interrupt(void);
 void	ft_signal_reset_prompt(int signal);
 void	ft_disable_ctrl_c_printing_chars(void);
 void	ft_signal_quit(void);
+void    init_vars(t_general *gen, char **env);
+char	**ft_cpy_env(char **env);
+char	*ft_cpy_home(char **env);
+char	*ft_cpy_path(char **env);
+char	*ft_cpy_pwd(char **env);
+char	*ft_cpy_oldpwd(char **env);
+void	cmd_env(char **line);
+void	cmd_exit(char **line);
+void	cmd_pwd(char **line);
+void	cmd_cd(char **line);
+void	cmd_export(char **line);
+void	cmd_unset(char **line);
+void	cmd_echo(char **line);
+
+t_general	g_gen;
 
 #endif
+ 

@@ -3,11 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:08:31 by drubio-m          #+#    #+#             */
-/*   Updated: 2023/09/07 21:08:32 by drubio-m         ###   ########.fr       */
+/*   Updated: 2023/11/23 19:54:10 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/minishell.h"
+#include "../headers/minishell.h"
+
+void	cmd_pwd(char **line)
+{
+	(void)line;
+	t_general *gen = &g_gen;
+	printf("%s\n", gen->env_pwd);
+}
