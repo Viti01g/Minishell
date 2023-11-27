@@ -5,17 +5,6 @@ void ft_leaks(void)
 	system("leaks -q minishell");
 }
 
-/* void free_tokens(t_token *tokens) {
-    t_token *tmp;
-
-    while (tokens) {
-        tmp = tokens;
-        tokens = tokens->next;
-        free(tmp->str);
-        free(tmp);
-    }
-} */
-
 void free_tokens(t_token *tokens)
 {
     t_token *tmp;
@@ -47,7 +36,7 @@ void process_double_operator(char *input, t_token **tokens, int *i)
 	fragment = ft_substr(input, *i, 2);
     ft_lstnew_addback(tokens, fragment);
 	if ((*tokens)->next != NULL)
-    	printf("%s\n", (*tokens)->next->str);
+	  	printf("%s\n", (*tokens)->next->str);
     (*i)++;
 	free(fragment);
 }
@@ -104,6 +93,6 @@ int	main(void)
 		free_tokens(tokens);
 		tokens = NULL;
     }
-	//atexit(ft_leaks);
+	atexit(ft_leaks);
 	return 0;
 }
