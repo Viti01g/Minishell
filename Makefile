@@ -4,8 +4,9 @@ CFLAGS = -Wall -Wextra -Werror -I ./headers/minishell.h -I ./libft/libft.h
 
 #DEBUG = -g3 -fsanitize=address
 RM = rm -f
-SRC = main.c ../signals/signal.c init_utils.c init_vars.c ../builtins/env.c ../builtins/pwd.c ../builtins/exit.c ../builtins/cd.c ../builtins/echo.c \
-		../builtins/export.c ../builtins/unset.c ../builtins/exec_builtins.c \
+#SRC = main.c ../signals/signal.c init_utils.c init_vars.c ../builtins/env.c ../builtins/pwd.c ../builtins/exit.c ../builtins/cd.c ../builtins/echo.c \
+
+SRC = diego.c prueba_lista.c
 
 INCLUDES = ./headers/minishell.h ./libft/libft.h
 LIBFT_DIR = libft/

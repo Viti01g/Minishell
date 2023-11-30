@@ -12,8 +12,7 @@ void free_tokens(t_token *tokens)
     while (tokens) {
         tmp = tokens;
         tokens = tokens->next;
-        printf("Freeing token: %s\n", tmp->str);
-        free(tmp->str);
+//	   free(tmp->str);
         tmp->str = NULL;
         free(tmp);
     }

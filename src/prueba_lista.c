@@ -9,7 +9,8 @@ t_token	*ft_lstnew_addback(t_token **token, char *str)
 	new = malloc(sizeof(t_token));
 	if (!new)
 		return (NULL);
-	new->str = ft_strdup(str);
+	//new->str = ft_strdup(str);
+	new->str = str;
 	new->next = NULL;
 	if (*token == NULL)
 		*token = new;
