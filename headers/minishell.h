@@ -130,6 +130,8 @@ void	cmd_cd(char **line);
 void	cmd_export(char **line);
 void	cmd_unset(char **line);
 void	cmd_echo(char **line);
+void	split_token(char *input, t_token **tokens);
+void	free_tokens(t_token *tokens);
 
 t_general	g_gen;
 

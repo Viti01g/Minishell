@@ -26,26 +26,22 @@
 
 t_token *ft_lstnew_addback(t_token **token, char *str)
 {
-    t_token *new;
+	t_token	*new;
 
-    if (!token || !str)
-        return (NULL);
-
-    new = malloc(sizeof(t_token));
-    if (!new)
-        return (NULL);
-
-    new->str = ft_split(str, ' '); // Aquí se asume una función ft_split para dividir la cadena por espacios
-    new->next = NULL;
-
-    if (*token == NULL)
-        *token = new;
-    else {
-        t_token *end = *token;
-        while (end->next != NULL)
-            end = end->next;
-        end->next = new;
-    }
-
-    return new;
+	if (!token || !str)
+		return (NULL);
+	new = malloc(sizeof(t_token));
+	if (!new)
+		return (NULL);
+	new->str = ft_split(str, ' '); // Aquí se asume una función ft_split para dividir la cadena por espacios
+	new->next = NULL;
+	if (*token == NULL)
+		*token = new;
+	else {
+		t_token *end = *token;
+		while (end->next != NULL)
+			end = end->next;
+		end->next = new;
+	}
+	return new;
 }
