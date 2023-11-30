@@ -7,7 +7,6 @@ void	view_prompt(void)
 	write(1, "minishell$ ", strlen("minishell$ "));
 	write(1, RESET, ft_strlen(RESET));
 }
-
 int	main(int argc, char **argv, char **env)
 {
 	char		*view;
