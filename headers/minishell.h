@@ -95,7 +95,7 @@ t_inf					g_info;
 typedef struct s_token
 {
 	int				type;
-	char			*str;
+	char			**str;
 	struct s_token	*next;
 }	t_token;
 

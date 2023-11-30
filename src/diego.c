@@ -5,19 +5,37 @@ void ft_leaks(void)
 	system("leaks -q minishell");
 }
 
-void free_tokens(t_token *tokens)
+/* void free_tokens(t_token *tokens)
 {
     t_token *tmp;
 
     while (tokens) {
         tmp = tokens;
         tokens = tokens->next;
-        printf("Freeing token: %s\n", tmp->str);
-        free(tmp->str);
         tmp->str = NULL;
         free(tmp);
     }
+} */
+void free_tokens(t_token *tokens)
+{
+    t_token *tmp;
+
+    while (tokens)
+    {
+        tmp = tokens;
+        tokens = tokens->next;
+
+        // Liberar la doble matriz
+        for (int i = 0; tmp->str[i] != NULL; i++)
+        {
+            free(tmp->str[i]);
+        }
+        free(tmp->str);
+
+        free(tmp);
+    }
 }
+
 
 void process_simple_operator(char *input, t_token **tokens, int *i, int *j)
 {
@@ -25,7 +43,7 @@ void process_simple_operator(char *input, t_token **tokens, int *i, int *j)
 
 	fragment = ft_substr(input, *j, *i - *j);
     ft_lstnew_addback(tokens, fragment);
-    printf("%s\n", (*tokens)->str);
+   // printf("%s\n", (*tokens)->str);
     free(fragment);
 }
 
@@ -35,8 +53,8 @@ void process_double_operator(char *input, t_token **tokens, int *i)
 
 	fragment = ft_substr(input, *i, 2);
     ft_lstnew_addback(tokens, fragment);
-	if ((*tokens)->next != NULL)
-	  	printf("%s\n", (*tokens)->next->str);
+//	if ((*tokens)->next != NULL)
+	  	//printf("%s\n", (*tokens)->next->str);
     (*i)++;
 	free(fragment);
 }
@@ -47,8 +65,8 @@ void process_single_operator(char *input, t_token **tokens, int *i)
 
 	fragment = ft_substr(input, *i, 1);
     ft_lstnew_addback(tokens, fragment);
-	if ((*tokens)->next != NULL)
-    	printf("%s\n", (*tokens)->next->str);
+	//if ((*tokens)->next != NULL)
+    //	printf("%s\n", (*tokens)->next->str);
     free(fragment);
 }
 
@@ -76,23 +94,33 @@ void split_token(char *input, t_token **tokens)
 		process_simple_operator(input, tokens, &i, &j);
 }
 
-int	main(void)
+int main(void)
 {
     char *input;
-	t_token *tokens;
+    t_token *tokens;
 
-	tokens = NULL;
+    tokens = NULL;
+    atexit(ft_leaks);
     while (1) 
-	{
+    {
         input = readline("\e[1;32mminishell$ \e[0m");
-		printf("%p\n", input);
+        printf("%p\n", input);
         if (!input) 
             break ;
-		split_token(input, &tokens);
-		free(input);
-		free_tokens(tokens);
-		tokens = NULL;
+        split_token(input, &tokens);
+        free(input);
+        t_token *current = tokens;
+        while (current != NULL)
+        {
+            for (int i = 0; current->str[i] != NULL; i++)
+            {
+                printf("%s ", current->str[i]);
+            }
+            printf("\n");
+            current = current->next;
+        }
+        free_tokens(tokens);
+        tokens = NULL;
     }
-	atexit(ft_leaks);
-	return 0;
+    return 0;
 }
