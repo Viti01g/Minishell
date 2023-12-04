@@ -79,70 +79,45 @@ void split_token(char *input, t_token **tokens)
         process_simple_operator(input, tokens, &i, &j);
 }
 
-/* int main(void)
+void process_tokens(char *input, t_token **tokens)
 {
-    char *input;
-    t_token *tokens;
-
-    tokens = NULL;
-    atexit(ft_leaks);
-    while (1) 
-    {
-        input = readline("\e[1;32mminishell$ \e[0m");
-        printf("%p\n", input);
-        if (!input) 
-            break ;
-        split_token(input, &tokens);
-        free(input);
-        t_token *current = tokens;
-        while (current != NULL)
-        {
-            for (int i = 0; current->str[i] != NULL; i++)
-            {
-                printf("%s ", current->str[i]);
-            }
-            printf("\n");
-            current = current->next;
-        }
-        free_tokens(tokens);
-        tokens = NULL;
+	int 	i; 
+    t_token *current_token;
+    int 	token_index;
+    int 	word_index;
+	
+    split_token(input, tokens);
+	current_token = *tokens;
+	token_index = 1;
+    while (current_token != NULL)
+	{
+        printf("\nToken %d\n", token_index);
+        char **current_words = current_token->str;
+		word_index = 1;
+		i = -1;
+		while(current_words[++i])
+			printf("Word %d: %s\n", word_index++, current_words[i]);
+        current_token = current_token->next;
+        token_index++;
     }
-    return 0;
-} */
+}
 
 int main(void)
 {
     char *input;
     t_token *tokens;
 
-    tokens = NULL;
     atexit(ft_leaks);
-
     while (1) 
-    {
+	{
         input = readline("\e[1;32mminishell$ \e[0m");
         printf("%p\n", input);
-        if (!input) 
-            break ;
-        split_token(input, &tokens);
+        if (!input)
+            break;
+        process_tokens(input, &tokens);
         free(input);
-        t_token *current_token = tokens;
-        int token_index = 1;
-        while (current_token != NULL)
-        {
-            printf("\nToken %d\n", token_index);
-            char **current_words = current_token->str;
-            int word_index = 1;
-            for (int i = 0; current_words[i] != NULL; i++)
-            {
-                printf("Word %d: %s\n", word_index++, current_words[i]);
-            }
-            current_token = current_token->next;
-            token_index++;
-        }
         free_tokens(tokens);
-        tokens = NULL;
+    	tokens = NULL;
     }
     return 0;
 }
-
