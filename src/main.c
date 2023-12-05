@@ -37,6 +37,8 @@ int	main(int argc, char **argv, char **env)
 		if (!view)
 			break;
 		split_token(view, &tokens);
+		printf("su\n");
+		g_gen.token = tokens;
 		if (ft_strlen(view) != 0)
 		{
 			add_history(view);
@@ -53,6 +55,7 @@ int	main(int argc, char **argv, char **env)
 			free_tokens(tokens);
 			free(view);
 		}
+			tokens = tokens->next;
 		tcsetattr(0, 0, &g_info.termios);
 	}
 	return (EXIT_SUCCESS);

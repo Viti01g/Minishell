@@ -1,4 +1,4 @@
-#ifndef TOKENIZER_H
+/* #ifndef TOKENIZER_H
 # define TOKENIZER_H
 
 # include "minishell.h"
@@ -17,4 +17,4 @@ void	free_tokens(t_token *tokens);
 // Listas
 t_token	*ft_lstnew_addback(t_token **token, char *str);
 
-#endif
+#endif */
