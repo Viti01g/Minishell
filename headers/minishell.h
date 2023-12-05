@@ -35,6 +35,8 @@ enum	e_tok
 	PIPE,
 	FLCH_IZQ,
 	FLCH_DRCH,
+	DBL_FLCH_IZQ,
+	DBL_FLCH_DRCH,
 	TXT
 };
 
@@ -84,7 +86,7 @@ typedef struct s_pipe
 	int				out;
 }					t_pipe;
 
-typedef struct s_inf				//para utilizar variable globales o estructuras globales
+typedef struct s_inf
 {
 	int				signal_code;
 	struct 	termios	termios;		//disable (ctrl + c) printing ^C
@@ -94,6 +96,7 @@ t_inf					g_info;
 
 typedef struct s_token
 {
+	int				words;
 	int				type;
 	char			**str;
 	struct s_token	*next;
@@ -107,6 +110,7 @@ typedef struct s_general
 	char	*env_path;
 	char	*env_pwd;
 	char	*env_oldpwd;
+	t_token	*token;
 }	t_general;
 
 void	split_token(char *input, t_token **tokens);
@@ -130,6 +134,8 @@ void	cmd_cd(char **line);
 void	cmd_export(char **line);
 void	cmd_unset(char **line);
 void	cmd_echo(char **line);
+void	split_token(char *input, t_token **tokens);
+void	free_tokens(t_token *tokens);
 
 t_general	g_gen;
 
