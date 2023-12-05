@@ -1,9 +1,10 @@
 #include "../headers/minishell.h"
 
-void	ft_leaks(void)
+
+/* void	ft_leaks(void)
 {
 	system("leaks -q minishell");
-}
+} */
 
 void	free_tokens(t_token *tokens)
 {
@@ -17,6 +18,7 @@ void	free_tokens(t_token *tokens)
 		i = -1;
 		while (tmp->str[++i])
 			free(tmp->str[i]);
+		// Liberar la doble matriz
 		free(tmp->str);
 		free(tmp);
 	}
@@ -103,18 +105,20 @@ int	main(void)
 {
 	char	*input;
 	t_token	*tokens;
-
 	atexit(ft_leaks);
 	while (1)
 	{
 		input = readline("\e[1;32mminishell$ \e[0m");
 		printf("%p\n", input);
+
 		if (!input || !ft_strncmp(input, "exit", 4))
 			break ;
 		split_token(input, &tokens);
 		free(input);
+
 		free_tokens(tokens);
 		tokens = NULL;
 	}
 	return (0);
 }
+

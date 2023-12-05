@@ -21,6 +21,5 @@ t_token	*ft_lstnew_addback(t_token **token, char *str)
 			end = end->next;
 		end->next = new;
 	}
-
 	return (new);
 }
