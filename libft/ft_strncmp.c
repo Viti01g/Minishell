@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:26:36 by drubio-m          #+#    #+#             */
-/*   Updated: 2022/04/10 20:06:01 by drubio-m         ###   ########.fr       */
+/*   Updated: 2023/12/05 14:51:19 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		if ((cast_s1[i] == '\0') || (cast_s2[i] == '\0'))
 			return (0);
 		i++;
-	}	
+	}
 	if (cast_s1[i] != cast_s2[i])
 		return (cast_s1[i] - cast_s2[i]);
 	return (0);
