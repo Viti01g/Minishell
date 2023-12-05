@@ -18,6 +18,7 @@
 # include <curses.h>			/* Para tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs */
 # include <limits.h>
 # include "../libft/libft.h"
+# include "tokenizer.h"
 
 # define GREEN "\e[1;32m"
 # define RESET "\e[0m"
@@ -109,8 +110,7 @@ typedef struct s_general
 	char	*env_oldpwd;
 }	t_general;
 
-void	split_token(char *input, t_token **tokens);
-t_token	*ft_lstnew_addback(t_token **token, char *str);
+
 
 void	ft_signals(void);
 void	ft_signal_interrupt(void);
@@ -130,6 +130,12 @@ void	cmd_cd(char **line);
 void	cmd_export(char **line);
 void	cmd_unset(char **line);
 void	cmd_echo(char **line);
+
+
+
+// MORRALLA
+void	ft_leaks(void);
+
 
 t_general	g_gen;
 

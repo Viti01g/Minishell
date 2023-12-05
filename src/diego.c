@@ -50,6 +50,29 @@ void	process_single_operator(char *input, t_token **tokens, int *i)
 	free(fragment);
 }
 
+void	print_tokens(t_token **tokens)
+{
+	t_token	*current_token;
+	char	**current_words;
+	int		token_index;
+	int		word_index;
+	int		i;
+
+	current_token = *tokens;
+	token_index = 1;
+	while (current_token != NULL)
+	{
+		printf("\nToken %d\n", token_index);
+		current_words = current_token->str;
+		word_index = 1;
+		i = -1;
+		while (current_words[++i])
+			printf("Word %d: %s\n", word_index++, current_words[i]);
+		current_token = current_token->next;
+		token_index++;
+	}
+}
+
 void	split_token(char *input, t_token **tokens)
 {
 	int	i;
@@ -73,62 +96,7 @@ void	split_token(char *input, t_token **tokens)
 	}
 	if (j < i)
 		process_simple_operator(input, tokens, &i, &j);
-}
-
-/* void	process_tokens(char *input, t_token **tokens)
-{
-	int		i;
-	t_token	*current_token;
-	char	**current_words;
-	int		token_index;
-	int		word_index;
-
-	split_token(input, tokens);
-	current_token = *tokens;
-	token_index = 1;
-	while (current_token != NULL)
-	{
-		printf("\nToken %d\n", token_index);
-		current_words = current_token->str;
-		word_index = 1;
-		i = -1;
-		while (current_words[++i])
-			printf("Word %d: %s\n", word_index++, current_words[i]);
-		current_token = current_token->next;
-		token_index++;
-	}
-} */
-
-void	print_tokens(t_token **tokens)
-{
-	t_token	*current_token;
-	char	**current_words;
-
-	current_token = *tokens;
-}
-
-void	process_tokens(char *input, t_token **tokens)
-{
-	int		i;
-	t_token	*current_token;
-	char	**current_words;
-	int		token_index;
-	int		word_index;
-
-	split_token(input, tokens);
-	current_token = *tokens;
-	token_index = 1;
-	while (current_token != NULL)
-	{
-		printf("\nToken %d\n", token_index);
-		current_words = current_token->str;
-		word_index = 1;
-		i = -1;
-		while (current_words[++i])
-			printf("Word %d: %s\n", word_index++, current_words[i]);
-		current_token = current_token->next;
-		token_index++;
-	}
+	print_tokens(tokens);
 }
 
 int	main(void)
@@ -141,9 +109,9 @@ int	main(void)
 	{
 		input = readline("\e[1;32mminishell$ \e[0m");
 		printf("%p\n", input);
-		if (!input)
+		if (!input || !ft_strncmp(input, "exit", 4))
 			break ;
-		process_tokens(input, &tokens);
+		split_token(input, &tokens);
 		free(input);
 		free_tokens(tokens);
 		tokens = NULL;
