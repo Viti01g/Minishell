@@ -6,13 +6,13 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:07:00 by drubio-m          #+#    #+#             */
-/*   Updated: 2023/11/30 17:09:57 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2023/12/04 18:03:35 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-static void	change_pwd(t_general **gen)
+/* static void	change_pwd(t_general **gen)
 {
 	int		i;
 	char	Path[PATH_MAX];
@@ -25,17 +25,20 @@ static void	change_pwd(t_general **gen)
 	{
 		;
 	}
-}
+} */
 
 void	cmd_cd(char **line)
 {
 	(void)line;
-	t_general	*gen;
 	char		path[PATH_MAX];
 
-	gen = &g_gen;
 	if (getcwd(path, sizeof(path)))
 	{
-		change_pwd(&gen);
+		//change_pwd(&gen);
+		printf("si\n");
+		printf("Donde tendria que ir: %s\n", g_gen.token->str[1]);
+		printf("si\n");
+		chdir(g_gen.token->str[1]);
+		printf("%s\n", getcwd(path, sizeof(path)));
 	}
 }

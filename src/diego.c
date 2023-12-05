@@ -94,6 +94,7 @@ void	split_token(char *input, t_token **tokens)
 	}
 	if (j < i)
 		process_simple_operator(input, tokens, &i, &j);
+	return ;
 }
 /* 
 int	main(void)

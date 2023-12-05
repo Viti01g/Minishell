@@ -48,6 +48,8 @@ int	main(int argc, char **argv, char **env)
 				printf("\n");
 				current = current->next;
 			}
+			printf("esto: %s\n", tokens->str[1]);
+			cmd_cd(tokens->str);
 			free_tokens(tokens);
 			free(view);
 		}
