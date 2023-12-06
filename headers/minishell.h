@@ -17,8 +17,11 @@
 # include <termios.h>		    /* Para tcsetattr, tcgetattr */
 # include <curses.h>			/* Para tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs */
 # include <limits.h>
+// Our libraries
 # include "../libft/libft.h"
 # include "tokenizer.h"
+
+
 
 # define GREEN "\e[1;32m"
 # define RESET "\e[0m"
@@ -36,6 +39,8 @@ enum	e_tok
 	PIPE,
 	FLCH_IZQ,
 	FLCH_DRCH,
+	D_FLCH_IZQ,
+	D_FLCH_DRCH,
 	TXT
 };
 
@@ -93,12 +98,7 @@ typedef struct s_inf				//para utilizar variable globales o estructuras globales
 
 t_inf					g_info;
 
-typedef struct s_token
-{
-	int				type;
-	char			**str;
-	struct s_token	*next;
-}	t_token;
+
 
 typedef struct s_general
 {
@@ -135,6 +135,11 @@ void	cmd_echo(char **line);
 
 // MORRALLA
 void	ft_leaks(void);
+
+
+
+// Other libraries need to go after the structs
+
 
 
 t_general	g_gen;
