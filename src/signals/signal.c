@@ -1,4 +1,4 @@
-# include "../headers/minishell.h"
+# include "minishell.h"
 
 void	ft_disable_ctrl_c_printing_chars(void)
 {
