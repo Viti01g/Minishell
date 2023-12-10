@@ -37,6 +37,7 @@ int	main(void)
 	t_token	*tokens;
 
 	atexit(ft_leaks);
+	tokens = NULL;
 	while (1)
 	{
 		input = readline("\e[1;32mminishell$ \e[0m");
