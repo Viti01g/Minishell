@@ -10,13 +10,14 @@ void	view_prompt(void)
 int	main(int argc, char **argv, char **env)
 {
 	char		*view;
-	t_general	gen;
+	//t_general	gen;
+	t_token		*tokens;
 	char		**manolo;
-	int  o;
 
-	o = 0;
 	manolo = argv;
 	manolo = env;
+
+	atexit(ft_leaks);
 
 	ft_disable_ctrl_c_printing_chars();
 	view = "a";
@@ -29,15 +30,21 @@ int	main(int argc, char **argv, char **env)
 		view = readline("\e[1;32mminishell$ \e[0m");
 		if (!view)
 			break;
-
+		split_token(view, &tokens);
 		if (ft_strlen(view) != 0)
 		{
 			add_history(view);
-			gen.linea_entera = ft_split(view, ' ');
-			while (*gen.linea_entera != NULL) {
-				printf("Token: %s\n", *gen.linea_entera);
-				gen.linea_entera++;
+			t_token *current = tokens;
+			while (current != NULL)
+			{
+				for (int i = 0; current->str[i] != NULL; i++)
+					printf("%s ", current->str[i]);
+				printf("\n");
+				current = current->next;
 			}
+			printf("esto: %s\n", tokens->str[1]);
+			cmd_cd(tokens->str);
+			free_tokens(tokens);
 			free(view);
 		}
 		tcsetattr(0, 0, &g_info.termios);
