@@ -5,7 +5,8 @@ void	process_simple_operator(char *input, t_token **tokens, int *i, int *j)
 	char	*fragment;
 
 	fragment = ft_substr(input, *j, *i - *j);
-	ft_lstnew_addback(tokens, fragment, TXT);
+	if (fragment[0] != '\0')
+		ft_lstnew_addback(tokens, fragment, TXT);
 	free(fragment);
 }
 

@@ -35,7 +35,6 @@
 
 enum	e_tok
 {
-	CMD,
 	PIPE,
 	FLCH_IZQ,
 	FLCH_DRCH,
