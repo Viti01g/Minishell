@@ -17,11 +17,8 @@
 # include <termios.h>		    /* Para tcsetattr, tcgetattr */
 # include <curses.h>			/* Para tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs */
 # include <limits.h>
-// Our libraries
 # include "../libft/libft.h"
 # include "tokenizer.h"
-
-
 
 # define GREEN "\e[1;32m"
 # define RESET "\e[0m"
@@ -35,11 +32,12 @@
 
 enum	e_tok
 {
+	CMD,
 	PIPE,
 	FLCH_IZQ,
 	FLCH_DRCH,
-	D_FLCH_IZQ,
-	D_FLCH_DRCH,
+	DBL_FLCH_IZQ,
+	DBL_FLCH_DRCH,
 	TXT
 };
 
@@ -97,7 +95,13 @@ typedef struct s_inf
 
 t_inf					g_info;
 
-
+typedef struct s_token
+{
+	int				words;
+	int				type;
+	char			**str;
+	struct s_token	*next;
+}	t_token;
 
 typedef struct s_general
 {
@@ -138,11 +142,6 @@ t_token	*ft_lstnew_addback(t_token **token, char *str);
 
 // MORRALLA
 void	ft_leaks(void);
-
-
-
-// Other libraries need to go after the structs
-
 
 
 t_general	g_gen;
