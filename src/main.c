@@ -45,6 +45,7 @@ int	main(int argc, char **argv, char **env)
 			printf("esto: %s\n", tokens->str[1]);
 			cmd_cd(tokens->str);
 			free_tokens(tokens);
+
 			free(view);
 		}
 			tokens = tokens->next;
