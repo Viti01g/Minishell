@@ -38,6 +38,7 @@ int	main(int argc, char **argv, char **env)
 				printf("Token: %s\n", *gen.linea_entera);
 				gen.linea_entera++;
 			}
+			//prueba
 			free(view);
 		}
 		tcsetattr(0, 0, &g_info.termios);
