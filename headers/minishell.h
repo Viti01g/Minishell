@@ -89,7 +89,7 @@ typedef struct s_pipe
 	int				out;
 }					t_pipe;
 
-typedef struct s_inf				//para utilizar variable globales o estructuras globales
+typedef struct s_inf
 {
 	int				signal_code;
 	struct 	termios	termios;		//disable (ctrl + c) printing ^C
@@ -107,6 +107,7 @@ typedef struct s_general
 	char	*env_path;
 	char	*env_pwd;
 	char	*env_oldpwd;
+	t_token	*token;
 }	t_general;
 
 
@@ -129,6 +130,9 @@ void	cmd_cd(char **line);
 void	cmd_export(char **line);
 void	cmd_unset(char **line);
 void	cmd_echo(char **line);
+void	split_token(char *input, t_token **tokens);
+void	free_tokens(t_token *tokens);
+t_token	*ft_lstnew_addback(t_token **token, char *str);
 
 
 
