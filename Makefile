@@ -1,18 +1,26 @@
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I ./headers/minishell.h -I ./libft/libft.h
+CFLAGS = -Wall -Wextra -Werror -I ./headers -I ./libft/libft.h
+
 
 #DEBUG = -g3 -fsanitize=address
 RM = rm -f
-SRC = main.c ../signals/signal.c init_utils.c init_vars.c ../builtins/env.c ../builtins/pwd.c ../builtins/exit.c ../builtins/cd.c ../builtins/echo.c diego.c prueba_lista.c\
+#SRC = main.c ../signals/signal.c init_utils.c init_vars.c ../builtins/env.c ../builtins/pwd.c ../builtins/exit.c ../builtins/cd.c ../builtins/echo.c \
+
+TKN_SRC = tokenizer.c token_utils.c token_memory.c token_operators.c 
+SIG_SRC = signal.c
+BUI_SRC = cd.c clear.c echo.c env.c exec_builtins.c exit.c export.c pwd.c unset.c
+
+SRC = $(TKN_SRC) #$(SIG_SRC)
 
 INCLUDES = ./headers/minishell.h ./libft/libft.h
 LIBFT_DIR = libft/
 LIBFT = $(LIBFT_DIR)libft.a
 
-SIG_DIR = ./signals/
-BUI_DIR = ./builtins/
 SRC_DIR = ./src/
+SIG_DIR = $(SRC_DIR)signals/
+TKN_DIR = $(SRC_DIR)tokenizer/
+BUI_DIR = $(SRC_DIR)builtins/
 OBJ_DIR = ./obj/
 
 OBJ_FILES = $(SRC:.c=.o)
@@ -35,8 +43,17 @@ $(LIBFT): $(LIBFT_DIR)
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)%.o:$(SRC_DIR)%.c
+#Different folders for the .o
+
+$(OBJ_DIR)%.o: $(TKN_DIR)%.c
 	@$(CC) $(CFLAGS) $(RLINE_INC) -c $< -o $@
+
+$(OBJ_DIR)%.o: $(SIG_DIR)%.c
+	@$(CC) $(CFLAGS) $(RLINE_INC) -c $< -o $@
+
+$(OBJ_DIR)%.o: $(BUI_DIR)%.c
+	@$(CC) $(CFLAGS) $(RLINE_INC) -c $< -o $@
+
 
 # basic library compiled
 $(NAME): $(OBJ) $(LIBFT)
