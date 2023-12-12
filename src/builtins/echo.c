@@ -6,11 +6,11 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:06:20 by drubio-m          #+#    #+#             */
-/*   Updated: 2023/11/23 13:27:49 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2023/12/12 17:02:29 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "minishell.h"
 
 void	cmd_echo(char **line)
 {

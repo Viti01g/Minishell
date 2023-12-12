@@ -6,11 +6,11 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:07:57 by drubio-m          #+#    #+#             */
-/*   Updated: 2023/11/23 13:22:58 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2023/12/12 17:02:46 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "minishell.h"
 
 void	ft_exec_buitins(char **line)
 {

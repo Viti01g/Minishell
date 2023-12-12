@@ -1,4 +1,4 @@
-#include "../headers/minishell.h"
+#include "minishell.h"
 
 void	init_vars(t_general *gen, char **env)
 {

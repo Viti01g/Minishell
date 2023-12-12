@@ -1,4 +1,4 @@
-#include "../headers/minishell.h"
+#include "minishell.h"
 
 static int	count_txt(char **str)
 {
@@ -22,9 +22,9 @@ void	type_args(t_token **tok)
 		if ((*prueba)->str[i] == '|')
 			(*tok)->type = PIPE;
 		else if ((*prueba)->str[i] == '<' && (*prueba)->str[i + 1] == '<')
-			(*tok)->type = DBL_FLCH_IZQ;
+			(*tok)->type = D_FLCH_IZQ;
 		else if ((*prueba)->str[i] == '>' && (*prueba)->str[i + 1] == '>')
-			(*tok)->type = DBL_FLCH_DRCH;
+			(*tok)->type = D_FLCH_DRCH;
 		else if ((*prueba)->str[i] == '<')
 			(*tok)->type = FLCH_IZQ;
 		else if ((*prueba)->str[i] == '>')

@@ -1,5 +1,5 @@
 
-#include "../headers/minishell.h"
+#include "minishell.h"
 
 void	view_prompt(void)
 {
