@@ -82,9 +82,10 @@ void	split_token(char *input, t_token **tokens)
 
 	i = 0;
 	j = 0;
+	printf("%s\n", input);
 	while (input[i])
 	{
-		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
+		if (input[i] && (input[i] == '|' || input[i] == '<' || input[i] == '>'))
 		{
 			process_simple_operator(input, tokens, &i, &j);
 			if ((input[i] == '>' || input[i] == '<')

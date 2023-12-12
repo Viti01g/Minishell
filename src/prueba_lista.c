@@ -16,9 +16,13 @@ t_token	*ft_lstnew_addback(t_token **token, char *str)
 		*token = new;
 	else
 	{
+		printf("AAAAAAA\n");
 		end = *token;
 		while (end->next != NULL)
+		{
+		printf("AAAAAAA\n");
 			end = end->next;
+		}
 		end->next = new;
 	}
 	return (new);

@@ -16,7 +16,6 @@ void	ft_leaks(void)
 int	main(int argc, char **argv, char **env)
 {
 	char		*view;
-	//t_general	gen;
 	t_token		*tokens;
 	char		**manolo;
 
@@ -37,7 +36,6 @@ int	main(int argc, char **argv, char **env)
 		if (!view)
 			break;
 		split_token(view, &tokens);
-		printf("su\n");
 		g_gen.token = tokens;
 		if (ft_strlen(view) != 0)
 		{
@@ -47,7 +45,7 @@ int	main(int argc, char **argv, char **env)
 			{
 				for (int i = 0; current->str[i] != NULL; i++)
 					printf("%s ", current->str[i]);
-				printf("\n");
+				//printf("\n");
 				current = current->next;
 			}
 			printf("esto: %s\n", tokens->str[1]);
@@ -59,4 +57,25 @@ int	main(int argc, char **argv, char **env)
 		tcsetattr(0, 0, &g_info.termios);
 	}
 	return (EXIT_SUCCESS);
+}
+
+int	main(void)
+{
+	char	*input;
+	t_token	*tokens;
+
+	atexit(ft_leaks);
+	tokens = NULL;
+	while (1)
+	{
+		input = readline("\e[1;32mminishell$ \e[0m");
+		printf("%p\n", input);
+		if (!input || !ft_strncmp(input, "exit", 4))
+			break ;
+		split_token(input, &tokens);
+		free(input);
+		free_tokens(tokens);
+		tokens = NULL;
+	}
+	return (0);
 }
