@@ -10,9 +10,9 @@ void	split_token(char *input, t_token **tokens)
 	int	i;
 	int	j;
 
-	i = 0;
+	i = -1;
 	j = 0;
-	while (input[i])
+	while (input[++i])
 	{
 		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
 		{
@@ -24,7 +24,6 @@ void	split_token(char *input, t_token **tokens)
 				process_single_operator(input, tokens, &i);
 			j = i + 1;
 		}
-		i++;
 	}
 	if (j < i)
 		process_simple_operator(input, tokens, &i, &j);
@@ -37,6 +36,7 @@ int	main(void)
 	t_token	*tokens;
 
 	atexit(ft_leaks);
+	tokens = NULL;
 	while (1)
 	{
 		input = readline("\e[1;32mminishell$ \e[0m");
