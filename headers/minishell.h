@@ -136,7 +136,6 @@ void	cmd_unset(char **line);
 void	cmd_echo(char **line);
 void	split_token(char *input, t_token **tokens);
 void	free_tokens(t_token *tokens);
-t_token	*ft_lstnew_addback(t_token **token, char *str);
 
 
 
