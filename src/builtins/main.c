@@ -45,15 +45,16 @@ int	main(int argc, char **argv, char **env)
 			printf("esto: %s\n", tokens->str[1]);
 			cmd_cd(tokens->str);
 			free_tokens(tokens);
-			free(view);
-		}
 			tokens = tokens->next;
+		}
+		free(view);
+		tokens = NULL;
 		tcsetattr(0, 0, &g_info.termios);
 	}
 	return (EXIT_SUCCESS);
 }
 
-int	main(void)
+/* int	main(void)
 {
 	char	*input;
 	t_token	*tokens;
@@ -72,4 +73,4 @@ int	main(void)
 		tokens = NULL;
 	}
 	return (0);
-}
+} */
