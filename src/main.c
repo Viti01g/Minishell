@@ -53,7 +53,7 @@ int	main(int argc, char **argv, char **env)
 	return (EXIT_SUCCESS);
 }
 
-int	main(void)
+/* int	main(void)
 {
 	char	*input;
 	t_token	*tokens;
@@ -72,4 +72,4 @@ int	main(void)
 		tokens = NULL;
 	}
 	return (0);
-}
+} */
