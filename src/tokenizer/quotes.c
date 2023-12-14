@@ -1,12 +1,6 @@
-#include <unistd.h>
-#include <stdio.h>
 #include "minishell.h"
 
-#define TRUE  1
-#define FALSE  0
-
-
-void check_quotes(char *input)
+/* void check_quotes(char *input)
 {
 	int	i;
 	int	double_flag;
@@ -15,32 +9,77 @@ void check_quotes(char *input)
 	i = 0;
 	double_flag = FALSE;
 	single_flag = FALSE;
-	if (input[i] == '\"')
+	while (input[i])
 	{
-		double_flag = TRUE;
-		while (input[i] != '\"' && input[i] != '\0')
-		{
-			printf("hola\n");
-			i++;
-		}
 		if (input[i] == '\"')
-			double_flag = FALSE;
-	}
-	else if (input[i] == '\'')
-	{
-		single_flag = TRUE;
-		while (input[i] != '\'' && input[i])
+		{
 			i++;
-		if (input[i] == '\'')
-			single_flag = FALSE;
+			double_flag = TRUE;
+			while (input[i] != '\"' && input[i] != '\0')
+			{
+				printf("hola\n");
+				i++;
+			}
+			if (input[i] == '\"')
+				double_flag = FALSE;
+		}
+		else if (input[i] == '\'')
+		{
+			i++;
+			single_flag = TRUE;
+			while (input[i] != '\'' && input[i])
+				i++;
+			if (input[i] == '\'')
+				single_flag = FALSE;
+		}
+		i++;
 	}
 	if (double_flag == FALSE)
 		printf("Comillas dobles cerradas o no hay\n");
-	else if (double_flag == TRUE)
+	if (double_flag == TRUE)
 		printf("Comillas dobles abiertas\n");
-	else if (single_flag == FALSE)
+	if (single_flag == FALSE)
 		printf("Comillas simples cerradas o no hay\n");
-	else if (single_flag == TRUE)
+	if (single_flag == TRUE)
+		printf("Comillas simples abiertas\n");
+} */
+
+void check_quotes(char *input)
+{
+	int	double_flag;
+	int	single_flag;
+
+	double_flag = FALSE;
+	single_flag = FALSE;
+	while (*input)
+	{
+		if (*input == '\"')
+		{
+			input++;
+			double_flag = TRUE;
+			while (*input != '\"' && *input != '\0')
+				input++;
+			if (*input == '\"')
+				double_flag = FALSE;
+		}
+		else if (*input == '\'')
+		{
+			input++;
+			single_flag = TRUE;
+			while (*input != '\'' && *input)
+				input++;
+			if (*input == '\'')
+				single_flag = FALSE;
+		}
+		input++;
+	}
+	if (double_flag == FALSE)
+		printf("Comillas dobles cerradas o no hay\n");
+	if (double_flag == TRUE)
+		printf("Comillas dobles abiertas\n");
+	if (single_flag == FALSE)
+		printf("Comillas simples cerradas o no hay\n");
+	if (single_flag == TRUE)
 		printf("Comillas simples abiertas\n");
 }
 

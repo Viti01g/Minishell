@@ -11,7 +11,7 @@ SIG_SRC = signal.c
 BUI_SRC = cd.c clear.c echo.c env.c exec_builtins.c exit.c export.c pwd.c unset.c
 SRC_SRC = init_utils.c init_vars.c main.c parsing.c probar_cosas.c utils.c
 
-SRC = $(SRC_SRC) #$(TKN_SRC) #$(SIG_SRC)
+SRC = $(TKN_SRC) #$(SIG_SRC)
 
 INCLUDES = ./headers/minishell.h ./libft/libft.h
 LIBFT_DIR = libft/

@@ -32,6 +32,8 @@
 # define BLUE "\e[1;34m"
 
 # define EXIT_STATUS	128
+# define TRUE  1
+# define FALSE  0
 
 enum	e_tok
 {
