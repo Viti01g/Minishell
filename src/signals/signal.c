@@ -2,16 +2,17 @@
 
 void	ft_disable_ctrl_c_printing_chars(void)
 {
+	t_inf	inf;
 	int rc;
 
-	rc = tcgetattr(0, &g_info.termios);
+	rc = tcgetattr(0, &inf.termios);
 	if (rc != 0)
 	{
 		perror("tcgetattr");
 		exit (1);
 	}
-	g_info.termios.c_lflag &= ~ECHOCTL;
-	rc = tcsetattr(0, 0, &g_info.termios);
+	inf.termios.c_lflag &= ~ECHOCTL;
+	rc = tcsetattr(0, 0, &inf.termios);
 	if (rc != 0)
 	{
 		perror("tcsetattr");
@@ -31,7 +32,7 @@ void	ft_signal_quit(void)
 void	ft_signal_reset_prompt(int signal)
 {
 	(void) signal;
-	g_info.signal_code = 130;
+	signal_code = 130;
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);

@@ -1,17 +1,17 @@
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I ./headers -I ./libft/libft.h
+CFLAGS = -Wall -Wextra -Werror -I ./headers -I ./libft/libft.h -g3
 
 
 #DEBUG = -g3 -fsanitize=address
 RM = rm -f
-#SRC = main.c ../signals/signal.c init_utils.c init_vars.c ../builtins/env.c ../builtins/pwd.c ../builtins/exit.c ../builtins/cd.c ../builtins/echo.c \
 
-TKN_SRC = tokenizer.c token_utils.c token_memory.c token_operators.c 
+TKN_SRC = tokenizer.c token_utils.c token_memory.c token_operators.c # quotes.c
 SIG_SRC = signal.c
-BUI_SRC = cd.c clear.c echo.c env.c exec_builtins.c exit.c export.c pwd.c unset.c main.c
+BUI_SRC = cd.c clear.c echo.c env.c exec_builtins.c exit.c export.c pwd.c unset.c
+SRC_SRC = init_utils.c init_vars.c main.c parsing.c utils.c
 
-SRC = $(TKN_SRC) $(BUI_SRC) $(SIG_SRC)
+SRC = $(SRC_SRC) $(TKN_SRC) $(SIG_SRC) $(BUI_SRC)
 
 INCLUDES = ./headers/minishell.h ./libft/libft.h
 LIBFT_DIR = libft/
@@ -52,6 +52,9 @@ $(OBJ_DIR)%.o: $(SIG_DIR)%.c
 	@$(CC) $(CFLAGS) $(RLINE_INC) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(BUI_DIR)%.c
+	@$(CC) $(CFLAGS) $(RLINE_INC) -c $< -o $@
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) $(RLINE_INC) -c $< -o $@
 
 

@@ -12,14 +12,14 @@ void	print_tokens(t_token **tokens)
 	token_index = 1;
 	while (current_token != NULL)
 	{
-		printf("\nToken %d\n", token_index);
+	//	printf("\nToken %d\n", token_index);
 		current_words = current_token->str;
-		printf("Token Type: %d\n", current_token->type);
-		printf("Num of words: %d\n", current_token->words);
+	//	printf("Token Type: %d\n", current_token->type);
+	//	printf("Num of words: %d\n", current_token->words);
 		word_index = 1;
 		i = -1;
-		while (current_words[++i])
-			printf("Word %d: %s\n", word_index++, current_words[i]);
+		/* while (current_words[++i])
+			printf("Word %d: %s\n", word_index++, current_words[i]); */
 		current_token = current_token->next;
 		token_index++;
 	}

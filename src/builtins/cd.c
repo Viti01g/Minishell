@@ -6,7 +6,7 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:07:00 by drubio-m          #+#    #+#             */
-/*   Updated: 2023/12/12 17:02:15 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2023/12/14 13:13:37 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,14 @@
 	}
 } */
 
-void	cmd_cd(char **line)
+void	cmd_cd(t_general *gen)
 {
-	(void)line;
 	char		path[PATH_MAX];
 
 	if (getcwd(path, sizeof(path)))
 	{
 		//change_pwd(&gen);
-		printf("si\n");
-		printf("Donde tendria que ir: %s\n", g_gen.token->str[1]);
-		printf("si\n");
-		chdir(g_gen.token->str[1]);
+		chdir(gen->token->str[1]);
 		printf("%s\n", getcwd(path, sizeof(path)));
 	}
 }

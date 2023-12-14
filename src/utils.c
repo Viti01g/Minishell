@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static int	count_txt(char **str)
+int	count_txt(char **str)
 {
 	int	i;
 
@@ -10,7 +10,7 @@ static int	count_txt(char **str)
 	return (i);
 }
 
-void	type_args(t_token **tok)
+/* void	type_args(t_token **tok)
 {
 	t_token	**prueba;
 	int		i;
@@ -36,5 +36,5 @@ void	type_args(t_token **tok)
 		}
 		(*prueba) = (*prueba)->next;
 	}
-	return ;
-}
+	return ; 
+}*/

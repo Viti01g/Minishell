@@ -6,7 +6,7 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:07:33 by drubio-m          #+#    #+#             */
-/*   Updated: 2023/12/12 17:02:35 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2023/12/14 15:16:51 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,10 @@
 
 } */
 
-void	cmd_env(char **line)
+void	cmd_env(t_general *gen)
 {
-	(void)line;
-	t_general *gen;
 	int	i;
 	
-	gen = &g_gen;
 	i = 0;
 	while (gen->env[i])
 	{
