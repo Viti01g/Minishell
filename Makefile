@@ -6,12 +6,12 @@ CFLAGS = -Wall -Wextra -Werror -I ./headers -I ./libft/libft.h -g3
 #DEBUG = -g3 -fsanitize=address
 RM = rm -f
 
-TKN_SRC = quotes.c #tokenizer.c token_utils.c token_memory.c token_operators.c 
+TKN_SRC = tokenizer.c token_utils.c token_memory.c token_operators.c 
 SIG_SRC = signal.c
 BUI_SRC = cd.c clear.c echo.c env.c exec_builtins.c exit.c export.c pwd.c unset.c
-SRC_SRC = init_utils.c init_vars.c main.c parsing.c probar_cosas.c utils.c
+SRC_SRC = quotes.c #init_utils.c init_vars.c main.c parsing.c probar_cosas.c utils.c
 
-SRC = $(TKN_SRC) #$(SIG_SRC)
+SRC = $(SRC_SRC) #$(TKN_SRC) #$(SIG_SRC)
 
 INCLUDES = ./headers/minishell.h ./libft/libft.h
 LIBFT_DIR = libft/
