@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:32:40 by drubio-m          #+#    #+#             */
-/*   Updated: 2022/04/10 20:02:58 by drubio-m         ###   ########.fr       */
+/*   Updated: 2023/12/17 21:15:46 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	ft_intlen(int n)
 }
 
 static int	ft_turn_to_positive(int n)
-{	
+{
 	if (n < 0)
 		n = -n;
 	return (n);
@@ -61,13 +61,20 @@ char	*ft_itoa(int n)
 	}
 	if (n < 0)
 		ret[0] = '-';
+//	free(ret);
 	return (ret);
 }
-/*
-int	main(void)
+
+/* int	main(void)
 {
-	int n = (-2147483647 -1);
-	printf("%s\n", ft_itoa(n));
+	//int n = (-2147483647 -1);
+	int n = (-2147);
+	char *sol = ft_itoa(n);
+	//printf("%s\n", ft_itoa(n));
+	printf("%s\n", sol);
 	printf("%d", ft_intlen(-2147483647));
-}
-*/
+	//free(sol);
+	system("leaks -q a.out");
+	return 0;
+} */
+
