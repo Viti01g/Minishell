@@ -5,7 +5,6 @@
 // TODO: Manejar las comillas anidadas
 // TODO: Manejar que me detecte los argumentos de los comandos bien
 	// TODO: ejemplo: echo "hola mundo" solo tiene un arg no 2
-// TODO: Mirar leak del itoa
 void check_quotes(char *input)
 {
 	int	double_flag;
