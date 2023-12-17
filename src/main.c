@@ -7,6 +7,9 @@ void	view_prompt(void)
 	write(1, "minishell$ ", strlen("minishell$ "));
 	write(1, RESET, ft_strlen(RESET));
 }
+
+
+// TODO: Cambiar el strncmp por un strcmp
 /* int	main(int argc, char **argv, char **env)
 {
 	char		*view;

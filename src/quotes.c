@@ -1,78 +1,54 @@
 #include "minishell.h"
 
-/* void check_quotes(char *input)
-{
-	int	i;
-	int	double_flag;
-	int	single_flag;
 
-	i = 0;
-	double_flag = FALSE;
-	single_flag = FALSE;
-	while (input[i])
-	{
-		if (input[i] == '\"')
-		{
-			i++;
-			double_flag = TRUE;
-			while (input[i] != '\"' && input[i] != '\0')
-			{
-				printf("hola\n");
-				i++;
-			}
-			if (input[i] == '\"')
-				double_flag = FALSE;
-		}
-		else if (input[i] == '\'')
-		{
-			i++;
-			single_flag = TRUE;
-			while (input[i] != '\'' && input[i])
-				i++;
-			if (input[i] == '\'')
-				single_flag = FALSE;
-		}
-		i++;
-	}
-	if (double_flag == FALSE)
-		printf("Comillas dobles cerradas o no hay\n");
-	if (double_flag == TRUE)
-		printf("Comillas dobles abiertas\n");
-	if (single_flag == FALSE)
-		printf("Comillas simples cerradas o no hay\n");
-	if (single_flag == TRUE)
-		printf("Comillas simples abiertas\n");
-} */
-
+// TODO: Checkear que las comillas estén cerradas
+// TODO: Manejar las comillas anidadas
+// TODO: Manejar que me detecte los argumentos de los comandos bien
+	// TODO: ejemplo: echo "hola mundo" solo tiene un arg no 2
+// TODO: Mirar leak del itoa
 void check_quotes(char *input)
 {
 	int	double_flag;
 	int	single_flag;
+	int	decide;
+	int flag;
 
 	double_flag = FALSE;
 	single_flag = FALSE;
+	decide = FALSE;
+	flag = FALSE;
 	while (*input)
 	{
 		if (*input == '\"' && single_flag == FALSE)
 		{
+			if (flag == FALSE)
+			{
+				decide = TRUE;
+				flag = TRUE;
+			}
 			input++;
 			if (double_flag == TRUE)
 				double_flag = FALSE;
 			else
 				double_flag = TRUE;
-			while (*input != '\"' && *input != '\0' && *input != '\'')
+			while (*input != '\"' && *input != '\0')
 				input++;
 			if (*input == '\"')
 				double_flag = FALSE;
 		}
 		if (*input == '\'' && double_flag == FALSE)
 		{
+			if (flag == FALSE)
+			{
+				decide = FALSE;
+				flag = TRUE;
+			}
 			input++;
 			if (single_flag == TRUE)
 				single_flag = FALSE;
 			else
 				single_flag = TRUE;
-			while (*input != '\'' && *input && *input != '\"')
+			while (*input != '\'' && *input)
 				input++;
 			if (*input == '\'')
 				single_flag = FALSE;
@@ -87,9 +63,13 @@ void check_quotes(char *input)
 		printf("Comillas simples cerradas o no hay\n");
 	if (single_flag == TRUE)
 		printf("Comillas simples abiertas\n");
+	if (decide == FALSE)
+		printf("Va a ser interpretado con comillas simples\n");
+	else
+		printf("Va a ser interpretado con comillas dobles\n");
 }
 
-/* int	main(void)
+int	main(void)
 {
 	char	*input;
 
@@ -104,4 +84,4 @@ void check_quotes(char *input)
 		free(input);
 	}
 	return (0);
-} */
+}

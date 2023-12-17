@@ -1,5 +1,21 @@
 #include "minishell.h"
 
+
+/* split cmd
+{
+	char **args;
+	args[i][j]
+	while (str[i])
+		if (DQ)
+			copy until str[i] == DQ
+		if (SQ)
+			copy until str[i] == SQ
+		else
+			copy until space
+	J++;
+
+} */
+
 t_token	*ft_lstnew_addback(t_token **token, char *str, int type)
 {
 	t_token	*new;
@@ -11,6 +27,7 @@ t_token	*ft_lstnew_addback(t_token **token, char *str, int type)
 	if (!new)
 		return (NULL);
 	new->str = ft_split(str, ' ');
+	new->str = spli_cmd(str);
 	new->words = count_words(new->str);
 	new->type = type;
 	new->next = NULL;

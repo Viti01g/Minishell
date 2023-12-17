@@ -31,6 +31,7 @@
 # define PURPLE "\e[1;35m"
 # define BLUE "\e[1;34m"
 
+// Macro Defines
 # define EXIT_STATUS	128
 # define TRUE  1
 # define FALSE  0
