@@ -7,7 +7,7 @@ void	view_prompt(void)
 	write(1, "minishell$ ", strlen("minishell$ "));
 	write(1, RESET, ft_strlen(RESET));
 }
-int	main(int argc, char **argv, char **env)
+/* int	main(int argc, char **argv, char **env)
 {
 	char		*view;
 	t_token		*tokens;
@@ -51,25 +51,4 @@ int	main(int argc, char **argv, char **env)
 		tcsetattr(0, 0, &g_info.termios);
 	}
 	return (EXIT_SUCCESS);
-}
-
-/* int	main(void)
-{
-	char	*input;
-	t_token	*tokens;
-
-	atexit(ft_leaks);
-	tokens = NULL;
-	while (1)
-	{
-		input = readline("\e[1;32mminishell$ \e[0m");
-		printf("%p\n", input);
-		if (!input || !ft_strncmp(input, "exit", 4))
-			break ;
-		split_token(input, &tokens);
-		free(input);
-		free_tokens(tokens);
-		tokens = NULL;
-	}
-	return (0);
 } */

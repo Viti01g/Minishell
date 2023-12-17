@@ -53,20 +53,26 @@ void check_quotes(char *input)
 	single_flag = FALSE;
 	while (*input)
 	{
-		if (*input == '\"')
+		if (*input == '\"' && single_flag == FALSE)
 		{
 			input++;
-			double_flag = TRUE;
-			while (*input != '\"' && *input != '\0')
+			if (double_flag == TRUE)
+				double_flag = FALSE;
+			else
+				double_flag = TRUE;
+			while (*input != '\"' && *input != '\0' && *input != '\'')
 				input++;
 			if (*input == '\"')
 				double_flag = FALSE;
 		}
-		else if (*input == '\'')
+		if (*input == '\'' && double_flag == FALSE)
 		{
 			input++;
-			single_flag = TRUE;
-			while (*input != '\'' && *input)
+			if (single_flag == TRUE)
+				single_flag = FALSE;
+			else
+				single_flag = TRUE;
+			while (*input != '\'' && *input && *input != '\"')
 				input++;
 			if (*input == '\'')
 				single_flag = FALSE;
@@ -83,7 +89,7 @@ void check_quotes(char *input)
 		printf("Comillas simples abiertas\n");
 }
 
-int	main(void)
+/* int	main(void)
 {
 	char	*input;
 
@@ -92,10 +98,10 @@ int	main(void)
 		input = readline("\e[1;32mminishell$ \e[0m");
 		printf("%p\n", input);
 		// TODO: Cambiar el strncmp por un strcmp
-		if (!input || !ft_strncmp(input, "exit", 4))
+		if (!input || !ft_strcmp(input, "exit"))
 			break ;
 		check_quotes(input);
 		free(input);
 	}
 	return (0);
-}
+} */
