@@ -17,12 +17,11 @@ int	main(int argc, char **argv, char **env)
 	manolo = argv;
 	manolo = env;
 
-	//atexit(ft_leaks);
+	atexit(ft_leaks);
 	ft_disable_ctrl_c_printing_chars();
 	view = "a";
 	if (argc != 1)
 		exit(EXIT_FAILURE);
-	
 	while (1)
 	{
 		ft_signals();
@@ -32,15 +31,14 @@ int	main(int argc, char **argv, char **env)
 			break;
 		split_token(view, &gen.token);
 		//gen.token = tokens;
-		gen.args = count_txt(gen.token->str);
-		printf("args en readline: %d\n", gen.args);
+		//printf("si\n");
 		if (ft_strlen(view) != 0)
 		{
+			gen.args = count_txt(gen.token->str);
 			add_history(view);
 			t_token *current = gen.token;
 			while (current != NULL)
 				current = current->next;
-				printf("si\n");
 		//	printf("\n");
 			ft_exec_buitins(&gen);
 			//cmd_cd(gen.token->str);

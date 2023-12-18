@@ -6,7 +6,7 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:07:57 by drubio-m          #+#    #+#             */
-/*   Updated: 2023/12/14 17:12:56 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2023/12/18 14:45:30 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	ft_exec_buitins(t_general *gen)
 {
-	if (!ft_strncmp(gen->token->str[0], "cd", ft_strlen(gen->token->str[0])))
+	if (!ft_strcmp(gen->token->str[0], "cd"))
 		cmd_cd(gen);
-	else if (!ft_strncmp(gen->token->str[0], "env", ft_strlen(gen->token->str[0])))
+	else if (!ft_strcmp(gen->token->str[0], "env"))
 		cmd_env(gen);
-	else if (!ft_strncmp(gen->token->str[0], "pwd", ft_strlen(gen->token->str[0])))
+	else if (!ft_strcmp(gen->token->str[0], "pwd"))
 		cmd_pwd(gen);
-	else if (!ft_strncmp(gen->token->str[0], "exit", ft_strlen(gen->token->str[0])))
+	else if (!ft_strcmp(gen->token->str[0], "exit"))
 		cmd_exit(gen);
-	else if (!ft_strncmp(gen->token->str[0], "echo", ft_strlen(gen->token->str[0])))
+	else if (!ft_strcmp(gen->token->str[0], "echo"))
 		cmd_echo(gen);
-	else if (!ft_strncmp(gen->token->str[0], "unset", ft_strlen(gen->token->str[0])))
+	else if (!ft_strcmp(gen->token->str[0], "unset"))
 		cmd_unset(gen);
-	else if (!ft_strncmp(gen->token->str[0], "export", ft_strlen(gen->token->str[0])))
+	else if (!ft_strcmp(gen->token->str[0], "export"))
 		cmd_export(gen);
 	else
 		return ;

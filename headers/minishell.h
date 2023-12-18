@@ -17,7 +17,10 @@
 # include <termios.h>		    /* Para tcsetattr, tcgetattr */
 # include <curses.h>			/* Para tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs */
 # include <limits.h>
+
+
 // Our libraries
+
 # include "../libft/libft.h"
 # include "tokenizer.h"
 

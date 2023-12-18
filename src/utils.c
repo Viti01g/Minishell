@@ -5,6 +5,8 @@ int	count_txt(char **str)
 	int	i;
 
 	i = 0;
+	if (str[i] == NULL)
+		return (0);
 	while (str[i])
 		i++;
 	return (i);
