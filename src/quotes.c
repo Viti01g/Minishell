@@ -1,58 +1,55 @@
 #include "minishell.h"
 
-
-// TODO: Checkear que las comillas estén cerradas
-// TODO: Manejar las comillas anidadas
 // TODO: Manejar que me detecte los argumentos de los comandos bien
 	// TODO: ejemplo: echo "hola mundo" solo tiene un arg no 2
-void check_quotes(char *input)
+
+int	change_quote_state(int quote)
+{
+	if (quote == FALSE)
+		return (TRUE);
+	else
+		return (FALSE);
+}
+
+void	until_double(char *input, int *i, int *double_flag)
+{
+	if (input[*i] == '\"')
+	{
+		*double_flag = change_quote_state(*double_flag);
+		(*i)++;
+		while (input[*i] != '\"' && input[*i])
+			(*i)++;
+		if (input[*i] == '\"')
+			*double_flag = change_quote_state(*double_flag);
+	}
+}
+
+void	until_single(char *input, int *i, int *single_flag)
+{
+	if (input[*i] == '\'')
+	{
+		*single_flag = change_quote_state(*single_flag);
+		(*i)++;
+		while (input[*i] != '\'' && input[*i])
+			(*i)++;
+		if (input[*i] == '\'')
+			*single_flag = change_quote_state(*single_flag);
+	}
+}
+
+void	check_quotes(char *input)
 {
 	int	double_flag;
 	int	single_flag;
-	int	decide;
-	int flag;
+	int	i;
 
+	i = -1;
 	double_flag = FALSE;
 	single_flag = FALSE;
-	decide = FALSE;
-	flag = FALSE;
-	while (*input)
+	while (input[++i])
 	{
-		if (*input == '\"' && single_flag == FALSE)
-		{
-			if (flag == FALSE)
-			{
-				decide = TRUE;
-				flag = TRUE;
-			}
-			input++;
-			if (double_flag == TRUE)
-				double_flag = FALSE;
-			else
-				double_flag = TRUE;
-			while (*input != '\"' && *input != '\0')
-				input++;
-			if (*input == '\"')
-				double_flag = FALSE;
-		}
-		if (*input == '\'' && double_flag == FALSE)
-		{
-			if (flag == FALSE)
-			{
-				decide = FALSE;
-				flag = TRUE;
-			}
-			input++;
-			if (single_flag == TRUE)
-				single_flag = FALSE;
-			else
-				single_flag = TRUE;
-			while (*input != '\'' && *input)
-				input++;
-			if (*input == '\'')
-				single_flag = FALSE;
-		}
-		input++;
+		until_double(input, &i, &double_flag);
+		until_single(input, &i, &single_flag);
 	}
 	if (double_flag == FALSE)
 		printf("Comillas dobles cerradas o no hay\n");
@@ -62,10 +59,6 @@ void check_quotes(char *input)
 		printf("Comillas simples cerradas o no hay\n");
 	if (single_flag == TRUE)
 		printf("Comillas simples abiertas\n");
-	if (decide == FALSE)
-		printf("Va a ser interpretado con comillas simples\n");
-	else
-		printf("Va a ser interpretado con comillas dobles\n");
 }
 
 int	main(void)
@@ -76,7 +69,6 @@ int	main(void)
 	{
 		input = readline("\e[1;32mminishell$ \e[0m");
 		printf("%p\n", input);
-		// TODO: Cambiar el strncmp por un strcmp
 		if (!input || !ft_strcmp(input, "exit"))
 			break ;
 		check_quotes(input);
