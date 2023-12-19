@@ -74,5 +74,6 @@ int	main(void)
 		check_quotes(input);
 		free(input);
 	}
+	system("leaks -q a.out");
 	return (0);
 }
