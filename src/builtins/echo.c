@@ -6,7 +6,7 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:06:20 by drubio-m          #+#    #+#             */
-/*   Updated: 2023/12/18 20:01:26 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2023/12/19 13:16:52 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,17 @@ static void	ft_ex_echo(t_general *gen, int cond)
 	int	i;
 
 	i = 0;
+	if (cond == 1)
+		i++;
 	while (++i < gen->token->words)
 	{
 		if (gen->token->str[i][0] != '$')
 			printf("%s", gen->token->str[i]);
 		if (!ft_strcmp(gen->token->str[i], "$?"))
 			printf("hola\n");
-		printf(" ");
+		if (gen->token->str[i + 1])
+			printf(" ");
 	}
-	if (cond == 1)
-		write(1, "\n", 1);
 }
 
 void	cmd_echo(t_general *gen)

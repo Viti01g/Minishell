@@ -17,7 +17,7 @@ int	main(int argc, char **argv, char **env)
 	manolo = argv;
 	manolo = env;
 
-	atexit(ft_leaks);
+	//atexit(ft_leaks);
 	ft_disable_ctrl_c_printing_chars();
 	view = "a";
 	if (argc != 1)
