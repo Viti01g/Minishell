@@ -6,20 +6,11 @@
 /*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:32:40 by drubio-m          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/12/17 22:40:54 by drubio-m         ###   ########.fr       */
-=======
-/*   Updated: 2023/12/19 13:16:06 by drubio-m         ###   ########.fr       */
->>>>>>> refs/remotes/origin/diego
+/*   Updated: 2023/12/20 18:15:39 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-void ft_leaks()
-{
-	system("leaks -q a.out");
-}
 
 static int	ft_intlen(int n)
 {
