@@ -6,11 +6,20 @@
 /*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:32:40 by drubio-m          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/12/17 22:40:54 by drubio-m         ###   ########.fr       */
+=======
+/*   Updated: 2023/12/19 13:16:06 by drubio-m         ###   ########.fr       */
+>>>>>>> refs/remotes/origin/diego
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+void ft_leaks()
+{
+	system("leaks -q a.out");
+}
 
 static int	ft_intlen(int n)
 {
@@ -64,16 +73,16 @@ char	*ft_itoa(int n)
 	return (ret);
 }
 
-/* int	main(void)
+/* int main(void)
 {
 	//int n = (-2147483647 -1);
 	int n = (-2147);
 	char *sol = ft_itoa(n);
-	//printf("%s\n", ft_itoa(n));
+//	printf("%s\n", ft_itoa(n));
 	printf("%s\n", sol);
 	printf("%d", ft_intlen(-2147483647));
-	//free(sol);
-	system("leaks -q a.out");
+//	free(sol);
+	atexit(ft_leaks);
 	return 0;
-} */
+}  */
 
