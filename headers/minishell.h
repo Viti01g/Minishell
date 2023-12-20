@@ -112,6 +112,7 @@ typedef struct s_general
 	char	*env_pwd;
 	char	*env_oldpwd;
 	t_token	*token;
+	t_inf	*inf;
 }	t_general;
 
 

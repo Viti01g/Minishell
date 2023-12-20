@@ -10,7 +10,6 @@ void	view_prompt(void)
 int	main(int argc, char **argv, char **env)
 {
 	char		*view;
-//	t_inf		inf;
 	t_general	gen;
 	char		**manolo;
 
