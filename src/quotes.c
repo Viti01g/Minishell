@@ -64,7 +64,7 @@ int	change_quote_state(int quote)
 		return (FALSE);
 }
 
-/* void	until_double(char *input, int *i, int *double_flag)
+void	until_double(char *input, int *i, int *double_flag)
 {
 	if (input[*i] == '\"')
 	{
@@ -75,8 +75,7 @@ int	change_quote_state(int quote)
 		if (input[*i] == '\"')
 			*double_flag = change_quote_state(*double_flag);
 	}
-} */
-
+}
 
 void	until_single(char *input, int *i, int *single_flag)
 {
