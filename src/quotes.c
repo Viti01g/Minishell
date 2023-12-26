@@ -64,7 +64,7 @@ int	change_quote_state(int quote)
 		return (FALSE);
 }
 
-void	until_double(char *input, int *i, int *double_flag)
+/* void	until_double(char *input, int *i, int *double_flag)
 {
 	if (input[*i] == '\"')
 	{
@@ -75,7 +75,8 @@ void	until_double(char *input, int *i, int *double_flag)
 		if (input[*i] == '\"')
 			*double_flag = change_quote_state(*double_flag);
 	}
-}
+} */
+
 
 void	until_single(char *input, int *i, int *single_flag)
 {
@@ -109,16 +110,16 @@ void	check_quotes(char *input)
 int	main(void)
 {
 	char	*input;
-	char	*si;
+	//char	*si;
 	while (1)
 	{
 		input = readline("\e[1;32mminishell$ \e[0m");
 		printf("%p\n", input);
 		if (!input || !ft_strcmp(input, "exit"))
 			break ;
-		//check_quotes(input);
-		si = retrieve_double_quote(input);
-		free(si);
+		check_quotes(input);
+		//si = retrieve_double_quote(input);
+		//free(si);
 		free(input);
 	}
 	//system("leaks -q minishell");

@@ -27,7 +27,7 @@ t_token	*ft_lstnew_addback(t_token **token, char *str, int type)
 	if (!new)
 		return (NULL);
 	new->str = ft_split(str, ' ');
-	new->str = spli_cmd(str);
+	//new->str = spli_cmd(str);
 	new->words = count_words(new->str);
 	new->type = type;
 	new->next = NULL;
