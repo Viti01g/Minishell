@@ -61,6 +61,7 @@ char	*retrieve_double_quote(char *input)
 	int		i;
 	int		start;
 	int		stop;
+	int		in_quotes;
 	char	*token;
 
 	i = -1;
@@ -71,16 +72,24 @@ char	*retrieve_double_quote(char *input)
 		if (input[i] == '\"')
 		{
 			start = i;
-			i++;
-			while (input[i] != '\"')
-				i++;
+			while (start > 0 && input[start - 1] != ' ' && input[start - 1] != '\t')
+				start--;
+			in_quotes = 1;
+		}
+		else
+		{
 			stop = i;
-			printf("Esto vale start: %d\n", start);
+			in_quotes = 0;
+			printf("esta es la len de ft_strlen de input: %d\n", ft_strlen(input));
+			printf("y este es su último char: %c\n", input[ft_strlen(input) - 1]);
+			while (stop < ft_strlen(input) && input[stop + 1] != ' ' && input[stop + 1] != '\t')
+				stop++;
 			printf("Esto vale stop: %d\n", stop);
+			printf("Y es este char: %c\n", input[stop - 1]);
 			break ;
 		}
 	}
-	token = ft_substr(input, start + 1, (stop - start) - 1);
+	token = ft_substr(input, start, (stop - start));
 	printf("Este es tu token mi rey: %s\n", token);
 	return (token);
 }
