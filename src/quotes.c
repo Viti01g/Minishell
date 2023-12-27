@@ -27,6 +27,35 @@ void ft_leaks()
 	}
 } */
 
+/* char	*retrieve_double_quote(char *input)
+{
+	int		i;
+	int		start;
+	int		stop;
+	char	*token;
+
+	i = -1;
+	start = 0;
+	stop = 0;
+	while (input[++i])
+	{
+		if (input[i] == '\"')
+		{
+			start = i;
+			i++;
+			while (input[i] != '\"')
+				i++;
+			stop = i;
+			printf("Esto vale start: %d\n", start);
+			printf("Esto vale stop: %d\n", stop);
+			break ;
+		}
+	}
+	token = ft_substr(input, start + 1, (stop - start) - 1);
+	printf("Este es tu token mi rey: %s\n", token);
+	return (token);
+} */
+
 char	*retrieve_double_quote(char *input)
 {
 	int		i;
@@ -109,16 +138,17 @@ void	check_quotes(char *input)
 int	main(void)
 {
 	char	*input;
-	//char	*si;
+	char	*si;
+
 	while (1)
 	{
 		input = readline("\e[1;32mminishell$ \e[0m");
 		printf("%p\n", input);
 		if (!input || !ft_strcmp(input, "exit"))
 			break ;
-		check_quotes(input);
-		//si = retrieve_double_quote(input);
-		//free(si);
+	//	check_quotes(input);
+		si = retrieve_double_quote(input);
+		free(si);
 		free(input);
 	}
 	//system("leaks -q minishell");
