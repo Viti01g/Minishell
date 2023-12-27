@@ -139,6 +139,7 @@ void	split_token(char *input, t_token **tokens);
 void	free_tokens(t_token *tokens);
 void	ft_exec_buitins(t_general *gen);
 int		count_txt(char **str);
+void	ft_print_export(t_general *gen);
 
 
 

@@ -11,10 +11,12 @@ int	main(int argc, char **argv, char **env)
 {
 	char		*view;
 	t_general	gen;
+	//t_token *tok;
 	//char		**manolo;
 
 	(void)argv;
-
+	gen.token = NULL;
+	//gen.token = tok;
 	//atexit(ft_leaks);
 	ft_disable_ctrl_c_printing_chars();
 	view = "a";
