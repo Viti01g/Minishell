@@ -2,6 +2,10 @@ NAME = minishell
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I ./headers -I ./libft/libft.h -g3
 
+#Cosas realine mac casa
+
+export LDFLAGS="-L/opt/homebrew/opt/readline/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/readline/include"
 
 #DEBUG = -g3 -fsanitize=address
 RM = rm -f
@@ -46,21 +50,21 @@ $(OBJ_DIR):
 #Different folders for the .o
 
 $(OBJ_DIR)%.o: $(TKN_DIR)%.c
-	@$(CC) $(CFLAGS) $(RLINE_INC) -c $< -o $@
+	@$(CC) $(CFLAGS) $(RLINE_INC) $(CPPFLAGS) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(SIG_DIR)%.c
-	@$(CC) $(CFLAGS) $(RLINE_INC) -c $< -o $@
+	@$(CC) $(CFLAGS) $(RLINE_INC) $(CPPFLAGS) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(BUI_DIR)%.c
-	@$(CC) $(CFLAGS) $(RLINE_INC) -c $< -o $@
+	@$(CC) $(CFLAGS) $(RLINE_INC) $(CPPFLAGS) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(CC) $(CFLAGS) $(RLINE_INC) -c $< -o $@
+	@$(CC) $(CFLAGS) $(RLINE_INC) $(CPPFLAGS) -c $< -o $@
 
 
 # basic library compiled
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(CFLAGS) $(DEBUG) $(OBJ) $(LIBFT) $(RLINE_L) -o $(NAME)
+	@$(CC) $(CFLAGS) $(DEBUG) $(OBJ) $(LIBFT) $(RLINE_L) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)#### minishell ####$(COLOR_OFF)"
 	@echo "    -Has been compiled ✅"
 

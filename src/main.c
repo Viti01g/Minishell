@@ -11,10 +11,9 @@ int	main(int argc, char **argv, char **env)
 {
 	char		*view;
 	t_general	gen;
-	char		**manolo;
+	//char		**manolo;
 
-	manolo = argv;
-	manolo = env;
+	(void)argv;
 
 	//atexit(ft_leaks);
 	ft_disable_ctrl_c_printing_chars();

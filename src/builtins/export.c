@@ -52,9 +52,9 @@ static void	ft_print_export(t_general *gen)
 
 void	cmd_export(t_general *gen)
 {
-	int	i;
+//	int	i;
 
-	i = 0;
+//	i = 0;
 	if (gen->args == 1)
 		ft_print_export(gen);
 }
