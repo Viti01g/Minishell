@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*   By: VR <VR@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:06:20 by drubio-m          #+#    #+#             */
-/*   Updated: 2023/12/20 19:38:13 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/01/02 20:30:51 by VR               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,19 @@ static char	*ft_expand_echo(t_general *gen, char *var/* , int pos */)
 			return (ft_substr(gen->env[i], j + 1, ft_strlen(gen->env[i]) - j));
 		}
 	}
-	return ("fallo");
+	return ("");
 }
 
 static void	ft_ex_echo(t_general *gen, int cond)
 {
 	int		i;
 	char	*var;
+	int	h;
 
 	i = 0;
-	if (cond == 1)
-		i++;
+	h = cond;
+	if (cond >= 1)
+		i = cond;
 	while (++i < gen->token->words)
 	{
 		if (gen->token->str[i][0] != '$')
@@ -52,21 +54,35 @@ static void	ft_ex_echo(t_general *gen, int cond)
 		if (gen->token->str[i + 1])
 			printf(" ");
 	}
+	if (h == 0)
+		printf("\n");
+}
+
+static int ft_find_flags(t_general *gen)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (gen->token->str[i] && gen->token->str[i][0] == '-')
+	{
+		j = 1;
+		while (gen->token->str[i][j] && gen->token->str[i][j] == 'n')
+			j++;
+		if (!gen->token->str[i][j])
+			i++;
+		else
+			break;
+	}
+	return (i - 1);
 }
 
 void	cmd_echo(t_general *gen)
 {
-	//(void)gen;
 	if (gen->token->words == 1)
 	{
 		printf("\n");
 		return ;
 	}
-	if (!ft_strcmp(gen->token->str[1], "-n"))
-		ft_ex_echo(gen, 1);
-	else
-	{
-		ft_ex_echo(gen, 0);
-		printf("\n");
-	}
+	ft_ex_echo(gen, ft_find_flags(gen));
 }
