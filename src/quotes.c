@@ -10,7 +10,7 @@
 		// * la cual devuelve un char * que sería el nuevo token ole ole ole
 
 
-void ft_leaks()
+void	ft_leaks()
 {
 	system("leaks -q minishell");
 }
@@ -24,6 +24,8 @@ void ft_leaks()
 	{
 
 		i++;
+
+
 	}
 } */
 
@@ -65,32 +67,36 @@ char	*retrieve_double_quote(char *input)
 	char	*token;
 
 	i = -1;
-	start = 0;
+	start = i + 1;
 	stop = 0;
-	while (input[++i])
+	in_quotes = 0;
+	token = NULL;
+	while (input[++i] && input[i] != ' ')
 	{
-		if (input[i] == '\"')
+		if (input[i] == '\"' && in_quotes == 0)
 		{
-			start = i;
-			while (start > 0 && input[start - 1] != ' ' && input[start - 1] != '\t')
-				start--;
+			//start = i;
+			i++;
 			in_quotes = 1;
-		}
-		else
-		{
-			stop = i;
+			while (input[i] != '\"' && input[i])
+				i++;
 			in_quotes = 0;
-			printf("esta es la len de ft_strlen de input: %d\n", ft_strlen(input));
-			printf("y este es su último char: %c\n", input[ft_strlen(input) - 1]);
-			while (stop < ft_strlen(input) && input[stop + 1] != ' ' && input[stop + 1] != '\t')
-				stop++;
-			printf("Esto vale stop: %d\n", stop);
-			printf("Y es este char: %c\n", input[stop - 1]);
-			break ;
+			//stop = i + 1;
 		}
+		if (input[i + 1] == '\0')
+			stop = i;
+		stop = i;
 	}
-	token = ft_substr(input, start, (stop - start));
-	printf("Este es tu token mi rey: %s\n", token);
+	if (stop > start)
+	{
+		printf("Esto vale start: %d\n", start);
+		printf("Esto vale stop: %d\n", stop);
+		printf("A partir de este char va a empezar: %c\n", input[start]);
+		token = ft_substr(input, start, (stop - start));
+		printf("Este es tu token mi rey: %s\n", token);
+	}
+	else
+		printf("No es un token válido\n");
 	return (token);
 }
 
@@ -142,6 +148,8 @@ void	check_quotes(char *input)
 		until_double(input, &i, &double_flag);
 		until_single(input, &i, &single_flag);
 	}
+	printf("Valor de comillas dobles: %d\n", double_flag);
+	printf("Valor de comillas simples: %d\n", single_flag);
 }
 
 int	main(void)
@@ -155,7 +163,7 @@ int	main(void)
 		printf("%p\n", input);
 		if (!input || !ft_strcmp(input, "exit"))
 			break ;
-	//	check_quotes(input);
+//		check_quotes(input);
 		si = retrieve_double_quote(input);
 		free(si);
 		free(input);
