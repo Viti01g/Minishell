@@ -10,94 +10,22 @@
 		// * la cual devuelve un char * que sería el nuevo token ole ole ole
 
 
-void	ft_leaks()
+/* void	ft_leaks()
 {
 	system("leaks -q minishell");
-}
+} */
 
-/* void	select_quote_mode(char *input)
+int	process_quotes(char *str, int i, char del)
 {
-	int	i;
+	int	j;
 
-	i = 0;
-	while (input[i])
-	{
-
+	j = i;
+	i++;
+	while (str[i] != del && str[i])
 		i++;
-
-
-	}
-} */
-
-/* char	*retrieve_double_quote(char *input)
-{
-	int		i;
-	int		start;
-	int		stop;
-	char	*token;
-
-	i = -1;
-	start = 0;
-	stop = 0;
-	while (input[++i])
-	{
-		if (input[i] == '\"')
-		{
-			start = i;
-			i++;
-			while (input[i] != '\"')
-				i++;
-			stop = i;
-			printf("Esto vale start: %d\n", start);
-			printf("Esto vale stop: %d\n", stop);
-			break ;
-		}
-	}
-	token = ft_substr(input, start + 1, (stop - start) - 1);
-	printf("Este es tu token mi rey: %s\n", token);
-	return (token);
-} */
-
-char	*retrieve_double_quote(char *input)
-{
-	int		i;
-	int		start;
-	int		stop;
-	int		in_quotes;
-	char	*token;
-
-	i = -1;
-	start = i + 1;
-	stop = 0;
-	in_quotes = 0;
-	token = NULL;
-	while (input[++i] && input[i] != ' ')
-	{
-		if (input[i] == '\"' && in_quotes == 0)
-		{
-			//start = i;
-			i++;
-			in_quotes = 1;
-			while (input[i] != '\"' && input[i])
-				i++;
-			in_quotes = 0;
-			//stop = i + 1;
-		}
-		if (input[i + 1] == '\0')
-			stop = i;
-		stop = i;
-	}
-	if (stop > start)
-	{
-		printf("Esto vale start: %d\n", start);
-		printf("Esto vale stop: %d\n", stop);
-		printf("A partir de este char va a empezar: %c\n", input[start]);
-		token = ft_substr(input, start, (stop - start));
-		printf("Este es tu token mi rey: %s\n", token);
-	}
-	else
-		printf("No es un token válido\n");
-	return (token);
+	if (str[i] == del)
+		i++;
+	return (i - j);
 }
 
 int	change_quote_state(int quote)
@@ -151,7 +79,7 @@ void	check_quotes(char *input)
 	printf("Valor de comillas dobles: %d\n", double_flag);
 	printf("Valor de comillas simples: %d\n", single_flag);
 }
-
+/* 
 int	main(void)
 {
 	char	*input;
@@ -171,4 +99,4 @@ int	main(void)
 	//system("leaks -q minishell");
 	atexit(ft_leaks);
 	return (0);
-}
+} */
