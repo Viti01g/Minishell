@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: VR <VR@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:06:20 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/01/03 19:40:26 by VR               ###   ########.fr       */
+/*   Updated: 2024/01/08 12:59:58 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ static char	*ft_expand_echo(t_general *gen, char *var/* , int pos */)
 	{
 		j = ft_strlen(var);
 		if (!ft_strncmp(gen->env[i], var, ft_strlen(var)))
-		{
 			return (ft_substr(gen->env[i], j + 1, ft_strlen(gen->env[i]) - j));
-		}
 	}
 	return ("");
 }
