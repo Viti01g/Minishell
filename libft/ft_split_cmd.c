@@ -6,18 +6,18 @@
 /*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 20:11:09 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/01/07 20:22:00 by drubio-m         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:41:50 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	is_whitespace(char c)
+static int	is_whitespace(char c)
 {
 	return (c == ' ' || (c > 8 && c < 14));
 }
 
-int	skip_spaces(char *str)
+static int	skip_spaces(char *str)
 {
 	int	j;
 
@@ -27,7 +27,7 @@ int	skip_spaces(char *str)
 	return (j);
 }
 
-static void	process_quotes(char const *s, size_t *i, int *in_quotes, char *current_quote)
+void	p_quotes_cmd(char *s, size_t *i, int *in_quotes, char *current_quote)
 {
     if (*in_quotes && *current_quote == s[*i]) 
         *in_quotes = 0;
@@ -39,7 +39,7 @@ static void	process_quotes(char const *s, size_t *i, int *in_quotes, char *curre
     (*i)++;
 }
 
-static void	process_delimiter(char const *s, size_t *i, size_t *word_count, char c, int in_quotes)
+void	process_delimiter(char *s, size_t *i, size_t *word_count, char c, int in_quotes)
 {
     if (!in_quotes && s[*i] == c) 
     {
@@ -51,7 +51,7 @@ static void	process_delimiter(char const *s, size_t *i, size_t *word_count, char
         (*i)++;
 }
 
-static size_t	ft_count_words(char const *s, char c)
+static size_t	ft_count_words(char *s, char c)
 {
     size_t	word_count;
     size_t	i;
@@ -62,13 +62,13 @@ static size_t	ft_count_words(char const *s, char c)
     i = 0;
     in_quotes = 0;
     current_quote = '\0';
-    i += skip_spaces((char *)s);
+    i += skip_spaces(s);
     while (s[i])
     {
         if (s[i] == '\'' || s[i] == '\"') 
         {
-            process_quotes(s, &i, &in_quotes, &current_quote);
-            continue;
+            p_quotes_cmd(s, &i, &in_quotes, &current_quote);
+            continue ;
         }
         process_delimiter(s, &i, &word_count, c, in_quotes);
     }
@@ -78,7 +78,7 @@ static size_t	ft_count_words(char const *s, char c)
     return (word_count);
 }
 
-static void	ft_free_split(char **str, size_t words)
+/* static void	ft_free_split(char **str, size_t words)
 {
 	while (words > 0)
 	{
@@ -86,34 +86,88 @@ static void	ft_free_split(char **str, size_t words)
 		words--;	
 	}
 	free(str);
+} */
+
+void	process_delimiter_split(char *s, size_t *i, char c, int in_quotes)
+{
+    if (!in_quotes && s[*i] == c) 
+    {
+        while (s[*i] && s[*i] == c)
+            (*i)++;
+    } 
+    else 
+        (*i)++;
 }
 
-char	**ft_split_cmd(char const *s, char c)
+void	process_word(char *s, size_t *i, int *in_quotes, char *current_quote)
 {
-	size_t	i;
-	size_t	j;
-	char	**str;
-	size_t	index;
+    if (s[*i] == '\'' || s[*i] == '\"') 
+        p_quotes_cmd(s, i, in_quotes, current_quote);
+    else 
+        (*i)++;
+}
 
-	index = 0;
-	i = 0;
-	if (!s)
-		return (NULL);
-	str = ft_calloc(sizeof (char *), (ft_count_words(s, c) + 1));
-	if (!str)
-		return (NULL);
-	while (s[i] && (index < ft_count_words(s, c)))
-	{
-		while (s[i] && s[i] == c)
-			i++;
-		j = i;
-		while (s[i] && s[i] != c)
-			i++;
-		str[index++] = ft_substr(s, j, (i - j));
-	}
-	if (!str)
-		ft_free_split(str, ft_count_words(s, c));
-	return (str);
+void skip_delimiters(char *s, size_t *start, char c, int in_quotes)
+{
+    if (s[*start] != '\0') // Check if not at the end of the string
+    {
+        while (s[*start] == c && !in_quotes) // Skip delimiters after a word only if not in quotes
+            (*start)++;
+    }
+}
+
+char	*get_next_word(char *s, size_t *start, char c)
+{
+    size_t	i;
+    int		in_quotes;
+    char	current_quote;
+    char    *word;
+
+    i = *start;
+    in_quotes = 0;
+    current_quote = '\0';
+    while (s[i] && (s[i] != c || in_quotes))
+    {
+        if (s[i] == '\'' || s[i] == '\"') 
+        {
+            p_quotes_cmd(s, &i, &in_quotes, &current_quote);
+            continue ;
+        }
+       else 
+           i++;
+    }
+    word = ft_substr(s, *start, (i - *start));
+    *start = i;
+	skip_delimiters(s, start, c, in_quotes);
+    return word;
+}
+
+char	**ft_split_cmd(char *s, char c)
+{
+    char	**words;
+    size_t	i;
+    size_t	start;
+    size_t	word_count;
+
+    if (!s)
+        return (NULL);
+    word_count = ft_count_words(s, c);
+    words = (char **)malloc(sizeof(char *) * (word_count + 1));
+    if (!words)
+        return (NULL);
+    i = 0;
+    start = 0;
+    while (s[start] == c && s[start] != '\0')
+        start++;
+    while (i < word_count)
+    {
+        words[i] = get_next_word(s, &start, c);
+        if (words[i] == NULL)
+            break ;
+        i++;
+    }
+    words[i] = NULL;
+    return (words);
 }
 
 //*****************************************************************************
@@ -130,18 +184,21 @@ char	**ft_split_cmd(char const *s, char c)
 //*****************************************************************************
 
 
-int main(void)
+/* int main(void)
 {
-//char s[] = " pedro' h o\"la'a     c' pedro' n";
-char s[] = "'hola' 'mundo'";
+char s[] = " pedro' h o\"la'a\"pito\"     c' pedro' n ";
+//char s[] = "'hola' 'mundo'";
+//char s[] = "\"hola\" \"mundo\"";
 char c = ' ';
 char **res;
+int i = 0;
 res = ft_split_cmd(s, ' ');
-while (*res)
+while (res[i])
 {
-	printf("%s\n", *res++);
+	printf("%s\n", res[i]);
+	i++;
 }
+printf("%s\n", res[i]);
 //system("leaks a.out");
 return (0);
-}
-
+} */

@@ -25,6 +25,9 @@ int		change_quote_state(int quote);
 void	until_double(char *input, int *i, int *double_flag);
 void	until_single(char *input, int *i, int *single_flag);
 void	check_quotes(char *input);
+int		skip_spaces(char *str, int i);
+int		is_whitespace(char c);
+
 
 
 
