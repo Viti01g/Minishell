@@ -36,6 +36,13 @@
 
 # define EXIT_STATUS	128
 
+enum	e_expt
+{
+	NEW_VALUE,
+	CREATE,
+	FAIL
+};
+
 enum	e_tok
 {
 	PIPE,
@@ -140,7 +147,8 @@ void	free_tokens(t_token *tokens);
 void	ft_exec_buitins(t_general *gen);
 int		count_txt(char **str);
 void	ft_print_export(t_general *gen);
-
+int		invalid_value(char **env);
+void	free_matriz(char **str);
 
 
 // MORRALLA

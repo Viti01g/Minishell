@@ -12,6 +12,16 @@ int	count_txt(char **str)
 	return (i);
 }
 
+void	free_matriz(char **str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		free(str[i]);
+	free(str);
+}
+
 /* void	type_args(t_token **tok)
 {
 	t_token	**prueba;

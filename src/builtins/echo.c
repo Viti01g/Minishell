@@ -6,7 +6,7 @@
 /*   By: VR <VR@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:06:20 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/01/02 20:30:51 by VR               ###   ########.fr       */
+/*   Updated: 2024/01/03 19:40:26 by VR               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	ft_ex_echo(t_general *gen, int cond)
 {
 	int		i;
 	char	*var;
-	int	h;
+	int		h;
 
 	i = 0;
 	h = cond;
