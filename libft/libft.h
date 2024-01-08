@@ -6,7 +6,7 @@
 /*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:41:23 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/01/08 16:38:33 by drubio-m         ###   ########.fr       */
+/*   Updated: 2024/01/08 19:59:03 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }t_list;
+
+typedef struct s_string_info
+{
+    char 	*s;
+    size_t	*i;
+	char	current_quote;
+}t_inf;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -69,7 +76,8 @@ char	*get_next_word(char *s, size_t *start, char c);
 void skip_delimiters(char *s, size_t *start, char c, int in_quotes);
 void	process_word(char *s, size_t *i, int *in_quotes, char *current_quote);
 void	process_delimiter_split(char *s, size_t *i, char c, int in_quotes);
-void	process_delimiter(char *s, size_t *i, size_t *word_count, char c, int in_quotes);
+//void	process_delimiter(char *s, size_t *i, size_t *word_count, char c, int in_quotes);
+void	process_delimiter(t_inf *info, size_t *word_count, char c, int in_quotes);
 void	p_quotes_cmd(char *s, size_t *i, int *in_quotes, char *current_quote);
 
 

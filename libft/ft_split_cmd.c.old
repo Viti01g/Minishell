@@ -6,7 +6,7 @@
 /*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 20:11:09 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/01/08 20:00:02 by drubio-m         ###   ########.fr       */
+/*   Updated: 2024/01/08 18:07:43 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,38 +39,28 @@ void	p_quotes_cmd(char *s, size_t *i, int *in_quotes, char *current_quote)
     (*i)++;
 }
 
-void	process_delimiter(t_inf *info, size_t *word_count, char c, int in_quotes)
+/* void	process_delimiter(char *s, size_t *i, size_t *word_count, char c, int in_quotes)
 {
-    if (!in_quotes && info->s[*(info->i)] == c) 
+    if (!in_quotes && s[*i] == c) 
     {
         (*word_count)++;
-        while (info->s[*(info->i)] && info->s[*(info->i)] == c)
-            (*(info->i))++;
+        while (s[*i] && s[*i] == c)
+            (*i)++;
     } 
     else 
-        (*(info->i))++;
-}
+        (*i)++;
+} */
 
-t_inf initialize_string_info(char *s, size_t *i)
+void	process_delimiter(t_delim params)
 {
-    t_inf string_info;
-
-    string_info.s = s;
-    string_info.i = i;
-
-    return string_info;
-}
-
-void process_char(t_inf *info, size_t *word_count, char c, int *in_quotes)
-{
-    if (info->s[*(info->i)] == '\'' || info->s[*(info->i)] == '\"') 
+    if (!params.in_quotes && s[*params.i] == params.c) 
     {
-        p_quotes_cmd(info->s, info->i, in_quotes, &(info->current_quote));
-    }
-    else
-    {
-        process_delimiter(info, word_count, c, *in_quotes);
-    }
+        (*params.word_count)++;
+        while (s[*params.i] && s[*params.i] == params.c)
+            (*params.i)++;
+    } 
+    else 
+        (*params.i)++;
 }
 
 static size_t	ft_count_words(char *s, char c)
@@ -78,21 +68,25 @@ static size_t	ft_count_words(char *s, char c)
     size_t	word_count;
     size_t	i;
     int		in_quotes;
-    t_inf	s_string_info;
+    char	current_quote;
 
     word_count = 0;
     i = 0;
     in_quotes = 0;
-    s_string_info.s = s;
-    s_string_info.i = &i;
-    s_string_info.current_quote = '\0';
+    current_quote = '\0';
     i += skip_spaces(s);
     while (s[i])
     {
-        process_char(&s_string_info, &word_count, c, &in_quotes);
+        if (s[i] == '\'' || s[i] == '\"') 
+        {
+            p_quotes_cmd(s, &i, &in_quotes, &current_quote);
+            continue ;
+        }
+        process_delimiter(s, &i, &word_count, c, in_quotes);
     }
     if (s[i - 1] != c && !in_quotes)
         word_count++;
+	printf("Esta es la cuenta: %zu\n", word_count);
     return (word_count);
 }
 
@@ -202,7 +196,7 @@ char	**ft_split_cmd(char *s, char c)
 //*****************************************************************************
 
 
-int main(void)
+/* int main(void)
 {
 char s[] = " pedro' h o\"la'a\"pito\"     c' pedro' n ";
 //char s[] = "'hola' 'mundo'";
@@ -219,4 +213,4 @@ while (res[i])
 printf("%s\n", res[i]);
 //system("leaks a.out");
 return (0);
-}
+} */
