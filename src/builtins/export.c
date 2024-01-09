@@ -6,7 +6,7 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:08:20 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/01/08 19:14:14 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/01/09 14:53:58 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static enum e_expt	ft_validate(char *str)
 	return (NEW_VALUE);
 }
 
-static char	**ft_change_env(char **env, char *str, enum e_expt flag)
+char	**ft_change_env(char **env, char *str, enum e_expt flag)
 {
 	char	**new_env;
 	char	*var;

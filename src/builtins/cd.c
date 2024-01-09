@@ -6,7 +6,7 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:07:00 by drubio-m          #+#    #+#             */
-/*   Updated: 2023/12/14 13:13:37 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:11:23 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 void	cmd_cd(t_general *gen)
 {
-	char		path[PATH_MAX];
+	char	path[PATH_MAX];
 
 	if (getcwd(path, sizeof(path)))
 	{

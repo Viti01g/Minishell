@@ -133,7 +133,7 @@ void    init_vars(t_general *gen, char **env);
 char	**ft_cpy_env(char **env);
 char	*ft_cpy_home(char **env);
 char	*ft_cpy_path(char **env);
-char	*ft_cpy_pwd(char **env);
+char	*ft_cpy_pwd(t_general **gen, char **env);
 char	*ft_cpy_oldpwd(char **env);
 void	cmd_env(t_general *gen);
 void	cmd_exit(t_general *gen);
@@ -149,6 +149,7 @@ int		count_txt(char **str);
 void	ft_print_export(t_general *gen);
 int		invalid_value(char **env);
 void	free_matriz(char **str);
+char	**ft_change_env(char **env, char *str, enum e_expt flag);
 
 
 // MORRALLA

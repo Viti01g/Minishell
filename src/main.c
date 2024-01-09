@@ -20,13 +20,13 @@ int	main(int argc, char **argv, char **env)
 	//atexit(ft_leaks);
 	ft_disable_ctrl_c_printing_chars();
 	view = "a";
-	if (argc != 1)
+	init_vars(&gen, env);
+	if (argc < 1)
 		exit(EXIT_FAILURE);
 	while (1)
 	{
 		ft_signals();
 		view = readline("\e[1;32mminishell$ \e[0m");
-		init_vars(&gen, env);
 		if (!view)
 			break;
 		split_token(view, &gen.token);
