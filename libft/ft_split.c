@@ -6,7 +6,7 @@
 /*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 20:11:09 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/01/07 17:25:30 by drubio-m         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:54:41 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static void	ft_free_split(char **str, size_t words)
 	while (words > 0)
 	{
 		free(str[words]);
-		words--;	}
+		words--;
+	}
 	free(str);
 }
 

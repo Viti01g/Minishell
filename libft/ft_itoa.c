@@ -6,7 +6,7 @@
 /*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:32:40 by drubio-m          #+#    #+#             */
-/*   Updated: 2023/12/20 18:15:39 by drubio-m         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:53:56 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,3 @@ char	*ft_itoa(int n)
 	atexit(ft_leaks);
 	return 0;
 }  */
-

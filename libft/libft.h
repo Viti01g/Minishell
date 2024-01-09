@@ -6,7 +6,7 @@
 /*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:41:23 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/01/09 17:17:57 by drubio-m         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:58:10 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_string_info
 	char	*s;
 	size_t	*i;
 	char	current_quote;
-}t_inf;
+}t_info;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -73,18 +73,17 @@ void	ft_putnbr_fd(int n, int fd);
 
 // Minishell
 char	**ft_split_cmd(char *s, char c);
+size_t	ft_count_words_cmd(char *s, char c);
 char	*get_next_word(char *s, size_t *start, char c);
 void	skip_delimiters(char *s, size_t *start, char c, int in_quotes);
 void	process_word(char *s, size_t *i, int *in_quotes, char *current_quote);
 void	process_delimiter_split(char *s, size_t *i, char c, int in_quotes);
-void	process_char(t_inf *info, size_t *word_count, char c, int *in_quotes);
-t_inf	initialize_string_info(char *s, size_t *i);
-void	process_delimiter(t_inf *info, size_t *w_c, char c, int in_quotes);
+void	process_char(t_info *info, size_t *word_count, char c, int *in_quotes);
+t_info	initialize_string_info(char *s, size_t *i);
+void	process_delimiter(t_info *info, size_t *w_c, char c, int in_quotes);
 void	p_quotes_cmd(char *s, size_t *i, int *in_quotes, char *current_quote);
-
-
-
-
+int		ft_is_whitespace(char c);
+int		ft_skip_spaces(char *str);
 
 // Lists
 t_list	*ft_lstnew(void *content);
