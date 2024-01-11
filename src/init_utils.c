@@ -8,6 +8,9 @@ char **ft_cpy_env(char **env)
 
 	i = 0;
 	j = 0;
+	str = NULL;
+	if(!env[i])
+		return (str);
 	while (env[i])
 		i++;
 	str = malloc(sizeof(char *) * (i + 1));
@@ -41,11 +44,6 @@ char	*ft_cpy_home(char **env)
 			break;
 		i++;
 	}
-/* 	if (!str)
-	{
-		ft_putstr_fd("Error: can't find HOME\n", STDERR_FILENO);
-		exit (1);
-	} */
 	return (str);
 }
 
@@ -64,34 +62,34 @@ char	*ft_cpy_path(char **env)
 			break;
 		i++;
 	}
-/* 	if (!str)
-	{
-		ft_putstr_fd("Error: can't find PATH\n", STDERR_FILENO);
-		exit (1);
-	} */
 	return (str);
 }
 
-char	*ft_cpy_pwd(char **env)
+char	*ft_cpy_pwd(t_general **gen, char **env)
 {
 	int		i;
 	char	*str;
+	char	**envi;
+	char	path[PATH_MAX];
 
-	i = 0;
+	envi = NULL;
 	str = NULL;
+	i = 0;
+	if(!env[i])
+	{
+		envi = ft_calloc(i + 2, sizeof(char*));//malloc(sizeof(char *) * (i + 1));
+/* 		printf("count: %d\n", count_txt(envi));
+		printf("i: %d\n", i); */
+		envi[i] = ft_strjoin("PWD=", getcwd(path, sizeof(path)));
+		(*gen)->env = envi;
+	}
 	while (env[i])
 	{
-		if (!ft_strncmp(env[i], "PWD=", 4))
-			str = ft_substr(env[i], 5, ft_strlen(env[i]) - 4);
+		str = getcwd(path, sizeof(path));
 		if (str)
 			break;
 		i++;
 	}
-/* 	if (!str)
-	{
-		ft_putstr_fd("Error: can't find PWD\n", STDERR_FILENO);
-		exit (1);
-	} */
 	return (str);
 }
 
@@ -110,10 +108,5 @@ char	*ft_cpy_oldpwd(char **env)
 			break;
 		i++;
 	}
-	/* if (!str)
-	{
-		ft_putstr_fd("Error: can't find OLDPWD\n", STDERR_FILENO);
-		exit (1);
-	} */
 	return (str);
 }

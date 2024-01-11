@@ -1,16 +1,28 @@
 #include "minishell.h"
 
-static int	count_txt(char **str)
+int	count_txt(char **str)
 {
 	int	i;
 
 	i = 0;
+	if (str[i] == NULL)
+		return (0);
 	while (str[i])
 		i++;
 	return (i);
 }
 
-void	type_args(t_token **tok)
+void	free_matriz(char **str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		free(str[i]);
+	free(str);
+}
+
+/* void	type_args(t_token **tok)
 {
 	t_token	**prueba;
 	int		i;
@@ -36,5 +48,5 @@ void	type_args(t_token **tok)
 		}
 		(*prueba) = (*prueba)->next;
 	}
-	return ;
-}
+	return ; 
+}*/

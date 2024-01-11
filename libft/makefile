@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+         #
+#    By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/25 20:18:27 by drubio-m          #+#    #+#              #
-#    Updated: 2024/01/09 19:52:02 by drubio-m         ###   ########.fr        #
+#    Updated: 2024/01/11 18:52:09 by vruiz-go         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRC = ft_bzero.c ft_isalpha.c ft_isdigit.c ft_memcpy.c ft_memset.c \
 	  ft_strlcat.c ft_strlen.c ft_strrchr.c ft_toupper.c ft_isalnum.c \
 	  ft_isascii.c ft_isprint.c ft_memmove.c ft_strchr.c ft_strlcpy.c \
 	  ft_strncmp.c ft_tolower.c ft_memchr.c ft_memcmp.c ft_strnstr.c \
-	  ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c \
+	  ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strcmp.c\
 	  ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c \
 	  ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 	  ft_strcmp.c ft_split_cmd.c ft_split_cmd_aux.c \

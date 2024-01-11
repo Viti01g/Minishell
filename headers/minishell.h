@@ -17,7 +17,10 @@
 # include <termios.h>		    /* Para tcsetattr, tcgetattr */
 # include <curses.h>			/* Para tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs */
 # include <limits.h>
+
+
 // Our libraries
+
 # include "../libft/libft.h"
 # include "tokenizer.h"
 
@@ -35,6 +38,13 @@
 # define EXIT_STATUS	128
 # define TRUE  1
 # define FALSE  0
+
+enum	e_expt
+{
+	NEW_VALUE,
+	CREATE,
+	FAIL
+};
 
 enum	e_tok
 {
@@ -94,16 +104,17 @@ typedef struct s_pipe
 
 typedef struct s_inf
 {
-	int				signal_code;
 	struct 	termios	termios;		//disable (ctrl + c) printing ^C
 }	t_inf;	
 
-t_inf					g_info;
+//t_inf					g_info;
+int				signal_code;
 
 
 
 typedef struct s_general
 {
+	int		args;
 	char	**linea_entera;
 	char	**env;
 	char	*env_home;
@@ -111,6 +122,7 @@ typedef struct s_general
 	char	*env_pwd;
 	char	*env_oldpwd;
 	t_token	*token;
+	t_inf	*inf;
 }	t_general;
 
 
@@ -124,18 +136,23 @@ void    init_vars(t_general *gen, char **env);
 char	**ft_cpy_env(char **env);
 char	*ft_cpy_home(char **env);
 char	*ft_cpy_path(char **env);
-char	*ft_cpy_pwd(char **env);
+char	*ft_cpy_pwd(t_general **gen, char **env);
 char	*ft_cpy_oldpwd(char **env);
-void	cmd_env(char **line);
-void	cmd_exit(char **line);
-void	cmd_pwd(char **line);
-void	cmd_cd(char **line);
-void	cmd_export(char **line);
-void	cmd_unset(char **line);
-void	cmd_echo(char **line);
+void	cmd_env(t_general *gen);
+void	cmd_exit(t_general *gen);
+void	cmd_pwd(t_general *gen);
+void	cmd_cd(t_general *gen);
+void	cmd_export(t_general *gen);
+void	cmd_unset(t_general *gen);
+void	cmd_echo(t_general *gen);
 void	split_token(char *input, t_token **tokens);
 void	free_tokens(t_token *tokens);
-
+void	ft_exec_buitins(t_general *gen);
+int		count_txt(char **str);
+void	ft_print_export(t_general *gen);
+int		invalid_value(char **env);
+void	free_matriz(char **str);
+char	**ft_change_env(char **env, char *str, enum e_expt flag);
 
 
 // MORRALLA

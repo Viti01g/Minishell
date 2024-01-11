@@ -19,45 +19,44 @@ void	view_prompt(void)
 /* int	main(int argc, char **argv, char **env)
 {
 	char		*view;
-	t_token		*tokens;
-	char		**manolo;
+	t_general	gen;
+	//t_token *tok;
+	//char		**manolo;
 
-	manolo = argv;
-	manolo = env;
-
-	atexit(ft_leaks);
-
+	(void)argv;
+	gen.token = NULL;
+	//gen.token = tok;
+	//atexit(ft_leaks);
 	ft_disable_ctrl_c_printing_chars();
 	view = "a";
-	if (argc != 1)
+	init_vars(&gen, env);
+	if (argc < 1)
 		exit(EXIT_FAILURE);
-	
 	while (1)
 	{
 		ft_signals();
 		view = readline("\e[1;32mminishell$ \e[0m");
 		if (!view)
 			break;
-		split_token(view, &tokens);
-		g_gen.token = tokens;
+		split_token(view, &gen.token);
+		//gen.token = tokens;
+		//printf("si\n");
 		if (ft_strlen(view) != 0)
 		{
+			gen.args = count_txt(gen.token->str);
 			add_history(view);
-			t_token *current = tokens;
+			t_token *current = gen.token;
 			while (current != NULL)
-			{
-				for (int i = 0; current->str[i] != NULL; i++)
-					printf("%s ", current->str[i]);
-				//printf("\n");
 				current = current->next;
-			}
-			printf("esto: %s\n", tokens->str[1]);
-			cmd_cd(tokens->str);
-			free_tokens(tokens);
-			free(view);
+		//	printf("\n");
+			ft_exec_buitins(&gen);
+			//cmd_cd(gen.token->str);
+			free_tokens(gen.token);
+			gen.token = gen.token->next;
 		}
-			tokens = tokens->next;
-		tcsetattr(0, 0, &g_info.termios);
+		free(view);
+		gen.token = NULL;
+		//tcsetattr(0, 0, &inf.termios);
 	}
 	return (EXIT_SUCCESS);
 } */
