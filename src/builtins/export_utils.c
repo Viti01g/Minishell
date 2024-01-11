@@ -30,7 +30,7 @@ static char **ft_ord_alf(char **env)
 int	invalid_value(char **env)
 {
 	free_matriz(env);
-	ft_putstr_fd("\033[0;31mInvalid identifier\n\033[0m", 2);
+	ft_putstr_fd("Invalid identifier\n", 2);
 	return (1);
 }
 
