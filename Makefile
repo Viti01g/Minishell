@@ -61,6 +61,9 @@ $(OBJ_DIR)%.o: $(BUI_DIR)%.c
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) $(RLINE_INC) $(CPPFLAGS) -c $< -o $@
 
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@$(CC) $(CFLAGS) $(RLINE_INC) -c $< -o $@
+
 
 # basic library compiled
 $(NAME): $(OBJ) $(LIBFT)

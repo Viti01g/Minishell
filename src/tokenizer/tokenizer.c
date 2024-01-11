@@ -41,6 +41,7 @@ int	main(void)
 	{
 		input = readline("\e[1;32mminishell$ \e[0m");
 		printf("%p\n", input);
+		// TODO: Cambiar el strncmp
 		if (!input || !ft_strncmp(input, "exit", 4))
 			break ;
 		split_token(input, &tokens);
