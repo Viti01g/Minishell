@@ -1,34 +1,9 @@
 #include "minishell.h"
 
-// TODO: Manejar que me detecte los argumentos de los comandos bien
-	// TODO: ejemplo: echo "hola mundo" solo tiene un arg no 2
-
-// TODO: Manejar redirecciones y pipes dentro de las comillas
-// TODO: Hacer una función que se llame double quote su funcionamiento es así:
-		// * Al tokenizar si encuentra una comilla doble, va a fumarse todo hasta
-		// * hasta la siguiente comilla doble y va a llamar en paralelo a double quote
-		// * la cual devuelve un char * que sería el nuevo token ole ole ole
-
-
 /* void	ft_leaks()
 {
 	system("leaks -q minishell");
 } */
-
-int	is_whitespace(char c)
-{
-	return (c == ' ' || (c > 8 && c < 14));
-}
-
-int	skip_spaces(char *str, int i)
-{
-	int	j;
-
-	j = 0;
-	while (is_whitespace(str[i + j]))
-		j++;
-	return (j);
-}
 
 int	process_quotes(char *str, int i, char del)
 {
@@ -91,8 +66,8 @@ void	check_quotes(char *input)
 		until_double(input, &i, &double_flag);
 		until_single(input, &i, &single_flag);
 	}
-	printf("Valor de comillas dobles: %d\n", double_flag);
-	printf("Valor de comillas simples: %d\n", single_flag);
+	if (double_flag || single_flag)
+		ft_error("Quotes are not closed");
 }
 /* 
 int	main(void)
@@ -115,3 +90,6 @@ int	main(void)
 	atexit(ft_leaks);
 	return (0);
 } */
+
+
+// wqeqw"ssdff""<"

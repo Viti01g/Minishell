@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int main() {
+/* int main() {
     // Tamaño del buffer para almacenar el directorio actual
     size_t buffer_size = 1024;
 
@@ -27,3 +27,4 @@ int main() {
 
     return EXIT_SUCCESS;
 }
+ */

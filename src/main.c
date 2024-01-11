@@ -1,6 +1,12 @@
 
 #include "minishell.h"
 
+void	ft_error(char *error)
+{
+	printf("\033[1;31mError: %s\033[0m\n", error);
+	exit(EXIT_FAILURE);
+}
+
 void	view_prompt(void)
 {
 	write(1, GREEN, ft_strlen(GREEN));

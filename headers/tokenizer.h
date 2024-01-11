@@ -28,11 +28,6 @@ void	check_quotes(char *input);
 int		skip_spaces(char *str, int i);
 int		is_whitespace(char c);
 
-
-
-
-
-
 // Lists
 t_token	*ft_lstnew_addback(t_token **token, char *str, int type);
 

@@ -140,7 +140,7 @@ void	free_tokens(t_token *tokens);
 
 // MORRALLA
 void	ft_leaks(void);
-
+void	ft_error(char *error);
 
 
 // Other libraries need to go after the structs
