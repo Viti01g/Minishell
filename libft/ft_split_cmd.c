@@ -1,75 +1,81 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 20:11:09 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/01/09 19:54:41 by drubio-m         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:38:14 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_count_words(char const *s, char c)
-{
-	size_t	word_count;
-	size_t	i;
-
-	word_count = 0;
-	i = 0;
-	while (s[i])
-	{
-		while (s[i] && s[i] == c)
-			i++;
-		while (s[i] && s[i] != c)
-		{
-			if (i == 0 || s[i - 1] == c)
-				word_count++;
-			i++;
-		}
-	}
-	return (word_count);
-}
-
-static void	ft_free_split(char **str, size_t words)
+/* static void	ft_free_split(char **str, size_t words)
 {
 	while (words > 0)
 	{
 		free(str[words]);
-		words--;
+		words--;	
 	}
 	free(str);
-}
+} */
 
-char	**ft_split(char const *s, char c)
+char	*get_next_word(char *s, size_t *start, char c)
 {
 	size_t	i;
-	size_t	j;
-	char	**str;
-	size_t	index;
+	int		in_quotes;
+	char	current_quote;
+	char	*word;
 
-	index = 0;
-	i = 0;
+	i = *start;
+	in_quotes = 0;
+	current_quote = '\0';
+	while (s[i] && (s[i] != c || in_quotes))
+	{
+		if (s[i] == '\'' || s[i] == '\"')
+		{
+			p_quotes_cmd(s, &i, &in_quotes, &current_quote);
+			continue ;
+		}
+		else
+			i++;
+	}
+	word = ft_substr(s, *start, (i - *start));
+	*start = i;
+	skip_delimiters(s, start, c, in_quotes);
+	return (word);
+}
+
+char	**ft_split_cmd(char *s, char c)
+{
+	char	**words;
+	size_t	i;
+	size_t	start;
+	size_t	word_count;
+
 	if (!s)
 		return (NULL);
-	str = ft_calloc(sizeof (char *), (ft_count_words(s, c) + 1));
-	if (!str)
+	word_count = ft_count_words_cmd(s, c);
+	words = (char **)malloc(sizeof(char *) * (word_count + 1));
+	if (!words)
 		return (NULL);
-	while (s[i] && (index < ft_count_words(s, c)))
+	i = 0;
+	start = 0;
+	while (s[start] == c && s[start] != '\0')
+		start++;
+	while (i < word_count)
 	{
-		while (s[i] && s[i] == c)
-			i++;
-		j = i;
-		while (s[i] && s[i] != c)
-			i++;
-		str[index++] = ft_substr(s, j, (i - j));
+		words[i] = get_next_word(s, &start, c);
+		if (words[i] == NULL)
+			break ;
+		i++;
 	}
-	if (!str)
-		ft_free_split(str, ft_count_words(s, c));
-	return (str);
+	words[i] = NULL;
+	return (words);
 }
+
 //*****************************************************************************
 // INPUT
 // #1. La string a separar.
@@ -83,18 +89,21 @@ char	**ft_split(char const *s, char c)
 // ’s’ con el caracter ’c’ como delimitador. El array debe terminar en NULL.
 //*****************************************************************************
 
-/*
-int main(void)
+/* int main(void)
 {
-char s[] = "hola que tal";
+char s[] = " pedro' h o\"la'ap\"ito\"     c' pedro' n ";
+//char s[] = "'hola' 'mundo'";
+//char s[] = "\"hola\" \"mundo\"";
 char c = ' ';
 char **res;
-res = ft_split(s, c);
-while (*res)
+int i = 0;
+res = ft_split_cmd(s, ' ');
+while (res[i])
 {
-	printf("%s", *res++);
+	printf("%s\n", res[i]);
+	i++;
 }
-system("leaks a.out");
+printf("%s\n", res[i]);
+//system("leaks a.out");
 return (0);
-}
-*/
+} */

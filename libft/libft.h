@@ -6,7 +6,7 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:41:23 by drubio-m          #+#    #+#             */
-/*   Updated: 2023/12/14 20:01:53 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/01/11 18:52:02 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ typedef struct s_list
 	struct s_list	*next;
 }t_list;
 
+typedef struct s_string_info
+{
+	char	*s;
+	size_t	*i;
+	char	current_quote;
+}t_info;
+
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
@@ -41,6 +48,7 @@ int		ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
+int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 int		ft_toupper(int c);
@@ -62,6 +70,22 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+
+// Minishell
+char	**ft_split_cmd(char *s, char c);
+size_t	ft_count_words_cmd(char *s, char c);
+char	*get_next_word(char *s, size_t *start, char c);
+void	skip_delimiters(char *s, size_t *start, char c, int in_quotes);
+void	process_word(char *s, size_t *i, int *in_quotes, char *current_quote);
+void	process_delimiter_split(char *s, size_t *i, char c, int in_quotes);
+void	process_char(t_info *info, size_t *word_count, char c, int *in_quotes);
+t_info	initialize_string_info(char *s, size_t *i);
+void	process_delimiter(t_info *info, size_t *w_c, char c, int in_quotes);
+void	p_quotes_cmd(char *s, size_t *i, int *in_quotes, char *current_quote);
+int		ft_is_whitespace(char c);
+int		ft_skip_spaces(char *str);
+
+// Lists
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);

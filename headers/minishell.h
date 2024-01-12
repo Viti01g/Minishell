@@ -34,7 +34,10 @@
 # define PURPLE "\e[1;35m"
 # define BLUE "\e[1;34m"
 
+// Macro Defines
 # define EXIT_STATUS	128
+# define TRUE  1
+# define FALSE  0
 
 enum	e_expt
 {
@@ -154,6 +157,14 @@ char	**ft_change_env(char **env, char *str, enum e_expt flag);
 
 // MORRALLA
 void	ft_leaks(void);
+void	ft_error(char *error);
+
+
+// Other libraries need to go after the structs
+
+
+
+t_general	g_gen;
 
 #endif
  

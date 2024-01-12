@@ -5,24 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/14 20:00:46 by vruiz-go          #+#    #+#             */
-/*   Updated: 2023/12/14 20:01:34 by vruiz-go         ###   ########.fr       */
+/*   Created: 2023/12/16 16:41:16 by drubio-m          #+#    #+#             */
+/*   Updated: 2024/01/11 18:51:48 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while ((s1[i] || s2[i]))
+	while (s1[i] != '\0' || s2[i] != '\0')
 	{
-		if (s1[i] == s2[i])
-			i++;
-		else if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
 	}
 	return (0);
 }

@@ -10,7 +10,7 @@ t_token	*ft_lstnew_addback(t_token **token, char *str, int type)
 	new = malloc(sizeof(t_token));
 	if (!new)
 		return (NULL);
-	new->str = ft_split(str, ' ');
+	new->str = ft_split_cmd(str, ' ');
 	new->words = count_words(new->str);
 	new->type = type;
 	new->next = NULL;
