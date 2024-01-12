@@ -5,42 +5,17 @@ void	ft_leaks(void)
 	system("leaks -q minishell");
 }
 
-/* void	split_token(char *input, t_token **tokens)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	j = 0;
-	while (input[++i])
-	{
-		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
-		{
-			process_simple_operator(input, tokens, &i, &j);
-			if ((input[i] == '>' || input[i] == '<')
-				&& (input[i] == input[i + 1]))
-				process_double_operator(input, tokens, &i);
-			else
-				process_single_operator(input, tokens, &i);
-			j = i + 1;
-		}
-	}
-	if (j < i)
-		process_simple_operator(input, tokens, &i, &j);
-	print_tokens(tokens);
-} */
-
 void	split_token(char *input, t_token **tokens)
 {
 	int	i;
 	int	j;
-	
+
 	i = -1;
 	j = 0;
 	while (input[++i])
 	{
 		if (input[i] == '\'' || input[i] == '\"')
-		 	i += process_quotes(input, i, input[i]);
+			i += process_quotes(input, i, input[i]);
 		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
 		{
 			process_simple_operator(input, tokens, &i, &j);
@@ -64,7 +39,7 @@ int	main(void)
 
 	//atexit(ft_leaks);
 	tokens = NULL;
-	printf("%p\n", input);
+//	printf("%p\n", input);
 //	printf("%s\n", input);
 	while (1)
 	{
