@@ -26,6 +26,8 @@ void	split_token(char *input, t_token **tokens)
 				process_single_operator(input, tokens, &i);
 			j = i + 1;
 		}
+		if (input[i] == '\'' || input[i] == '\"')
+			i += process_quotes(input, i, input[i]);
 	}
 	if (j < i)
 		process_simple_operator(input, tokens, &i, &j);
