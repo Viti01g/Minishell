@@ -10,8 +10,9 @@ TKN_SRC = tokenizer.c token_utils.c token_memory.c token_operators.c quotes.c qu
 SIG_SRC = signal.c
 BUI_SRC = cd.c clear.c echo.c env.c exec_builtins.c exit.c export.c pwd.c unset.c
 SRC_SRC = init_utils.c init_vars.c main.c parsing.c probar_cosas.c #utils.c
+EXP_SRC = expander.c
 
-SRC = $(TKN_SRC) $(SIG_SRC) $(SRC_SRC)
+SRC = $(EXP_SRC) #$(TKN_SRC) $(SIG_SRC) $(SRC_SRC)
 
 INCLUDES = ./headers/minishell.h ./libft/libft.h
 LIBFT_DIR = libft/
@@ -21,6 +22,7 @@ SRC_DIR = ./src/
 SIG_DIR = $(SRC_DIR)signals/
 TKN_DIR = $(SRC_DIR)tokenizer/
 BUI_DIR = $(SRC_DIR)builtins/
+EXP_DIR = $(SRC_DIR)expander/
 OBJ_DIR = ./obj/
 
 OBJ_FILES = $(SRC:.c=.o)
@@ -57,6 +59,8 @@ $(OBJ_DIR)%.o: $(BUI_DIR)%.c
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) $(RLINE_INC) -c $< -o $@
 
+$(OBJ_DIR)%.o: $(EXP_DIR)%.c
+	@$(CC) $(CFLAGS) $(RLINE_INC) -c $< -o $@
 
 # basic library compiled
 $(NAME): $(OBJ) $(LIBFT)

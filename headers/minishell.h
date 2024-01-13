@@ -20,7 +20,7 @@
 // Our libraries
 # include "../libft/libft.h"
 # include "tokenizer.h"
-
+# include "expander.h"
 
 
 # define GREEN "\e[1;32m"
