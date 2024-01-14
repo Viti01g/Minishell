@@ -29,8 +29,12 @@ OBJ_FILES = $(SRC:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
 # READLINE
-RLINE_INC	= -I/sgoinfre/students/$(USER)/homebrew/opt/readline/include
-RLINE_L		= -lreadline -L /sgoinfre/students/$(USER)/homebrew/opt/readline/lib
+#RLINE_INC	= -I/sgoinfre/students/$(USER)/homebrew/opt/readline/include
+#RLINE_L		= -lreadline -L /sgoinfre/students/$(USER)/homebrew/opt/readline/lib
+
+# READLINE
+RLINE_INC   = -I/usr/local/Cellar/readline/8.2.7/include
+RLINE_L     = -lreadline -L/usr/local/Cellar/readline/8.2.7/lib
 
 # COLOURS
 GREEN = \033[0;32m
