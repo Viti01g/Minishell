@@ -4,8 +4,8 @@ CFLAGS = -Wall -Wextra -Werror -I ./headers -I ./libft/libft.h -g3
 
 #Cosas realine mac casa
 
-export LDFLAGS="-L/opt/homebrew/opt/readline/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/readline/include"
+#export LDFLAGS="-L/opt/homebrew/opt/readline/lib"
+#export CPPFLAGS="-I/opt/homebrew/opt/readline/include"
 
 #DEBUG = -g3 -fsanitize=address
 RM = rm -f

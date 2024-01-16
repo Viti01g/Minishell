@@ -33,8 +33,8 @@ void	split_token(char *input, t_token **tokens)
 		process_simple_operator(input, tokens, &i, &j);
 	print_tokens(tokens);
 }
-/*
-int	main(void)
+
+/* int	main(void)
 {
 	char	*input;
 	t_token	*tokens;
@@ -55,4 +55,4 @@ int	main(void)
 		tokens = NULL;
 	}
 	return (0);
-}*/
+} */
