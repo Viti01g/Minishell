@@ -12,7 +12,7 @@ BUI_SRC = cd.c clear.c echo.c env.c exec_builtins.c exit.c export.c pwd.c unset.
 SRC_SRC = init_utils.c init_vars.c main.c parsing.c probar_cosas.c #utils.c
 EXP_SRC = expander.c
 
-SRC =  $(TKN_SRC) $(SIG_SRC) $(SRC_SRC) #$(EXP_SRC)
+SRC = $(EXP_SRC) #$(TKN_SRC) $(SIG_SRC) $(SRC_SRC) #
 
 INCLUDES = ./headers/minishell.h ./libft/libft.h
 LIBFT_DIR = libft/
