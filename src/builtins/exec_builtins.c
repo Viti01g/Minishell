@@ -6,13 +6,13 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:07:57 by drubio-m          #+#    #+#             */
-/*   Updated: 2023/12/18 14:45:30 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:34:17 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exec_buitins(t_general *gen)
+void	ft_exec_builtins(t_general *gen)
 {
 	if (!ft_strcmp(gen->token->str[0], "cd"))
 		cmd_cd(gen);

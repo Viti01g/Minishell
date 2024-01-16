@@ -15,8 +15,7 @@ void	view_prompt(void)
 }
 
 
-// TODO: Cambiar el strncmp por un strcmp
-/* int	main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
 	char		*view;
 	t_general	gen;
@@ -25,8 +24,6 @@ void	view_prompt(void)
 
 	(void)argv;
 	gen.token = NULL;
-	//gen.token = tok;
-	//atexit(ft_leaks);
 	ft_disable_ctrl_c_printing_chars();
 	view = "a";
 	init_vars(&gen, env);
@@ -39,8 +36,6 @@ void	view_prompt(void)
 		if (!view)
 			break;
 		split_token(view, &gen.token);
-		//gen.token = tokens;
-		//printf("si\n");
 		if (ft_strlen(view) != 0)
 		{
 			gen.args = count_txt(gen.token->str);
@@ -48,9 +43,7 @@ void	view_prompt(void)
 			t_token *current = gen.token;
 			while (current != NULL)
 				current = current->next;
-		//	printf("\n");
-			ft_exec_buitins(&gen);
-			//cmd_cd(gen.token->str);
+			ft_exec_builtins(&gen);
 			free_tokens(gen.token);
 			gen.token = gen.token->next;
 		}
@@ -59,4 +52,4 @@ void	view_prompt(void)
 		//tcsetattr(0, 0, &inf.termios);
 	}
 	return (EXIT_SUCCESS);
-} */
+}

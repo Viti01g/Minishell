@@ -12,10 +12,10 @@ RM = rm -f
 
 TKN_SRC = tokenizer.c token_utils.c token_memory.c token_operators.c quotes.c quotes_utils.c
 SIG_SRC = signal.c
-BUI_SRC = cd.c clear.c echo.c env.c exec_builtins.c exit.c export.c pwd.c unset.c
-SRC_SRC = init_utils.c init_vars.c main.c parsing.c probar_cosas.c #utils.c
+BUI_SRC = cd.c echo.c env.c exec_builtins.c exit.c export.c pwd.c unset.c export_utils.c
+SRC_SRC = init_utils.c init_vars.c main.c parsing.c probar_cosas.c utils.c
 
-SRC = $(TKN_SRC) $(SIG_SRC) $(SRC_SRC)
+SRC = $(TKN_SRC) $(SIG_SRC) $(BUI_SRC) $(SRC_SRC)
 
 INCLUDES = ./headers/minishell.h ./libft/libft.h
 LIBFT_DIR = libft/
