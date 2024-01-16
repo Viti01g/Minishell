@@ -25,6 +25,7 @@ SRC_DIR = ./src/
 SIG_DIR = $(SRC_DIR)signals/
 TKN_DIR = $(SRC_DIR)tokenizer/
 BUI_DIR = $(SRC_DIR)builtins/
+EXP_DIR = $(SRC_DIR)expander/
 OBJ_DIR = ./obj/
 
 OBJ_FILES = $(SRC:.c=.o)
@@ -33,6 +34,10 @@ OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 # READLINE
 RLINE_INC	= -I/sgoinfre/students/$(USER)/homebrew/opt/readline/include
 RLINE_L		= -lreadline -L /sgoinfre/students/$(USER)/homebrew/opt/readline/lib
+
+# READLINE
+RLINE_INC_2   = -I/usr/local/Cellar/readline/8.2.7/include
+RLINE_L_2     = -lreadline -L/usr/local/Cellar/readline/8.2.7/lib
 
 # COLOURS
 GREEN = \033[0;32m
@@ -50,24 +55,23 @@ $(OBJ_DIR):
 #Different folders for the .o
 
 $(OBJ_DIR)%.o: $(TKN_DIR)%.c
-	@$(CC) $(CFLAGS) $(RLINE_INC) $(CPPFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(RLINE_INC) $(RLINE_INC_2) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(SIG_DIR)%.c
-	@$(CC) $(CFLAGS) $(RLINE_INC) $(CPPFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(RLINE_INC) $(RLINE_INC_2) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(BUI_DIR)%.c
-	@$(CC) $(CFLAGS) $(RLINE_INC) $(CPPFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(RLINE_INC) $(RLINE_INC_2) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(CC) $(CFLAGS) $(RLINE_INC) $(CPPFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(RLINE_INC) $(RLINE_INC_2) -c $< -o $@
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(CC) $(CFLAGS) $(RLINE_INC) -c $< -o $@
-
+$(OBJ_DIR)%.o: $(EXP_DIR)%.c
+	@$(CC) $(CFLAGS) $(RLINE_INC) $(RLINE_INC_2) -c $< -o $@
 
 # basic library compiled
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(CFLAGS) $(DEBUG) $(OBJ) $(LIBFT) $(RLINE_L) $(LDFLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(DEBUG) $(OBJ) $(LIBFT) $(RLINE_L) $(RLINE_L_2) -o $(NAME)
 	@echo "$(GREEN)#### minishell ####$(COLOR_OFF)"
 	@echo "    -Has been compiled ✅"
 
