@@ -107,7 +107,6 @@ typedef struct s_inf
 	struct 	termios	termios;		//disable (ctrl + c) printing ^C
 }	t_inf;	
 
-//t_inf					g_info;
 int				signal_code;
 
 

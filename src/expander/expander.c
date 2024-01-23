@@ -4,54 +4,88 @@
 #include <stdlib.h>
 #include <string.h>
 
-char* expand_variables(char* input)
-{
-    char* output = malloc(strlen(input) * 2); // Allocate memory for output
-    char* var_start = NULL;
-    int i, j = 0;
+// TODO: Añadir la excepción de la virgulilla, tiene que tener un espacio antes y después obligatoriamente
 
-    for (i = 0; input[i] != '\0'; i++) {
-        if (input[i] == '$') { // Start of variable
-            var_start = &input[i+1];
-        } else if (var_start) {
-            if (input[i] == ' ' || input[i] == '\0') { // End of variable
-                char var_name[256];
-                strncpy(var_name, var_start, &input[i] - var_start);
-                var_name[&input[i] - var_start] = '\0';
-                char* var_value = getenv(var_name);
-                if (var_value) {
-                    strcpy(&output[j], var_value);
-                    j += strlen(var_value);
-                }
-                var_start = NULL;
-                if (input[i] != '\0') {
-                    output[j++] = input[i];
-                }
-            }
-        } else {
-            output[j++] = input[i];
-        }
-    }
-    output[j] = '\0';
-    return output;
+void ft_leaks(void)
+{
+	system("leaks -q minishell");
 }
 
-/* int main()
+// Verifica que no haya ningún carácter inválido en la variable
+/* int check_valid_var(char *str, int start, int len)
 {
-    char* input = "echo $HOME";
-    char* output = expand_variables(input);
-    printf("%s\n", output);
-    free(output);
-    return 0;
+	while (str[start] && (str[start] == '_' || ft_isalnum(str[start])) && start < len)
+		start++;
+	if (start != len)
+		return (1);
+	else
+		return (0);
 } */
 
-/* int	main(void)
+int check_valid_var(char *str, int start, int len)
+{
+    while (str[start] && start < len)
+    {
+        if (!(str[start] == '_' || ft_isalnum(str[start])))
+            return (0); // Devuelve 0 tan pronto como encuentra un carácter inválido
+        start++;
+    }
+    return (1); // Devuelve 1 si todos los caracteres son válidos
+}
+
+// Coje desde el dólar hasta que haya un espacio o un null para sacar la variable
+void skip_until_space(char *input, int *i)
+{
+	while (input[*i] && input[*i] != ' ')
+		(*i)++;
+}
+
+char *expander(char *input)
+{
+    char *new_str;
+	char *var;
+    int in_quotes;
+	int	i;
+	int j;
+
+	i = 0;
+	(void) new_str;
+	(void) in_quotes;
+	while (input[i])
+	{
+		if (input[i] == '$' && (input[i + 1] == '_' || ft_isalpha(input[i + 1])))
+		{
+			j = i + 1;
+			skip_until_space(input, &i);
+			//***********************************************
+			// * Cambiar esto por la función de error
+			if (!check_valid_var(input, j, i - j))
+			{
+				//free(var);
+				printf("ERROR\n");
+				return (NULL);
+			}
+			//**********************************************
+			var = ft_substr(input, j, i - j);
+			printf("Esto vale j: %d y char: %c\n", j, input[j]);
+			printf("Esto vale i: %d y char: %c\n", i, input[i]);
+			printf("Esta es tu var: %s\n", var);
+			free(var);
+		}
+		else if (input[i] == '$' && !(input[i + 1] == '_' || ft_isalpha(input[i + 1])))
+			printf("MArico\n");
+		i++;
+	}
+	return input;
+}
+
+int	main(void)
 {
 	char	*input;
-	t_token	*tokens;
+//	t_token	*tokens;
 
 	//atexit(ft_leaks);
-	tokens = NULL;
+//	tokens = NULL;
 //	printf("%p\n", input);
 //	printf("%s\n", input);
 	while (1)
@@ -59,11 +93,14 @@ char* expand_variables(char* input)
 		input = readline("\e[1;32mminishell$ \e[0m");
 		if (!input || !ft_strcmp(input, "exit"))
 			break ;
-		check_quotes(input);
-		split_token(input, &tokens);
+		//check_quotes(input);
+		//split_token(input, &tokens);
+		input = expander(input);
+		printf("Este es tu input:\n %s\n", input);
 		free(input);
-		free_tokens(tokens);
-		tokens = NULL;
+	//	free_tokens(tokens);
+	//	tokens = NULL;
 	}
+	atexit(ft_leaks);
 	return (0);
-} */
+}

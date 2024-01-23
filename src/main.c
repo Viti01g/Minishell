@@ -14,46 +14,6 @@ void	view_prompt(void)
 	write(1, RESET, ft_strlen(RESET));
 }
 
-
-/* int	main(int argc, char **argv, char **env)
-{
-	char		*view;
-	t_general	gen;
-	t_token		*tokens;
-	//char		**manolo;
-
-	(void)argv;
-	gen.token = NULL;
-	ft_disable_ctrl_c_printing_chars();
-	view = "a";
-	init_vars(&gen, env);
-	if (argc < 1)
-		exit(EXIT_FAILURE);
-	while (1)
-	{
-		ft_signals();
-		view = readline("\e[1;32mminishell$ \e[0m");
-		if (!view)
-			break;
-		split_token(view, &gen.token);
-		if (ft_strlen(view) != 0)
-		{
-			gen.args = count_txt(gen.token->str);
-			add_history(view);
-			t_token *current = gen.token;
-			while (current != NULL)
-				current = current->next;
-			ft_exec_builtins(&gen);
-			free_tokens(gen.token);
-			gen.token = gen.token->next;
-		}
-		free(view);
-		gen.token = NULL;
-		//tcsetattr(0, 0, &inf.termios);
-	}
-	return (EXIT_SUCCESS);
-} */
-
 int	main(int argc, char **argv, char **env)
 {
 	char		*view;
@@ -89,6 +49,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		free(view);
 		gen.token = NULL;
+	//	atexit(ft_leaks);
 		//tcsetattr(0, 0, &inf.termios);
 	}
 	return (EXIT_SUCCESS);
