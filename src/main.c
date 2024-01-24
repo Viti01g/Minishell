@@ -14,7 +14,7 @@ void	view_prompt(void)
 	write(1, RESET, ft_strlen(RESET));
 }
 
-int	main(int argc, char **argv, char **env)
+/* int	main(int argc, char **argv, char **env)
 {
 	char		*view;
 	t_general	gen;
@@ -52,5 +52,31 @@ int	main(int argc, char **argv, char **env)
 	//	atexit(ft_leaks);
 		//tcsetattr(0, 0, &inf.termios);
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCCESS); */
+}
+
+int	main(void)
+{
+	char	*input;
+//	t_token	*tokens;
+
+	//atexit(ft_leaks);
+//	tokens = NULL;
+//	printf("%p\n", input);
+//	printf("%s\n", input);
+	while (1)
+	{
+		input = readline("\e[1;32mminishell$ \e[0m");
+		if (!input || !ft_strcmp(input, "exit"))
+			break ;
+		//check_quotes(input);
+		//split_token(input, &tokens);
+		input = expander(input);
+		printf("Este es tu input:\n %s\n", input);
+		free(input);
+	//	free_tokens(tokens);
+	//	tokens = NULL;
+	}
+	atexit(ft_leaks);
+	return (0);
 }

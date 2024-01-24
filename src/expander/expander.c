@@ -6,11 +6,6 @@
 
 // TODO: Añadir la excepción de la virgulilla, tiene que tener un espacio antes y después obligatoriamente
 
-void ft_leaks(void)
-{
-	system("leaks -q minishell");
-}
-
 // Verifica que no haya ningún carácter inválido en la variable
 /* int check_valid_var(char *str, int start, int len)
 {
@@ -79,28 +74,4 @@ char *expander(char *input)
 	return input;
 }
 
-int	main(void)
-{
-	char	*input;
-//	t_token	*tokens;
 
-	//atexit(ft_leaks);
-//	tokens = NULL;
-//	printf("%p\n", input);
-//	printf("%s\n", input);
-	while (1)
-	{
-		input = readline("\e[1;32mminishell$ \e[0m");
-		if (!input || !ft_strcmp(input, "exit"))
-			break ;
-		//check_quotes(input);
-		//split_token(input, &tokens);
-		input = expander(input);
-		printf("Este es tu input:\n %s\n", input);
-		free(input);
-	//	free_tokens(tokens);
-	//	tokens = NULL;
-	}
-	atexit(ft_leaks);
-	return (0);
-}
