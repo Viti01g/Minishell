@@ -40,6 +40,11 @@ void	cmd_cd(t_general *gen)
 	char	new_pwd[PATH_MAX];
 	char	*old_pwd;
 
+// char *path = ft_strjoin(gen->env_home, ft_strchr(gen, '~') + 1);
+// str_append  = realloc src
+// capacidad
+
+// char_append = realloc src
 	if (!gen->token->str[1] || (gen->token->str[1][0] == '~' && ft_strlen(gen->token->str[1]) == 1))
 	{
 		if (chdir(gen->env_home) != 0)

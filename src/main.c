@@ -15,12 +15,10 @@ void	view_prompt(void)
 }
 
 
-int	main(int argc, char **argv, char **env)
+int main(int argc, char **argv, char **env)
 {
 	char		*view;
 	t_general	gen;
-	//t_token *tok;
-	//char		**manolo;
 
 	(void)argv;
 	gen.token = NULL;
@@ -35,6 +33,8 @@ int	main(int argc, char **argv, char **env)
 		view = readline("\e[1;32mminishell$ \e[0m");
 		if (!view)
 			break;
+		view = ft_strtrim(view, " \n\t\r\v\f");
+		check_quotes(view);
 		split_token(view, &gen.token);
 		if (ft_strlen(view) != 0)
 		{

@@ -31,7 +31,7 @@ void	split_token(char *input, t_token **tokens)
 	}
 	if (j < i)
 		process_simple_operator(input, tokens, &i, &j);
-	print_tokens(tokens);
+	//print_tokens(tokens);
 }
 /*
 int	main(void)

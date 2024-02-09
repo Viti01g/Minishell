@@ -96,11 +96,11 @@ enum	e_bash_error
 	EB_EXIT_OUT_RANGE = 255
 };
 
-typedef struct s_pipe
+/* typedef struct s_pipe
 {
 	int				in;
 	int				out;
-}					t_pipe;
+}					t_pipe; */
 
 typedef struct s_inf
 {
@@ -153,6 +153,7 @@ void	ft_print_export(t_general *gen);
 int		invalid_value(char **env);
 void	free_matriz(char **str);
 char	**ft_change_env(char **env, char *str, enum e_expt flag);
+int		check_if_builtin(char *str);
 
 
 // MORRALLA

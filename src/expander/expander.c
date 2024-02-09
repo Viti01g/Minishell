@@ -36,14 +36,14 @@ char* expand_variables(char* input)
     return output;
 }
 
-int main()
+/* int main()
 {
     char* input = "echo $HOME";
     char* output = expand_variables(input);
     printf("%s\n", output);
     free(output);
     return 0;
-}
+} */
 
 /* int	main(void)
 {
