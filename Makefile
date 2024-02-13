@@ -14,18 +14,19 @@ TKN_SRC = tokenizer.c token_utils.c token_memory.c token_operators.c quotes.c qu
 SIG_SRC = signal.c
 BUI_SRC = cd.c echo.c env.c exec_builtins.c exit.c export.c pwd.c unset.c export_utils.c
 SRC_SRC = init_utils.c init_vars.c main.c parsing.c probar_cosas.c utils.c
+EXE_SRC = exec_pipes.c exec_utils.c exec.c
 
-SRC = $(TKN_SRC) $(SIG_SRC) $(BUI_SRC) $(SRC_SRC)
+SRC = $(TKN_SRC) $(SIG_SRC) $(BUI_SRC) $(SRC_SRC) $(EXE_SRC)
 
 INCLUDES = ./headers/minishell.h ./libft/libft.h
 LIBFT_DIR = libft/
 LIBFT = $(LIBFT_DIR)libft.a
 
 SRC_DIR = ./src/
+EXE_DIR = $(SRC_DIR)executor/
 SIG_DIR = $(SRC_DIR)signals/
 TKN_DIR = $(SRC_DIR)tokenizer/
 BUI_DIR = $(SRC_DIR)builtins/
-EXP_DIR = $(SRC_DIR)expander/
 OBJ_DIR = ./obj/
 
 OBJ_FILES = $(SRC:.c=.o)
@@ -34,10 +35,6 @@ OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 # READLINE
 RLINE_INC	= -I/sgoinfre/students/$(USER)/homebrew/opt/readline/include
 RLINE_L		= -lreadline -L /sgoinfre/students/$(USER)/homebrew/opt/readline/lib
-
-# READLINE
-RLINE_INC_2   = -I/usr/local/Cellar/readline/8.2.7/include
-RLINE_L_2     = -lreadline -L/usr/local/Cellar/readline/8.2.7/lib
 
 # COLOURS
 GREEN = \033[0;32m
@@ -55,23 +52,27 @@ $(OBJ_DIR):
 #Different folders for the .o
 
 $(OBJ_DIR)%.o: $(TKN_DIR)%.c
-	@$(CC) $(CFLAGS) $(RLINE_INC) $(RLINE_INC_2) -c $< -o $@
+	@$(CC) $(CFLAGS) $(RLINE_INC) $(CPPFLAGS) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(SIG_DIR)%.c
-	@$(CC) $(CFLAGS) $(RLINE_INC) $(RLINE_INC_2) -c $< -o $@
+	@$(CC) $(CFLAGS) $(RLINE_INC) $(CPPFLAGS) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(BUI_DIR)%.c
-	@$(CC) $(CFLAGS) $(RLINE_INC) $(RLINE_INC_2) -c $< -o $@
+	@$(CC) $(CFLAGS) $(RLINE_INC) $(CPPFLAGS) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(CC) $(CFLAGS) $(RLINE_INC) $(RLINE_INC_2) -c $< -o $@
+	@$(CC) $(CFLAGS) $(RLINE_INC) $(CPPFLAGS) -c $< -o $@
 
-$(OBJ_DIR)%.o: $(EXP_DIR)%.c
-	@$(CC) $(CFLAGS) $(RLINE_INC) $(RLINE_INC_2) -c $< -o $@
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@$(CC) $(CFLAGS) $(RLINE_INC) -c $< -o $@
+
+$(OBJ_DIR)%.o: $(EXE_DIR)%.c
+	@$(CC) $(CFLAGS) $(RLINE_INC) $(CPPFLAGS) -c $< -o $@
+
 
 # basic library compiled
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(CFLAGS) $(DEBUG) $(OBJ) $(LIBFT) $(RLINE_L) $(RLINE_L_2) -o $(NAME)
+	@$(CC) $(CFLAGS) $(DEBUG) $(OBJ) $(LIBFT) $(RLINE_L) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)#### minishell ####$(COLOR_OFF)"
 	@echo "    -Has been compiled ✅"
 
