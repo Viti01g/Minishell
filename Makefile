@@ -14,7 +14,7 @@ TKN_SRC = tokenizer.c token_utils.c token_memory.c token_operators.c quotes.c qu
 SIG_SRC = signal.c
 BUI_SRC = cd.c echo.c env.c exec_builtins.c exit.c export.c pwd.c unset.c export_utils.c
 SRC_SRC = init_utils.c init_vars.c main.c parsing.c probar_cosas.c utils.c
-EXP_SRC = expander.c
+EXP_SRC = expander.c expander_utils.c
 
 SRC =  $(TKN_SRC) $(SIG_SRC) $(BUI_SRC) $(SRC_SRC) $(EXP_SRC)
 
