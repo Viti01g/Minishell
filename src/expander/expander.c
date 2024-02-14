@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// TODO: Añadir la excepción de la virgulilla, tiene que tener un espacio antes y después obligatoriamente
 
 /*
 *EXPANDER ROADMAP:
@@ -61,7 +60,7 @@ char *expander(char *input)
 			// * Cambiar esto por la función de error
 			if (!check_valid_var(input, j, i - j))
 				ft_error("Invalid char detected");
-			//**********************************************
+			//***********************************************
 			var = ft_substr(input, j, i - j);
 			// printf("Esto vale j: %d y char: %c\n", j, input[j]);
 			// printf("Esto vale i: %d y char: %c\n", i, input[i]);
