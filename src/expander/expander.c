@@ -17,15 +17,18 @@
 		return (0);
 } */
 
+
+// Devuelve 0 tan pronto como encuentra un carácter inválido
+// Devuelve 1 si todos los caracteres son válidos
 int check_valid_var(char *str, int start, int len)
 {
     while (str[start] && start < len)
     {
         if (!(str[start] == '_' || ft_isalnum(str[start])))
-            return (0); // Devuelve 0 tan pronto como encuentra un carácter inválido
+            return (0); 
         start++;
     }
-    return (1); // Devuelve 1 si todos los caracteres son válidos
+    return (1);
 }
 
 // Coje desde el dólar hasta que haya un espacio o un null para sacar la variable
@@ -65,6 +68,7 @@ char *expander(char *input)
 			printf("Esto vale j: %d y char: %c\n", j, input[j]);
 			printf("Esto vale i: %d y char: %c\n", i, input[i]);
 			printf("Esta es tu var: %s\n", var);
+			return var;
 			free(var);
 		}
 		else if (input[i] == '$' && !(input[i + 1] == '_' || ft_isalpha(input[i + 1])))
