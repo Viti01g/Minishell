@@ -14,6 +14,7 @@ void	view_prompt(void)
 	write(1, RESET, ft_strlen(RESET));
 }
 
+// TODO: Meter el skip_spaces de las comillas para no tokenizar los espacios ni tabulaciones
 /* int	main(int argc, char **argv, char **env)
 {
 	char		*view;
@@ -53,7 +54,7 @@ void	view_prompt(void)
 		//tcsetattr(0, 0, &inf.termios);
 	}
 	return (EXIT_SUCCESS); 
-}*/
+} */
 
 int	main(int argc, char **argv, char **env)
 {

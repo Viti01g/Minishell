@@ -6,16 +6,18 @@
 
 // TODO: Añadir la excepción de la virgulilla, tiene que tener un espacio antes y después obligatoriamente
 
-// Verifica que no haya ningún carácter inválido en la variable
-/* int check_valid_var(char *str, int start, int len)
-{
-	while (str[start] && (str[start] == '_' || ft_isalnum(str[start])) && start < len)
-		start++;
-	if (start != len)
-		return (1);
-	else
-		return (0);
-} */
+/*
+*EXPANDER ROADMAP:
+*	1. Leer input 										(DONE)
+*	2. Comprobar que después del $ haya un char			(DONE)
+!	3. Comprobar si el dolar está entre comillas		//TODO
+!	4. Expandir la virgulilla							//TODO
+!	5. Calcular la nueva longitud del array				//TODO
+!	6. Liberar el input									//TODO
+!	7. Redirigir el puntero								//TODO
+!	8. Tokenizar										//TODO
+!	9. Eliminar comillas								//TODO
+ */
 
 
 // Devuelve 0 tan pronto como encuentra un carácter inválido
@@ -58,15 +60,11 @@ char *expander(char *input)
 			//***********************************************
 			// * Cambiar esto por la función de error
 			if (!check_valid_var(input, j, i - j))
-			{
-				//free(var);
-				printf("ERROR\n");
-				return (NULL);
-			}
+				ft_error("Invalid char detected");
 			//**********************************************
 			var = ft_substr(input, j, i - j);
-			printf("Esto vale j: %d y char: %c\n", j, input[j]);
-			printf("Esto vale i: %d y char: %c\n", i, input[i]);
+			// printf("Esto vale j: %d y char: %c\n", j, input[j]);
+			// printf("Esto vale i: %d y char: %c\n", i, input[i]);
 			printf("Esta es tu var: %s\n", var);
 			return var;
 			free(var);
