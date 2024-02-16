@@ -36,6 +36,11 @@ int main(int argc, char **argv, char **env)
 		view = ft_strtrim(view, " \n\t\r\v\f");
 		check_quotes(view);
 		split_token(view, &gen.token);
+		/* while (gen.token->next)
+		{
+			printf("token: %s\n", gen.token->str[0]);
+			gen.token = gen.token->next;
+		} */
 		if (ft_strlen(view) != 0)
 		{
 			gen.args = count_txt(gen.token->str);
@@ -43,6 +48,7 @@ int main(int argc, char **argv, char **env)
 			t_token *current = gen.token;
 			while (current != NULL)
 				current = current->next;
+			exec(&gen);
 			ft_exec_builtins(&gen);
 			free_tokens(gen.token);
 			gen.token = gen.token->next;

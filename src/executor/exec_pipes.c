@@ -1,5 +1,5 @@
 # include "minishell.h"
-
+/* 
 void	exec_pipe(t_general	*gen)
 {
 	int	i;
@@ -9,4 +9,4 @@ void	exec_pipe(t_general	*gen)
 	{
 		
 	}
-}
+} */

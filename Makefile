@@ -1,6 +1,6 @@
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I ./headers -I ./libft/libft.h -g3
+CFLAGS = -Wall -Wextra -I ./headers -I ./libft/libft.h -g3
 
 #Cosas realine mac casa
 
@@ -14,7 +14,7 @@ TKN_SRC = tokenizer.c token_utils.c token_memory.c token_operators.c quotes.c qu
 SIG_SRC = signal.c
 BUI_SRC = cd.c echo.c env.c exec_builtins.c exit.c export.c pwd.c unset.c export_utils.c
 SRC_SRC = init_utils.c init_vars.c main.c parsing.c probar_cosas.c utils.c
-EXE_SRC = exec_pipes.c exec_utils.c exec.c
+EXE_SRC = exec_pipes.c exec_utils.c exec.c exec_utils_2.c
 
 SRC = $(TKN_SRC) $(SIG_SRC) $(BUI_SRC) $(SRC_SRC) $(EXE_SRC)
 

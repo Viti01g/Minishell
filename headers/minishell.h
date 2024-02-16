@@ -53,7 +53,8 @@ enum	e_tok
 	FLCH_DRCH,
 	D_FLCH_IZQ,
 	D_FLCH_DRCH,
-	TXT
+	TXT,
+	DELM
 };
 
 enum	e_free
@@ -154,6 +155,10 @@ int		invalid_value(char **env);
 void	free_matriz(char **str);
 char	**ft_change_env(char **env, char *str, enum e_expt flag);
 int		check_if_builtin(char *str);
+t_token	*copy_no_pipe(t_token *token);
+void	exec(t_general	*gen);
+void	set_nodes(t_token **new_head, t_token **new_node, t_token **current_new);
+int		cont_pipes(t_token *token);
 
 
 // MORRALLA

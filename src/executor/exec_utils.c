@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-char	*find_name_com(char **paths, char **paths_aux, char *aux, char *argv)
+/* char	*find_name_com(char **paths, char **paths_aux, char *aux, char *argv)
 {
 	char	*str;
 	char	*temp;
@@ -27,9 +27,9 @@ char	*find_name_com(char **paths, char **paths_aux, char *aux, char *argv)
 	}
 	free_matrix(paths_aux);
 	return (NULL);
-}
+} */
 
-int	check_path(char *str, char **paths)
+/* int	check_path(char *str, char **paths)
 {
 	int		n;
 	char	*temp;
@@ -53,9 +53,9 @@ int	check_path(char *str, char **paths)
 		n++;
 	}
 	return (1);
-}
+} */
 
-char	*find_command(char *argv)
+/* char	*find_command(char *argv)
 {
 	char	*str;
 	char	*aux;
@@ -73,8 +73,8 @@ char	*find_command(char *argv)
 	if (paths == NULL)
 		return (NULL);
 	str = find_name_com(paths, paths_aux, aux, argv);
-	return (str);
-}
+	return (str); 
+}*/
 
 int	check_if_builtin(char *str)
 {
