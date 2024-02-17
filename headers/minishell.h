@@ -158,7 +158,7 @@ int		check_if_builtin(char *str);
 t_token	*copy_no_pipe(t_token *token);
 void	exec(t_general	*gen);
 void	set_nodes(t_token **new_head, t_token **new_node, t_token **current_new);
-int		cont_pipes(t_token *token);
+int		cont_pipes(t_token **token);
 
 
 // MORRALLA

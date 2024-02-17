@@ -18,7 +18,7 @@ void	exec(t_general	*gen)
 	printf("se\n");
 	aux->token = copy_no_pipe(gen->token);
 	sleep(2);
-	n_pipe = cont_pipes(gen->token);
+	n_pipe = cont_pipes(&gen->token);
 	//first = aux;
 	
 }

@@ -43,27 +43,30 @@ void	set_nodes(t_token **new_head, t_token **new_node, t_token **current_new)
 	}
 }
 
-int	cont_pipes(t_token *token)
+int cont_pipes(t_token **token)
 {
-	t_token *aux;
-	int	i;
-
-	printf("token token: %s\n", token->str[0]);
-	printf("token next: %s\n", token->next->str[0]);
-	aux = token;
-	i = 0;
-	while (aux)
-	{
-	printf("si\n");
-		printf("token aux: %s\n", aux->str[0]);
-		if (aux->type == PIPE)
-		{
-			printf("token: %s\n", aux->str[0]);
-			printf("entro\n");
-			i++;
-		}
-		aux = aux->next;
-	}
-	printf("num de pipes: %d\n", i);
-	return (i);
+    t_token *aux;
+    int     i;
+    int     token_index;
+    char    **current_words;
+    aux = *token;
+    token_index = 1;
+    i = 0;
+    while(aux != NULL)
+    {
+        current_words = aux->str;
+        printf("Token type: %d\n", aux->type);
+        printf("token: %s\n", aux->str[0]);
+        if (aux->type == PIPE)
+        {
+            printf("\n");
+            printf("Mira Maricón, un pipe: %s\n", aux->str[0]);
+            printf("Y me la pela el pipe\n");
+            i++;
+            printf("\n");
+        }
+        aux = aux->next;
+    }
+    printf("Hay este número de pipes: %d\n", i);
+    return 0;
 }
