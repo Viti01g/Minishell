@@ -116,6 +116,7 @@ int				signal_code;
 typedef struct s_general
 {
 	int		args;
+	int		num_pipes;
 	char	**linea_entera;
 	char	**env;
 	char	*env_home;
@@ -146,7 +147,7 @@ void	cmd_cd(t_general *gen);
 void	cmd_export(t_general *gen);
 void	cmd_unset(t_general *gen);
 void	cmd_echo(t_general *gen);
-void	split_token(char *input, t_token **tokens);
+int		split_token(char *input, t_token **tokens);
 void	free_tokens(t_token *tokens);
 void	ft_exec_builtins(t_general *gen);
 int		count_txt(char **str);
@@ -159,6 +160,8 @@ t_token	*copy_no_pipe(t_token *token);
 void	exec(t_general	*gen);
 void	set_nodes(t_token **new_head, t_token **new_node, t_token **current_new);
 int		cont_pipes(t_token **token);
+int		check_if_builtin(char *str);
+char	*buscar_var_env(char *var, char **env);
 
 
 // MORRALLA

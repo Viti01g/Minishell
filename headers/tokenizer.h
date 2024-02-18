@@ -14,7 +14,7 @@ typedef struct s_token
 }	t_token;
 
 // Tokens
-void	split_token(char *input, t_token **tokens);
+int		split_token(char *input, t_token **tokens);
 void	process_single_operator(char *input, t_token **tokens, int *i);
 void	process_double_operator(char *input, t_token **tokens, int *i);
 void	process_simple_operator(char *input, t_token **tokens, int *i, int *j);

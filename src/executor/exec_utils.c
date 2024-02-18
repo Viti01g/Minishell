@@ -78,8 +78,6 @@
 
 int	check_if_builtin(char *str)
 {
-	if (!str)
-		return (1);
 	if (ft_strcmp(str, "cd") == 0)
 		return (1);
 	else if (ft_strcmp(str, "echo") == 0)

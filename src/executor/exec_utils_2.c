@@ -25,7 +25,6 @@ t_token	*copy_no_pipe(t_token *token)
 		}
 		struct_cpy = struct_cpy->next;
 	}
-	printf("so\n");
 	return (new_head);
 }
 
@@ -43,30 +42,62 @@ void	set_nodes(t_token **new_head, t_token **new_node, t_token **current_new)
 	}
 }
 
-int cont_pipes(t_token **token)
+int	cont_pipes(t_token **token)
 {
-    t_token *aux;
-    int     i;
-    int     token_index;
-    char    **current_words;
-    aux = *token;
-    token_index = 1;
-    i = 0;
-    while(aux != NULL)
-    {
-        current_words = aux->str;
-        printf("Token type: %d\n", aux->type);
-        printf("token: %s\n", aux->str[0]);
-        if (aux->type == PIPE)
-        {
-            printf("\n");
-            printf("Mira Maricón, un pipe: %s\n", aux->str[0]);
-            printf("Y me la pela el pipe\n");
-            i++;
-            printf("\n");
-        }
-        aux = aux->next;
-    }
-    printf("Hay este número de pipes: %d\n", i);
-    return 0;
+	t_token	*aux;
+	int		i;
+	int		token_index;
+	char	**current_words;
+	aux = *token;
+	token_index = 1;
+	i = 0;
+	while(aux != NULL)
+	{
+		current_words = aux->str;
+		if (aux->type == PIPE)
+			i++;
+		aux = aux->next;
+	}
+	return (i);
+}
+
+int check_cmd_path(t_token *tmp, t_general *gen)
+{
+	t_token	*aux;
+
+	aux = tmp;
+	while (aux != NULL)
+	{
+		if (check_if_builtin(aux->str[0] == 0))
+		{
+			if (aux->next)
+				aux = aux->next;
+			else
+				return (0);
+		}
+		if (access(aux->str[0], X_OK) == 0)
+			aux->path = ft_strdup(aux->str[0]);
+		else if (buscar_var_env("PATH", gen->env))
+			return (3); //cambiar para que devuelva un error de cmd.
+		else if ()	// comprobar que el argumento sea tipo comando y no se pueda ejecutar.
+		
+	}
+}
+
+char	*buscar_var_env(char *var, char **env)
+{
+	int	i;
+	int	j;
+
+	if (!env || !var)
+		return (NULL);
+	j = ft_strlen(var);
+	i = -1;
+	while (env[++i])
+	{
+		if (!ft_strcmp(var, env[i]) || (!ft_strncmp(var, env[i], j)
+				&& !ft_strncmp("=", env[i] + j, 1)))
+			return (env[i]);
+	}
+	return (NULL);
 }

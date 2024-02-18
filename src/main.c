@@ -35,7 +35,7 @@ int main(int argc, char **argv, char **env)
 			break;
 		view = ft_strtrim(view, " \n\t\r\v\f");
 		check_quotes(view);
-		split_token(view, &gen.token);
+		gen.num_pipes = split_token(view, &gen.token);
 		/* while (gen.token->next)
 		{
 			printf("token: %s\n", gen.token->str[0]);

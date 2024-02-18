@@ -10,15 +10,10 @@
 
 void	exec(t_general	*gen)
 {
-	//t_general	*first;
-	t_general	*aux;
-	int			n_pipe;
+	t_token	*first;
+	t_token	*aux;
 
-	aux = gen;
-	printf("se\n");
-	aux->token = copy_no_pipe(gen->token);
-	sleep(2);
-	n_pipe = cont_pipes(&gen->token);
-	//first = aux;
+	aux = copy_no_pipe(gen->token);
+	first = aux;
 	
 }
