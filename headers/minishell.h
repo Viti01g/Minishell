@@ -166,6 +166,7 @@ char	*buscar_var_env(char *var, char **env);
 int		check_no_path(t_general **gen, t_token **toke, t_token **aux);
 void	free_tokens_no_mtx(t_token *tokens);
 void	check_redirs(t_token *tok, t_general *gen);
+void	check_redirs(t_token *tok, t_general *gen);
 
 
 // MORRALLA

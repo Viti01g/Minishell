@@ -2,7 +2,9 @@
 
 void	mayor_sign(t_token *tok, t_general *gen)
 {
-	
+	int	file;
+
+	file = 0;
 }
 
 int	ft_is_redir(int type)

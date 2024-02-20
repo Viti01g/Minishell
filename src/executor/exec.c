@@ -10,5 +10,7 @@ void	exec(t_general	*gen)
 	if (check_cmd_path(aux, gen) != 0)
 	{
 		free_tokens_no_mtx(aux);
+		return ;
 	}
+	check_redirs(aux, gen);
 }
