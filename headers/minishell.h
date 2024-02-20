@@ -161,7 +161,11 @@ void	exec(t_general	*gen);
 void	set_nodes(t_token **new_head, t_token **new_node, t_token **current_new);
 int		cont_pipes(t_token **token);
 int		check_if_builtin(char *str);
+int		check_cmd_path(t_token *tmp, t_general *gen);
 char	*buscar_var_env(char *var, char **env);
+int		check_no_path(t_general **gen, t_token **toke, t_token **aux);
+void	free_tokens_no_mtx(t_token *tokens);
+void	check_redirs(t_token *tok, t_general *gen);
 
 
 // MORRALLA

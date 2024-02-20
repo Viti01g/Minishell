@@ -1,80 +1,77 @@
 #include "minishell.h"
 
-/* char	*find_name_com(char **paths, char **paths_aux, char *aux, char *argv)
+static int	pos_path(char **env)
 {
-	char	*str;
-	char	*temp;
+	int	i;
 
-	str = NULL;
-	temp = NULL;
-	while (*paths != NULL)
+	i = -1;
+	while (env[++i])
 	{
-		if (access(argv, F_OK) == 0 && argv[0] == '/')
-			return (free_matrix(paths_aux), argv);
-		aux = ft_strjoin(*paths, "/");
-		temp = ft_strjoin(aux, argv);
-		if (access(temp, F_OK) == 0)
-		{
-			str = ft_substr(temp, 0, ft_strlen(temp));
-			free(temp);
-			free(aux);
-			free_matrix(paths_aux);
-			return (str);
-		}
-		paths++;
-		free(temp);
-		free(aux);
+		if (!strncmp(env[i], "PATH=", 5))
+			return (i);
 	}
-	free_matrix(paths_aux);
-	return (NULL);
-} */
+	return (-1);
+}
 
-/* int	check_path(char *str, char **paths)
+static char	*find_in_path(t_token *toke, t_general *gen)
 {
-	int		n;
-	char	*temp;
-	char	*aux;
+	char	**cmds;
+	char	*barra_cmd;
+	int		path;
+	int		i;
+	t_token	*aux;
 
-	n = 0;
-	if (!paths)
-		return (1);
-	while (paths[n])
-	{
-		temp = ft_strjoin(paths[n], "/");
-		aux = ft_strjoin(temp, str);
-		if (access(aux, F_OK) == 0)
-		{
-			free(temp);
-			free(aux);
-			return (0);
-		}
-		free(temp);
-		free(aux);
-		n++;
-	}
-	return (1);
-} */
-
-/* char	*find_command(char *argv)
-{
-	char	*str;
-	char	*aux;
-	char	**paths_aux;
-	char	**paths;
-
-	paths = get_paths();
-	aux = NULL;
-	paths_aux = paths;
-	if (argv[0] == '.' && (argv[1] == '.' || argv[1] == '/'))
-		return (argv);
-	if (access(argv, F_OK) == 0 && !check_if_builtin(argv)
-		&& check_path(argv, paths))
-		return (argv);
-	if (paths == NULL)
+	aux = toke;
+	if (access(aux->str, X_OK) == 0)
+		return (aux->str);
+	path = pos_path(gen->env);
+	if (path == -1)
 		return (NULL);
-	str = find_name_com(paths, paths_aux, aux, argv);
-	return (str); 
-}*/
+	cmds = ft_split(gen->env[path] + 5, ':');
+	i = -1;
+	while (cmds[++i])
+	{
+		barra_cmd = ft_strjoin("/", *aux->str);
+		aux->path = ft_strjoin(cmds[i], barra_cmd);
+		free(barra_cmd);
+		if (access(aux->path, X_OK) == 0)
+			return (free_matriz(cmds), aux->path);
+		free(aux->path);
+	}
+	free_matriz(cmds);
+	return (NULL);
+}
+
+static void	no_path(t_token **token, t_token **tmp)
+{
+	t_token	*head;
+	t_token	*aux;
+
+	head = (*token);
+	aux = (*token);
+	(*tmp) = head;
+	while ((*tmp) && (*tmp)->next)
+	{
+		if ((*tmp)->next)
+			aux = (*tmp)->next;
+		if ((*tmp)->path)
+			free((*tmp)->path);
+		(*tmp) = aux;
+	}
+}
+
+int	check_no_path(t_general **gen, t_token **toke, t_token **aux)
+{
+	char	*str;
+
+	(*aux)->path = find_in_path(*aux, *gen);
+	if (!(*aux)->path)
+	{
+		str = (*aux)->str[0];
+		return (no_path(toke, aux), -1);
+	}
+	return (0);
+}
 
 int	check_if_builtin(char *str)
 {
