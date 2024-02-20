@@ -40,6 +40,7 @@ void skip_until_space(char *input, int *i)
 
 void skip_until_space_or_dollar(char *input, int *i)
 {
+	(*i)++;
     while (input[*i] && input[*i] != ' ' && input[*i] != '$')
         (*i)++;
 }
@@ -64,13 +65,10 @@ int calculate_expanded_str(char *input)
         {
             var_start = i;
 			skip_until_space_or_dollar(input, &i);
-			//skip_until_space(input, &i);
             char *var = ft_substr(input, var_start + 1, i - var_start - 1);
-           // char *expanded_var = expander(var);
             char *expanded_var = getenv(var);
             expanded_len += ft_strlen(expanded_var);
             free(var);
-        	//free(expanded_var);
         }
         else
         {
@@ -82,8 +80,6 @@ int calculate_expanded_str(char *input)
     printf("Expanded len: %d\n", expanded_len);
     return expanded_len;
 }
-
-
 
 char *expander(char *input)
 {
