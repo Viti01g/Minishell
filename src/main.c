@@ -63,6 +63,7 @@ int	main(int argc, char **argv, char **env)
 	t_general gen;
 	(void)argc;
 	(void)argv;
+	(void)env;
 
 	//atexit(ft_leaks);
 //	tokens = NULL;
@@ -76,6 +77,7 @@ int	main(int argc, char **argv, char **env)
 			break ;
 		//check_quotes(input);
 		//split_token(input, &tokens);
+		calculate_expanded_str(input);
 		input = expander(input);
 		printf("Esto es lo que le llega a print %s\n", input);
 		print_env_var(&gen, input);

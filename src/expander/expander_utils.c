@@ -24,7 +24,7 @@ void print_env_var(t_general *gen, char *var)
 	int i;
 
 	i = 0;
-	while (*env && ft_strncmp(var, env[i], ft_strlen(var)))
+	while (env[i] && ft_strncmp(var, env[i], ft_strlen(var)))
 		++i;
 	if (!env[i])
 	{
@@ -49,5 +49,5 @@ void print_env_var(t_general *gen, char *var)
         }
         env++;
     }
-    printf("Variable %s not found in environment\n", var);
+    //printf("Variable %s not found in environment\n", var);
 }

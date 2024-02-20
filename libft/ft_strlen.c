@@ -6,7 +6,7 @@
 /*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:33:17 by drubio-m          #+#    #+#             */
-/*   Updated: 2023/10/31 13:06:33 by drubio-m         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:25:19 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_strlen(const char *s)
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (i);
 	while (s[i] != '\0')
 		i++;
 	return (i);

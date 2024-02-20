@@ -9,20 +9,19 @@
 *EXPANDER ROADMAP:
 *	1. Leer input 										(DONE)
 *	2. Comprobar que después del $ haya un char			(DONE)
-!	3. Comprobar si el dolar está entre comillas		//TODO
-!	4. Expandir la virgulilla							//TODO
-!	5. Calcular la nueva longitud del array				//TODO
-!	6. Liberar el input									//TODO
-!	7. Redirigir el puntero								//TODO
-!	8. Tokenizar										//TODO
-!	9. Eliminar comillas								//TODO
+*	3. Comprobar si el dólar está entre comillas		(DONE)
+!	4. Calcular la nueva longitud del array				//TODO
+!	5. Liberar el input									//TODO
+!	6. Redirigir el puntero								//TODO
+!	7. Tokenizar										//TODO
+!	8. Eliminar comillas								//TODO
  */
 
 
 // Devuelve 0 tan pronto como encuentra un carácter inválido
 // Devuelve 1 si todos los caracteres son válidos
 int check_valid_var(char *str, int start, int len)
-{
+{	
     while (str[start] && start < len)
     {
         if (!(str[start] == '_' || ft_isalnum(str[start])))
@@ -39,40 +38,82 @@ void skip_until_space(char *input, int *i)
 		(*i)++;
 }
 
+void skip_until_space_or_dollar(char *input, int *i)
+{
+    while (input[*i] && input[*i] != ' ' && input[*i] != '$')
+        (*i)++;
+}
+
+int calculate_expanded_str(char *input)
+{
+    int initial_len;
+    int expanded_len;
+    int i;
+    int in_quotes;
+    int var_start;
+
+    initial_len = ft_strlen(input);
+    expanded_len = 0;
+    i = 0;
+    in_quotes = 0;
+    while(input[i])
+    {
+        if (input[i] == '\'')
+            in_quotes = !in_quotes;
+        if (input[i] == '$' && !in_quotes && (input[i + 1] == '_' || ft_isalpha(input[i + 1])))
+        {
+            var_start = i;
+			skip_until_space_or_dollar(input, &i);
+			//skip_until_space(input, &i);
+            char *var = ft_substr(input, var_start + 1, i - var_start - 1);
+           // char *expanded_var = expander(var);
+            char *expanded_var = getenv(var);
+            expanded_len += ft_strlen(expanded_var);
+            free(var);
+        	//free(expanded_var);
+        }
+        else
+        {
+            expanded_len += 1;
+            i++;
+        }
+    }
+    printf("Initial len: %d\n", initial_len);
+    printf("Expanded len: %d\n", expanded_len);
+    return expanded_len;
+}
+
+
+
 char *expander(char *input)
 {
-    char *new_str;
+	char *new_str;
 	char *var;
-    int in_quotes;
-	int	i;
+	int in_quotes;
+	int i;
 	int j;
 
 	i = 0;
+	in_quotes = 0;
 	(void) new_str;
-	(void) in_quotes;
 	while (input[i])
 	{
-		if (input[i] == '$' && (input[i + 1] == '_' || ft_isalpha(input[i + 1])))
+		if (input[i] == '\'')
+			in_quotes = !in_quotes;
+		else if (input[i] == '$' && !in_quotes && (input[i + 1] == '_' || ft_isalpha(input[i + 1])))
 		{
 			j = i + 1;
 			skip_until_space(input, &i);
-			//***********************************************
-			// * Cambiar esto por la función de error
 			if (!check_valid_var(input, j, i - j))
 				ft_error("Invalid char detected");
-			//***********************************************
 			var = ft_substr(input, j, i - j);
-			// printf("Esto vale j: %d y char: %c\n", j, input[j]);
-			// printf("Esto vale i: %d y char: %c\n", i, input[i]);
 			printf("Esta es tu var: %s\n", var);
 			return var;
 			free(var);
 		}
-		else if (input[i] == '$' && !(input[i + 1] == '_' || ft_isalpha(input[i + 1])))
+		else if (input[i] == '$' && !in_quotes && !(input[i + 1] == '_' || ft_isalpha(input[i + 1])))
 			printf("MArico\n");
 		i++;
 	}
 	return input;
 }
-
-

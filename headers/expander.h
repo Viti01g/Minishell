@@ -8,6 +8,10 @@ typedef struct s_general t_general;
 char *expander(char *input);
 void skip_until_space(char *input, int *i);
 int check_valid_var(char *str, int start, int len);
+void skip_until_space_or_dollar(char *input, int *i);
+
+
+int calculate_expanded_str(char *input);
 
 // Expander Utils
 void	*ft_realloc(void *ptr, size_t len, size_t new_size);
