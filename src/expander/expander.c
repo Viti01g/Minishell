@@ -67,6 +67,7 @@ int calculate_expanded_str(char *input)
 			skip_until_space_or_dollar(input, &i);
             char *var = ft_substr(input, var_start + 1, i - var_start - 1);
             char *expanded_var = getenv(var);
+			printf("Este es tu output:\n %s\n\n", expanded_var);
             expanded_len += ft_strlen(expanded_var);
             free(var);
         }
@@ -100,8 +101,8 @@ char *expander(char *input)
 		{
 			j = i + 1;
 			skip_until_space(input, &i);
-			if (!check_valid_var(input, j, i - j))
-				ft_error("Invalid char detected");
+			// if (!check_valid_var(input, j, i - j))
+			// 	ft_error("Invalid char detected");
 			var = ft_substr(input, j, i - j);
 			printf("Esta es tu var: %s\n", var);
 			return var;
