@@ -68,8 +68,7 @@ int check_cmd_path(t_token *tmp, t_general *gen)
 	aux = tmp;
 	while (aux != NULL)
 	{
-
-		if (check_if_builtin(aux->str[0]) == 0)
+		if (check_if_builtin(aux->str[0]) == 1)
 		{
 			if (aux->next)
 				aux = aux->next;
@@ -78,14 +77,13 @@ int check_cmd_path(t_token *tmp, t_general *gen)
 		}
 		if (access(aux->str[0], X_OK) == 0)
 			aux->path = ft_strdup(aux->str[0]);
-		else if (buscar_var_env("PATH", gen->env))
+		else if (buscar_var_env("PATH", gen->env) == NULL)
 			return (3); //cambiar para que devuelva un error de cmd.
 		else if (aux->str && aux->type == TXT && access(aux->str[0], X_OK) != 0)   // si es tipo comando, no tiene ruta completa (comando normal = ls, cat, etc)
 		{
 			if (check_no_path(&gen, &tmp, &aux) == -1)
 				return (-1);
 		}	
-		printf("ol\n");
 		aux = aux->next;
 	}
 	return (0);

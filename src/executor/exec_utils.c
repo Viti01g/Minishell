@@ -22,8 +22,8 @@ static char	*find_in_path(t_token *toke, t_general *gen)
 	t_token	*aux;
 
 	aux = toke;
-	if (access(aux->str, X_OK) == 0)
-		return (aux->str);
+	if (access(*aux->str, X_OK) == 0)
+		return (*aux->str);
 	path = pos_path(gen->env);
 	if (path == -1)
 		return (NULL);

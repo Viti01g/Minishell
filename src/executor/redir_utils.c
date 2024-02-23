@@ -57,7 +57,10 @@ void	check_redirs(t_token *tok, t_general *gen)
 	{
 		if (!ft_is_redir(aux->type))
 		{
-
+			mayor_sign(aux, gen);
+			minor_sign(aux, gen);
 		}
+		ft_file_type(aux, gen);
+		aux = aux->next;
 	}
 }

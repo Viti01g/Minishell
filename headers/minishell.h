@@ -129,6 +129,8 @@ typedef struct s_general
 	char	*dch;			//	---  Preguntar  -----
 	char	*db_izq;		//	---  Cristian   -----
 	char	*izq;			//-----------------------
+	char	*outfile;
+	char	*infile;
 	t_token	*token;
 	t_inf	*inf;
 }	t_general;
@@ -174,6 +176,7 @@ void	free_tokens_no_mtx(t_token *tokens);
 void	check_redirs(t_token *tok, t_general *gen);
 void	check_redirs(t_token *tok, t_general *gen);
 int		ft_open_files(t_token *tok, int type);
+void	ft_file_type(t_token *tmp, t_general *gen);
 
 
 // MORRALLA
