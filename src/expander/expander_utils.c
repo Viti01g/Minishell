@@ -51,3 +51,59 @@ void print_env_var(t_general *gen, char *var)
     }
     //printf("Variable %s not found in environment\n", var);
 }
+
+/* char *create_and_fill_array(char *input)
+{
+	char *result;
+	int  i;
+	int in_quotes;
+
+	result = malloc(sizeof(char) * (calculate_expanded_str(input) + 1));
+	i = -1;
+	in_quotes = 0;
+	while(input[++i])
+	{
+		if (input[i] == '\'')
+			in_quotes = !in_quotes;
+		if (input[i] == '$' && !in_quotes)
+		{
+
+		}
+	}
+} */
+
+char *create_and_fill_array(char *input)
+{
+    char *result;
+    int  i[2]; // i[0] for input index, i[1] for result index
+    int in_quotes;
+
+    result = malloc(sizeof(char) * (calculate_expanded_str(input) + 1));
+    i[0] = 0;
+    i[1] = 0;
+    in_quotes = 0;
+    while(input[i[0]])
+    {
+        if (input[i[0]] == '\'')
+            in_quotes = !in_quotes;
+        if (input[i[0]] == '$' && !in_quotes && (input[i[0] + 1] == '_' || ft_isalpha(input[i[0] + 1])))
+        {
+            int var_start = i[0];
+            skip_until_space_or_dollar(input, &i[0]);
+            char *var = ft_substr(input, var_start + 1, i[0] - var_start - 1);
+            char *expanded_var = getenv(var);
+            if (expanded_var != NULL) {
+                ft_strcpy(&result[i[1]], expanded_var);
+                i[1] += ft_strlen(expanded_var);
+            }
+            free(var);
+        }
+        else
+            result[i[1]++] = input[i[0]++];
+    }
+    result[i[1]] = '\0'; // null-terminate the result string
+	printf("Result: %s\n", result);
+    return result;
+}
+
+

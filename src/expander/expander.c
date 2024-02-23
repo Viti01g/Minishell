@@ -41,7 +41,7 @@ void skip_until_space(char *input, int *i)
 void skip_until_space_or_dollar(char *input, int *i)
 {
 	(*i)++;
-    while (input[*i] && input[*i] != ' ' && input[*i] != '$')
+    while (input[*i] && input[*i] != ' ' && input[*i] != '$' && input[*i] != '\"')
         (*i)++;
 }
 
@@ -101,8 +101,6 @@ char *expander(char *input)
 		{
 			j = i + 1;
 			skip_until_space(input, &i);
-			// if (!check_valid_var(input, j, i - j))
-			// 	ft_error("Invalid char detected");
 			var = ft_substr(input, j, i - j);
 			printf("Esta es tu var: %s\n", var);
 			return var;

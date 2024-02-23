@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:41:23 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/01/12 17:58:36 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:17:06 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void	process_delimiter(t_info *info, size_t *w_c, char c, int in_quotes);
 void	p_quotes_cmd(char *s, size_t *i, int *in_quotes, char *current_quote);
 int		ft_is_whitespace(char c);
 int		ft_skip_spaces(char *str);
+char	*ft_strcpy(char *dst, const char *src);
+
 
 // Lists
 t_list	*ft_lstnew(void *content);

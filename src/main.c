@@ -78,7 +78,8 @@ int	main(int argc, char **argv, char **env)
 		//check_quotes(input);
 		//split_token(input, &tokens);
 		printf("Este es tu input:\n %s\n", input);
-		calculate_expanded_str(input);
+		//calculate_expanded_str(input);
+		create_and_fill_array(input);
 		input = expander(input);
 //		printf("Esto es lo que le llega a print %s\n", input);
 	//	print_env_var(&gen, input);
