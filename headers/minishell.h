@@ -49,12 +49,14 @@ enum	e_expt
 enum	e_tok
 {
 	PIPE,
-	FLCH_IZQ,
-	FLCH_DRCH,
-	D_FLCH_IZQ,
-	D_FLCH_DRCH,
+	FLCH_IZQ,		// <
+	FLCH_DRCH,		// >
+	D_FLCH_IZQ,		// <<
+	D_FLCH_DRCH,	// >>
 	TXT,
-	DELM
+	DELM,
+	INFILE,
+	OUTFILE
 };
 
 enum	e_free
@@ -123,6 +125,10 @@ typedef struct s_general
 	char	*env_path;
 	char	*env_pwd;
 	char	*env_oldpwd;
+	char	*db_dch;		//-----------------------
+	char	*dch;			//	---  Preguntar  -----
+	char	*db_izq;		//	---  Cristian   -----
+	char	*izq;			//-----------------------
 	t_token	*token;
 	t_inf	*inf;
 }	t_general;
@@ -134,7 +140,7 @@ void	ft_signal_interrupt(void);
 void	ft_signal_reset_prompt(int signal);
 void	ft_disable_ctrl_c_printing_chars(void);
 void	ft_signal_quit(void);
-void    init_vars(t_general *gen, char **env);
+void	init_vars(t_general *gen, char **env);
 char	**ft_cpy_env(char **env);
 char	*ft_cpy_home(char **env);
 char	*ft_cpy_path(char **env);
@@ -167,6 +173,7 @@ int		check_no_path(t_general **gen, t_token **toke, t_token **aux);
 void	free_tokens_no_mtx(t_token *tokens);
 void	check_redirs(t_token *tok, t_general *gen);
 void	check_redirs(t_token *tok, t_general *gen);
+int		ft_open_files(t_token *tok, int type);
 
 
 // MORRALLA

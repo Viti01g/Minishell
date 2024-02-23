@@ -5,13 +5,13 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int main(int argc, char **argv, char **envp) {
+/* int main(int argc, char **argv, char **envp) {
     // Tamaño del buffer para almacenar el directorio actual
 
 int a = access("ls", X_OK);
 int b = access("/bin/ls", X_OK);
 printf("a: %d\n", a);
-printf("b: %d\n", b);
+printf("b: %d\n", b); */
 
 /*     size_t buffer_size = 1024;
     char    *str[] = {"/usr/bin/wc", "-l", "-w", "caca.txt", NULL};
@@ -43,6 +43,6 @@ printf("b: %d\n", b);
 /
     if (access(str[0], F_OK))
         printf("funciona\n");
-    execve(str[0], str, NULL); */
+    execve(str[0], str, NULL); 
     return EXIT_SUCCESS;
- }
+ }*/
