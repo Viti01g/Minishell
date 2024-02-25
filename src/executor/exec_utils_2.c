@@ -46,14 +46,11 @@ int	cont_pipes(t_token **token)
 {
 	t_token	*aux;
 	int		i;
-	int		token_index;
-	char	**current_words;
 	aux = *token;
-	token_index = 1;
+
 	i = 0;
 	while(aux != NULL)
 	{
-		current_words = aux->str;
 		if (aux->type == PIPE)
 			i++;
 		aux = aux->next;
@@ -81,8 +78,11 @@ int check_cmd_path(t_token *tmp, t_general *gen)
 			return (3); //cambiar para que devuelva un error de cmd.
 		else if (aux->str && aux->type == TXT && access(aux->str[0], X_OK) != 0)   // si es tipo comando, no tiene ruta completa (comando normal = ls, cat, etc)
 		{
-			if (check_no_path(&gen, &tmp, &aux) == -1)
+			/* if (check_no_path(&gen, &tmp, &aux) == -1)
+			{
+				printf("tus mu\n");
 				return (-1);
+			} */
 		}	
 		aux = aux->next;
 	}

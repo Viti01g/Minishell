@@ -131,6 +131,7 @@ typedef struct s_general
 	char	*izq;			//-----------------------
 	char	*outfile;
 	char	*infile;
+	char	**delim;
 	t_token	*token;
 	t_inf	*inf;
 }	t_general;
@@ -174,9 +175,9 @@ char	*buscar_var_env(char *var, char **env);
 int		check_no_path(t_general **gen, t_token **toke, t_token **aux);
 void	free_tokens_no_mtx(t_token *tokens);
 void	check_redirs(t_token *tok, t_general *gen);
-void	check_redirs(t_token *tok, t_general *gen);
 int		ft_open_files(t_token *tok, int type);
 void	ft_file_type(t_token *tmp, t_general *gen);
+void	heredoc(t_token *tok, t_general *gen);
 
 
 // MORRALLA
