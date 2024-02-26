@@ -52,14 +52,11 @@ void	*ft_realloc(void *ptr, size_t len, size_t new_size)
     }
 } */
 
-// i[0] for input index, i[1] for result index
 char *create_and_fill_array(char *input)
 {
     char *result;
     int  i[2]; 
     int in_quotes;
-	char *var;
-	char *expanded_var;
 
     result = malloc(sizeof(char) * (calculate_expanded_str(input) + 1));
     i[0] = 0;
@@ -69,25 +66,33 @@ char *create_and_fill_array(char *input)
     {
         if (input[i[0]] == '\'')
             in_quotes = !in_quotes;
-        if (input[i[0]] == '$' && !in_quotes && (input[i[0] + 1] == '_' || ft_isalpha(input[i[0] + 1])))
-        {
-            int var_start = i[0];
-            skip_until_space_or_dollar(input, &i[0]);
-            var = ft_substr(input, var_start + 1, i[0] - var_start - 1);
-            expanded_var = getenv(var);
-            if (expanded_var != NULL)
-			{
-                ft_strcpy(&result[i[1]], expanded_var);
-                i[1] += ft_strlen(expanded_var);
-            }
-            free(var);
-        }
-        else
-            result[i[1]++] = input[i[0]++];
+        handle_variable_expansion(input, i, result, &in_quotes);
     }
     result[i[1]] = '\0';
-	free(input);
+    free(input);
+	//printf("Este es tu output:\n %s\n", result);
     return result;
 }
 
+void handle_variable_expansion(char *input, int *i, char *result, int *in_quotes)
+{
+	char *var;
+	char *expanded_var;
+	int var_start;
 
+    if (input[i[0]] == '$' && !(*in_quotes) && (input[i[0] + 1] == '_' || ft_isalpha(input[i[0] + 1])))
+    {
+        var_start = i[0];
+        skip_until_space_or_dollar(input, &i[0]);
+        var = ft_substr(input, var_start + 1, i[0] - var_start - 1);
+        expanded_var = getenv(var);
+        if (expanded_var != NULL)
+        {
+            ft_strcpy(&result[i[1]], expanded_var);
+            i[1] += ft_strlen(expanded_var);
+        }
+        free(var);
+    }
+    else
+        result[i[1]++] = input[i[0]++];
+}

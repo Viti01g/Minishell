@@ -11,8 +11,8 @@
 *	2. Comprobar que después del $ haya un char			(DONE)
 *	3. Comprobar si el dólar está entre comillas		(DONE)
 *	4. Calcular la nueva longitud del array				(DONE)
-!	5. Liberar el input									//TODO
-!	6. Redirigir el puntero								//TODO
+*	5. Liberar el input									(DONE)
+*	6. Redirigir el puntero								(DONE)
 !	7. Tokenizar										//TODO
 !	8. Eliminar comillas								//TODO
  */
@@ -45,31 +45,38 @@ void skip_until_space_or_dollar(char *input, int *i)
         (*i)++;
 }
 
+char *aux_calculate(char *input, int *i)
+{
+    int var_start;
+    char *var;
+    char *expanded_var;
+
+    var_start = *i;
+    skip_until_space_or_dollar(input, i);
+    var = ft_substr(input, var_start + 1, *i - var_start - 1);
+    expanded_var = getenv(var);
+    free(var);
+    return expanded_var;
+}
+
 int calculate_expanded_str(char *input)
 {
-    int initial_len;
-    int expanded_len;
     int i;
     int in_quotes;
-    int var_start;
+    int expanded_len;
+    char *expanded_var;
 
-    initial_len = ft_strlen(input);
-    expanded_len = 0;
     i = 0;
     in_quotes = 0;
+    expanded_len = 0;
     while(input[i])
     {
         if (input[i] == '\'')
             in_quotes = !in_quotes;
         if (input[i] == '$' && !in_quotes && (input[i + 1] == '_' || ft_isalpha(input[i + 1])))
         {
-            var_start = i;
-			skip_until_space_or_dollar(input, &i);
-            char *var = ft_substr(input, var_start + 1, i - var_start - 1);
-            char *expanded_var = getenv(var);
-			printf("Este es tu output:\n %s\n\n", expanded_var);
+            expanded_var = aux_calculate(input, &i);
             expanded_len += ft_strlen(expanded_var);
-            free(var);
         }
         else
         {
@@ -77,38 +84,13 @@ int calculate_expanded_str(char *input)
             i++;
         }
     }
-    printf("Initial len: %d\n", initial_len);
-    printf("Expanded len: %d\n", expanded_len);
     return expanded_len;
 }
 
 char *expander(char *input)
 {
-	char *new_str;
-	char *var;
-	int in_quotes;
-	int i;
-	int j;
+	char *result;
 
-	i = 0;
-	in_quotes = 0;
-	(void) new_str;
-	while (input[i])
-	{
-		if (input[i] == '\'')
-			in_quotes = !in_quotes;
-		else if (input[i] == '$' && !in_quotes && (input[i + 1] == '_' || ft_isalpha(input[i + 1])))
-		{
-			j = i + 1;
-			skip_until_space(input, &i);
-			var = ft_substr(input, j, i - j);
-			printf("Esta es tu var: %s\n", var);
-			return var;
-			free(var);
-		}
-		else if (input[i] == '$' && !in_quotes && !(input[i + 1] == '_' || ft_isalpha(input[i + 1])))
-			printf("MArico\n");
-		i++;
-	}
-	return input;
+	result = create_and_fill_array(input);
+	return result;
 }
