@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 /*
 *EXPANDER ROADMAP:
 *	1. Leer input 										(DONE)
@@ -17,80 +16,69 @@
 !	8. Eliminar comillas								//TODO
  */
 
-
-// Devuelve 0 tan pronto como encuentra un carácter inválido
-// Devuelve 1 si todos los caracteres son válidos
-int check_valid_var(char *str, int start, int len)
-{	
-    while (str[start] && start < len)
-    {
-        if (!(str[start] == '_' || ft_isalnum(str[start])))
-            return (0); 
-        start++;
-    }
-    return (1);
-}
-
-// Coje desde el dólar hasta que haya un espacio o un null para sacar la variable
-void skip_until_space(char *input, int *i)
+// Coje desde el dólar hasta que haya un espacio 
+// o un null para sacar la variable
+void	skip_until_space(char *input, int *i)
 {
 	while (input[*i] && input[*i] != ' ')
 		(*i)++;
 }
 
-void skip_until_space_or_dollar(char *input, int *i)
+void	skip_until_space_or_dollar(char *input, int *i)
 {
 	(*i)++;
-    while (input[*i] && input[*i] != ' ' && input[*i] != '$' && input[*i] != '\"')
-        (*i)++;
+	while (input[*i] && input[*i] != ' '
+		&& input[*i] != '$' && input[*i] != '\"')
+		(*i)++;
 }
 
-char *aux_calculate(char *input, int *i)
+char	*aux_calculate(char *input, int *i)
 {
-    int var_start;
-    char *var;
-    char *expanded_var;
+	int		var_start;
+	char	*var;
+	char	*expanded_var;
 
-    var_start = *i;
-    skip_until_space_or_dollar(input, i);
-    var = ft_substr(input, var_start + 1, *i - var_start - 1);
-    expanded_var = getenv(var);
-    free(var);
-    return expanded_var;
+	var_start = *i;
+	skip_until_space_or_dollar(input, i);
+	var = ft_substr(input, var_start + 1, *i - var_start - 1);
+	expanded_var = getenv(var);
+	free(var);
+	return (expanded_var);
 }
 
-int calculate_expanded_str(char *input)
+int	calculate_expanded_str(char *input)
 {
-    int i;
-    int in_quotes;
-    int expanded_len;
-    char *expanded_var;
+	int		i;
+	int		in_quotes;
+	int		expanded_len;
+	char	*expanded_var;
 
-    i = 0;
-    in_quotes = 0;
-    expanded_len = 0;
-    while(input[i])
-    {
-        if (input[i] == '\'')
-            in_quotes = !in_quotes;
-        if (input[i] == '$' && !in_quotes && (input[i + 1] == '_' || ft_isalpha(input[i + 1])))
-        {
-            expanded_var = aux_calculate(input, &i);
-            expanded_len += ft_strlen(expanded_var);
-        }
-        else
-        {
-            expanded_len += 1;
-            i++;
-        }
-    }
-    return expanded_len;
+	i = 0;
+	in_quotes = 0;
+	expanded_len = 0;
+	while (input[i])
+	{
+		if (input[i] == '\'')
+			in_quotes = !in_quotes;
+		if (input[i] == '$' && !in_quotes
+			&& (input[i + 1] == '_' || ft_isalpha(input[i + 1])))
+		{
+			expanded_var = aux_calculate(input, &i);
+			expanded_len += ft_strlen(expanded_var);
+		}
+		else
+		{
+			expanded_len += 1;
+			i++;
+		}
+	}
+	return (expanded_len);
 }
 
-char *expander(char *input)
+char	*expander(char *input)
 {
-	char *result;
+	char	*result;
 
 	result = create_and_fill_array(input);
-	return result;
+	return (result);
 }

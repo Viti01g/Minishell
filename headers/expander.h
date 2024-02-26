@@ -2,26 +2,21 @@
 # define EXPANDER_H
 
 # include "minishell.h"
-typedef struct s_general t_general;
+
+typedef struct s_general	t_general;
 
 // Expander
-char *expander(char *input);
-void skip_until_space(char *input, int *i);
-int check_valid_var(char *str, int start, int len);
-void skip_until_space_or_dollar(char *input, int *i);
-char *create_and_fill_array(char *input);
-int calculate_expanded_str(char *input);
-void handle_variable_expansion(char *input, int *i, char *result, int *in_quotes);
-
-
-
+char	*expander(char *input);
+char	*create_and_fill_array(char *input);
+char	*aux_calculate(char *input, int *i);
+int		calculate_expanded_str(char *input);
+void	handle_var_expand(char *input, int *i, char *result, int *in_quotes);
 
 // Expander Utils
 void	*ft_realloc(void *ptr, size_t len, size_t new_size);
-void print_env_var(t_general *gen, char *var);
-
-
-char *aux_calculate(char *input, int *i);
-
+void	print_env_var(t_general *gen, char *var);
+void	skip_until_space(char *input, int *i);
+void	skip_until_space_or_dollar(char *input, int *i);
+int		check_valid_var(char *str, int start, int len);
 
 #endif
