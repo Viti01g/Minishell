@@ -178,6 +178,7 @@ void	check_redirs(t_token *tok, t_general *gen);
 int		ft_open_files(t_token *tok, int type);
 void	ft_file_type(t_token *tmp, t_general *gen);
 void	heredoc(t_token *tok, t_general *gen);
+int		ft_is_builtin(t_token *token, t_general *gen);
 
 
 // MORRALLA

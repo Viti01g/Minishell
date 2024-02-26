@@ -80,7 +80,7 @@ int check_cmd_path(t_token *tmp, t_general *gen)
 		{
 			/* if (check_no_path(&gen, &tmp, &aux) == -1)
 			{
-				printf("tus mu\n");
+				printf("tus mu\n");							//descomentar cuando ya esten bien los tipos de token.
 				return (-1);
 			} */
 		}	

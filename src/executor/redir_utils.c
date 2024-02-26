@@ -7,6 +7,7 @@ void	mayor_sign(t_token *tok, t_general *gen)
 	file = 0;
 	if (tok->type == FLCH_DRCH || tok->type == D_FLCH_DRCH)
 	{
+				printf("su\n");
 		if (tok->type == FLCH_DRCH)
 		{
 			gen->dch = tok->str[0];
@@ -26,20 +27,15 @@ void	minor_sign(t_token *tok, t_general *gen)
 	int	file;
 
 	file = 0;
-			printf("........................................\n");
-		printf("tipo de toki: %d\n", tok->type);
-			printf("........................................\n");
 	if (tok->type == FLCH_IZQ || tok->type == D_FLCH_IZQ)
 	{
 		if (tok->type == FLCH_IZQ)
 		{
 			gen->izq = tok->str[0];
-		printf("\n\nentra\n\n");
 			if (tok->next->type == INFILE)
 				gen->infile = tok->next->str[0];
 			if (access(gen->infile, F_OK) == -1)
 			{
-				printf("su\n");
 				return ; //error de infile no existe
 				gen->infile = NULL;
 			}
@@ -68,12 +64,6 @@ void	check_redirs(t_token *tok, t_general *gen)
 	{
 		if (!ft_is_redir(aux->type))
 		{
-			printf("---------------------------------\n");
-			printf("tipo de tok: %d\n", aux->type);
-			printf("---------------------------------\n");
-			printf("content de tok: %s\n", aux->str[0]);
-			printf("---------------------------------\n");
-			printf("cucu\n");
 			mayor_sign(aux, gen);
 			minor_sign(aux, gen);
 		}
