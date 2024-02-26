@@ -64,12 +64,13 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	(void)env;
+	(void)gen;
 
 	//atexit(ft_leaks);
 //	tokens = NULL;
 //	printf("%p\n", input);
 //	printf("%s\n", input);
-	init_vars(&gen, env);
+//	init_vars(&gen, env);
 	while (1)
 	{
 		input = readline("\e[1;32mminishell$ \e[0m");
@@ -79,8 +80,8 @@ int	main(int argc, char **argv, char **env)
 		//split_token(input, &tokens);
 		printf("Este es tu input:\n %s\n", input);
 		//calculate_expanded_str(input);
-		create_and_fill_array(input);
-		input = expander(input);
+		input = create_and_fill_array(input);
+		//input = expander(input);
 //		printf("Esto es lo que le llega a print %s\n", input);
 	//	print_env_var(&gen, input);
 	//	printf("Este es tu output:\n %s\n", input);
@@ -88,6 +89,6 @@ int	main(int argc, char **argv, char **env)
 	//	free_tokens(tokens);
 	//	tokens = NULL;
 	}
-	//atexit(ft_leaks);
+	atexit(ft_leaks);
 	return (0);
 }

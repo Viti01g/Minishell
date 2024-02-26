@@ -10,7 +10,7 @@
 *	1. Leer input 										(DONE)
 *	2. Comprobar que después del $ haya un char			(DONE)
 *	3. Comprobar si el dólar está entre comillas		(DONE)
-!	4. Calcular la nueva longitud del array				//TODO
+*	4. Calcular la nueva longitud del array				(DONE)
 !	5. Liberar el input									//TODO
 !	6. Redirigir el puntero								//TODO
 !	7. Tokenizar										//TODO

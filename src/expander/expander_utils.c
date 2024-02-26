@@ -17,7 +17,8 @@ void	*ft_realloc(void *ptr, size_t len, size_t new_size)
 	return (new);
 }
 
-void print_env_var(t_general *gen, char *var)
+// *UTIL PARA IMPRIMIR VARS
+/* void print_env_var(t_general *gen, char *var)
 {
     char **env = gen->env;
     char *subst;
@@ -49,34 +50,16 @@ void print_env_var(t_general *gen, char *var)
         }
         env++;
     }
-    //printf("Variable %s not found in environment\n", var);
-}
-
-/* char *create_and_fill_array(char *input)
-{
-	char *result;
-	int  i;
-	int in_quotes;
-
-	result = malloc(sizeof(char) * (calculate_expanded_str(input) + 1));
-	i = -1;
-	in_quotes = 0;
-	while(input[++i])
-	{
-		if (input[i] == '\'')
-			in_quotes = !in_quotes;
-		if (input[i] == '$' && !in_quotes)
-		{
-
-		}
-	}
 } */
 
+// i[0] for input index, i[1] for result index
 char *create_and_fill_array(char *input)
 {
     char *result;
-    int  i[2]; // i[0] for input index, i[1] for result index
+    int  i[2]; 
     int in_quotes;
+	char *var;
+	char *expanded_var;
 
     result = malloc(sizeof(char) * (calculate_expanded_str(input) + 1));
     i[0] = 0;
@@ -90,9 +73,10 @@ char *create_and_fill_array(char *input)
         {
             int var_start = i[0];
             skip_until_space_or_dollar(input, &i[0]);
-            char *var = ft_substr(input, var_start + 1, i[0] - var_start - 1);
-            char *expanded_var = getenv(var);
-            if (expanded_var != NULL) {
+            var = ft_substr(input, var_start + 1, i[0] - var_start - 1);
+            expanded_var = getenv(var);
+            if (expanded_var != NULL)
+			{
                 ft_strcpy(&result[i[1]], expanded_var);
                 i[1] += ft_strlen(expanded_var);
             }
@@ -101,8 +85,8 @@ char *create_and_fill_array(char *input)
         else
             result[i[1]++] = input[i[0]++];
     }
-    result[i[1]] = '\0'; // null-terminate the result string
-	printf("Result: %s\n", result);
+    result[i[1]] = '\0';
+	free(input);
     return result;
 }
 
