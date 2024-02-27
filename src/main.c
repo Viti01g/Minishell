@@ -56,7 +56,7 @@ void	view_prompt(void)
 } */
 
 
-int	main(int argc, char **argv, char **env)
+/* int	main(int argc, char **argv, char **env)
 {
 	char		*input;
 	t_general	gen;
@@ -80,4 +80,52 @@ int	main(int argc, char **argv, char **env)
 		gen.token = NULL;
 	}
 	return (0);
+} */
+
+int	main(int argc, char **argv, char **env)
+{
+	char		*input;
+	t_general	gen;
+
+	(void)argv;
+	(void)argc;
+//  atexit(ft_leaks);
+	gen.token = NULL;
+	init_vars(&gen, env);
+	while (1)
+	{
+		input = readline("\e[1;32mminishell$ \e[0m");
+		if (!input || !ft_strcmp(input, "exit"))
+			break ;
+		check_quotes(input);
+		input = expander(input);
+		split_token(input, &gen.token);
+		//*****************************************************************
+		//* Añadidas para probar lo de eliminar comillas, luego se unifica
+		//* Recuerda que print_tokens está comentada en split_token
+		remove_quotes_from_tokens(gen.token);
+		print_tokens(&gen.token);
+		//*****************************************************************
+		//ft_exec_builtins(&gen);
+		free(input);
+		free_tokens(gen.token);
+		gen.token = NULL;
+	}
+	return (0);
+}
+
+int	cont_pipes(t_token **token)
+{
+	t_token	*aux;
+	int		i;
+	aux = *token;
+
+	i = 0;
+	while(aux != NULL)
+	{
+		if (aux->type == PIPE)
+			i++;
+		aux = aux->next;
+	}
+	return (i);
 }

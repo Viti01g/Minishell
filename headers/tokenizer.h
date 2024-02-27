@@ -29,6 +29,13 @@ void	check_quotes(char *input);
 int		skip_spaces(char *str, int i);
 int		is_whitespace(char c);
 
+// Quote Removal
+void remove_quotes_from_tokens(t_token *tokens);
+void process_node(t_token *current_node);
+void process_token(char *current_token);
+void p_s_quote(char *current_token, int *j, int *single_quote_count, int double_quote_count);
+void p_d_quote(char *current_token, int *j, int *double_quote_count, int single_quote_count);
+
 // Lists
 t_token	*ft_lstnew_addback(t_token **token, char *str, int type);
 
