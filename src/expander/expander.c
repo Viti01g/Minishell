@@ -29,7 +29,11 @@ void	skip_until_space_or_dollar(char *input, int *i)
 	(*i)++;
 	while (input[*i] && input[*i] != ' '
 		&& input[*i] != '$' && input[*i] != '\"')
+	{
+		if (input[*i] == '\'')
+			break ;
 		(*i)++;
+	}
 }
 
 char	*aux_calculate(char *input, int *i)
