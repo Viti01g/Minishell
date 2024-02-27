@@ -14,12 +14,11 @@ void	view_prompt(void)
 	write(1, RESET, ft_strlen(RESET));
 }
 
-/* int	main(int argc, char **argv, char **env)
+
+int main(int argc, char **argv, char **env)
 {
 	char		*view;
 	t_general	gen;
-	//t_token		*tokens;
-	//char		**manolo;
 
 	(void)argv;
 	gen.token = NULL;
@@ -34,8 +33,14 @@ void	view_prompt(void)
 		view = readline("\e[1;32mminishell$ \e[0m");
 		if (!view)
 			break;
+		view = ft_strtrim(view, " \n\t\r\v\f");
 		check_quotes(view);
-		split_token(view, &gen.token);
+		gen.num_pipes = split_token(view, &gen.token);
+		/* while (gen.token->next)
+		{
+			printf("token: %s\n", gen.token->str[0]);
+			gen.token = gen.token->next;
+		} */
 		if (ft_strlen(view) != 0)
 		{
 			gen.args = count_txt(gen.token->str);
@@ -43,6 +48,7 @@ void	view_prompt(void)
 			t_token *current = gen.token;
 			while (current != NULL)
 				current = current->next;
+			exec(&gen);
 			ft_exec_builtins(&gen);
 			free_tokens(gen.token);
 			gen.token = gen.token->next;

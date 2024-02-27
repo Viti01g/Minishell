@@ -22,6 +22,23 @@ void	free_matriz(char **str)
 	free(str);
 }
 
+void	free_tokens_no_mtx(t_token *tokens)
+{
+	t_token	*aux;
+
+	aux = tokens;
+	if (!tokens)
+		return ;
+	while (tokens && tokens->next)
+	{
+		if (tokens && tokens->next)
+			aux = tokens->next;
+		free(tokens);
+		tokens = aux;
+	}
+	free(tokens);
+}
+
 /* void	type_args(t_token **tok)
 {
 	t_token	**prueba;

@@ -5,7 +5,7 @@ void	ft_leaks(void)
 	system("leaks -q minishell");
 }
 
-void	split_token(char *input, t_token **tokens)
+int	split_token(char *input, t_token **tokens)
 {
 	int	i;
 	int	j;
@@ -32,6 +32,7 @@ void	split_token(char *input, t_token **tokens)
 	if (j < i)
 		process_simple_operator(input, tokens, &i, &j);
 	print_tokens(tokens);
+	return (cont_pipes(tokens));
 }
 
 /* int	main(void)
