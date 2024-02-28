@@ -6,7 +6,7 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:06:20 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/02/27 12:33:19 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/02/28 19:12:05 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	ft_ex_echo(t_general *gen, int cond)
 			printf("%s", ft_expand_echo(gen, var));
 		}
 		if (!ft_strcmp(gen->token->str[i], "$?"))
-			printf("%d", signal_code);
+			printf("%d", g_signal_code);
 		if (gen->token->str[i + 1])
 			printf(" ");
 	}

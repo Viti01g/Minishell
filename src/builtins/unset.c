@@ -6,7 +6,7 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:08:44 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/01/11 17:07:16 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/02/28 19:12:15 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,5 @@ void	cmd_unset(t_general *gen)
 	}
 	free_matriz(gen->env);
 	gen->env = env;
-	signal_code = 0;
+	g_signal_code = 0;
 }

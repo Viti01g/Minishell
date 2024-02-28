@@ -1,8 +1,25 @@
 # include "minishell.h"
 
+pid_t	ft_fork(void)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid < 0)
+		exit(EXIT_FAILURE);
+	return (pid);
+}
+
+static int	is_absolute_path(const char *path)
+{
+	if (!path || path[0] == '\0')
+		return (0);
+	return (1);
+}
+
 int	ft_is_builtin(t_token *token, t_general *gen)
 {
-	if (search_var_in_env("PATH", gen->env) != NULL)
+	if (buscar_var_env("PATH", gen->env) != NULL)
 	{
 		if (is_absolute_path(*token->str) == 0)
 		{

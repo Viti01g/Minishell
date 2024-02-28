@@ -44,7 +44,7 @@ int main(int argc, char **argv, char **env)
 			while (current != NULL)
 				current = current->next;
 			exec(&gen);
-			ft_exec_builtins(&gen);
+			//ft_exec_builtins(&gen, gen.token, STDOUT_FILENO);
 			free_tokens(gen.token);
 			gen.token = gen.token->next;
 		}

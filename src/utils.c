@@ -39,6 +39,23 @@ void	free_tokens_no_mtx(t_token *tokens)
 	free(tokens);
 }
 
+t_general	*reset_data(t_general *gen)
+{
+	gen->delim = NULL;
+	gen->outfile = NULL;
+	gen->infile = NULL;
+	return (gen);
+}
+
+/* void	free_view(t_general *gen)
+{
+	t_token	*aux;
+
+	aux = gen->token;
+	free(gen->);
+		gen->line = NULL;
+} */
+
 /* void	type_args(t_token **tok)
 {
 	t_token	**prueba;

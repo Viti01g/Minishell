@@ -76,7 +76,7 @@ int check_cmd_path(t_token *tmp, t_general *gen)
 			aux->path = ft_strdup(aux->str[0]);
 		else if (buscar_var_env("PATH", gen->env) == NULL)
 			return (3); //cambiar para que devuelva un error de cmd.
-		else if (aux->str && aux->type == TXT && access(aux->str[0], X_OK) != 0)   // si es tipo comando, no tiene ruta completa (comando normal = ls, cat, etc)
+		else if (aux->str && aux->type == CMD && access(aux->str[0], X_OK) != 0)   // si es tipo comando, no tiene ruta completa (comando normal = ls, cat, etc)
 		{
 			/* if (check_no_path(&gen, &tmp, &aux) == -1)
 			{

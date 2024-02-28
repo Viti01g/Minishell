@@ -6,7 +6,7 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:08:20 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/01/29 20:09:46 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:15:45 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,5 @@ void	cmd_export(t_general *gen)
 			gen->env = ft_change_env(env, gen->token->str[1], result);
 		}
 	}
-	signal_code = flag;
+	g_signal_code = flag;
 }
