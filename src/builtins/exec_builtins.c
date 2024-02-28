@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	ft_exec_builtins(t_general *gen)
+void	ft_exec_builtins(t_general *gen, t_token *tok, int fd)
 {
 	if (gen->token->str[0])
 	{

@@ -37,6 +37,9 @@
 # define TRUE  1
 # define FALSE  0
 
+# define READ 0
+# define WRITE 1
+
 enum	e_expt
 {
 	NEW_VALUE,
@@ -108,71 +111,92 @@ typedef struct s_inf
 	struct termios	termios;		//disable (ctrl + c) printing ^C
 }	t_inf;	
 
+int				g_signal_code;
+
+typedef struct s_heredoc
+{
+	char	*delimi;
+	int		fd[2];
+}	t_heredoc;
+
 typedef struct s_general
 {
-	int		args;
-	int		num_pipes;
-	char	**linea_entera;
-	char	**env;
-	char	*env_home;
-	char	*env_path;
-	char	*env_pwd;
-	char	*env_oldpwd;
-	char	*db_dch;		//-----------------------
-	char	*dch;			//	---  Preguntar  -----
-	char	*db_izq;		//	---  Cristian   -----
-	char	*izq;			//-----------------------
-	char	*outfile;
-	char	*infile;
-	char	**delim;
-	t_token	*token;
-	t_inf	*inf;
+	int			args;
+	int			num_pipes;
+	char		**linea_entera;
+	char		**env;
+	char		*env_home;
+	char		*env_path;
+	char		*env_pwd;
+	char		*env_oldpwd;
+	char		*db_dch;
+	char		*dch;
+	char		*db_izq;
+	char		*izq;
+	char		*outfile;
+	char		*infile;
+	char		**delim;
+	int			num_herdoc;
+	int			fd[2];
+	pid_t		id;
+	t_heredoc	*heredc;
+	t_token		*token;
+	t_inf		*inf;
 }	t_general;
 
 t_general	g_gen;
 int			g_signal_code;
 
-void	ft_signals(void);
-void	ft_signal_interrupt(void);
-void	ft_signal_reset_prompt(int signal);
-void	ft_disable_ctrl_c_printing_chars(void);
-void	ft_signal_quit(void);
-void	init_vars(t_general *gen, char **env);
-char	**ft_cpy_env(char **env);
-char	*ft_cpy_home(char **env);
-char	*ft_cpy_path(char **env);
-char	*ft_cpy_pwd(t_general **gen, char **env);
-char	*ft_cpy_oldpwd(char **env);
-void	cmd_env(t_general *gen);
-void	cmd_exit(t_general *gen);
-void	cmd_pwd(t_general *gen);
-void	cmd_cd(t_general *gen);
-void	cmd_export(t_general *gen);
-void	cmd_unset(t_general *gen);
-void	cmd_echo(t_general *gen);
-int		split_token(char *input, t_token **tokens);
-void	free_tokens(t_token *tokens);
-void	ft_exec_builtins(t_general *gen);
-int		count_txt(char **str);
-void	ft_print_export(t_general *gen);
-int		invalid_value(char **env);
-void	free_matriz(char **str);
-char	**ft_change_env(char **env, char *str, enum e_expt flag);
-int		check_if_builtin(char *str);
-t_token	*copy_no_pipe(t_token *token);
-void	exec(t_general	*gen);
-void	set_nodes(t_token **new_head, t_token **new_node, t_token **current_new);
-int		cont_pipes(t_token **token);
-int		check_if_builtin(char *str);
-int		check_cmd_path(t_token *tmp, t_general *gen);
-char	*buscar_var_env(char *var, char **env);
-int		check_no_path(t_general **gen, t_token **toke, t_token **aux);
-void	free_tokens_no_mtx(t_token *tokens);
-void	check_redirs(t_token *tok, t_general *gen);
-int		ft_open_files(t_token *tok, int type);
-void	ft_file_type(t_token *tmp, t_general *gen);
-void	heredoc(t_token *tok, t_general *gen);
-int		ft_is_builtin(t_token *token, t_general *gen);
+void		ft_signals(void);
+void		ft_signal_interrupt(void);
+void		ft_signal_reset_prompt(int signal);
+void		ft_disable_ctrl_c_printing_chars(void);
+void		ft_signal_quit(void);
+void		ft_sig_child(void);
+void		init_vars(t_general *gen, char **env);
+char		**ft_cpy_env(char **env);
+char		*ft_cpy_home(char **env);
+char		*ft_cpy_path(char **env);
+char		*ft_cpy_pwd(t_general **gen, char **env);
+char		*ft_cpy_oldpwd(char **env);
+void		cmd_env(t_general *gen);
+void		cmd_exit(t_general *gen);
+void		cmd_pwd(t_general *gen);
+void		cmd_cd(t_general *gen);
+void		cmd_export(t_general *gen);
+void		cmd_unset(t_general *gen);
+void		cmd_echo(t_general *gen);
+int			split_token(char *input, t_token **tokens);
+void		free_tokens(t_token *tokens);
+void		ft_exec_builtins(t_general *gen, t_token *tok, int fd);
+int			count_txt(char **str);
+void		ft_print_export(t_general *gen);
+int			invalid_value(char **env);
+void		free_matriz(char **str);
+char		**ft_change_env(char **env, char *str, enum e_expt flag);
+int			check_if_builtin(char *str);
+t_token		*copy_no_pipe(t_token *token);
+void		exec(t_general	*gen);
+void		set_nodes(t_token **new_head, t_token **new_node, t_token **current_new);
+int			cont_pipes(t_token **token);
+int			check_if_builtin(char *str);
+int			check_cmd_path(t_token *tmp, t_general *gen);
+char		*buscar_var_env(char *var, char **env);
+int			check_no_path(t_general **gen, t_token **toke, t_token **aux);
+void		free_tokens_no_mtx(t_token *tokens);
+void		check_redirs(t_token *tok, t_general *gen);
+int			ft_open_files(t_token *tok, int type);
+void		ft_file_type(t_token *tmp, t_general *gen);
+void		heredoc(t_token *tok, t_general *gen);
+int			ft_is_builtin(t_token *token, t_general *gen);
+char		*find_in_path(t_token *toke, t_general *gen);
+pid_t		ft_fork(void);
+void		check_outfile(t_token *token, t_general *data, int fd_outf);
+int			prueba_builtin(t_token *token, t_general *gen);
+void		check_infile(t_token *token, t_general *gen, int fd_inf);
+void		ft_executer(t_token *token, t_general *gen, int fd_inf, int fd_outf);
+int			ft_exec_pipes(t_token *token, t_general *gen, int st_fd);
+t_general	*reset_data(t_general *gen);
 
 // MORRALLA
 void	ft_leaks(void);

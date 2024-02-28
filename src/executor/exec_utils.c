@@ -13,7 +13,7 @@ static int	pos_path(char **env)
 	return (-1);
 }
 
-static char	*find_in_path(t_token *toke, t_general *gen)
+char	*find_in_path(t_token *toke, t_general *gen)
 {
 	char	**cmds;
 	char	*barra_cmd;
