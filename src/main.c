@@ -105,6 +105,7 @@ int	main(int argc, char **argv, char **env)
 		//* Recuerda que print_tokens está comentada en split_token
 		remove_quotes_from_tokens(gen.token);
 		print_tokens(&gen.token);
+	//	ft_exec_builtins(&gen);
 		//*****************************************************************
 		//ft_exec_builtins(&gen);
 		free(input);

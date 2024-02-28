@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:08:20 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/01/29 20:09:46 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:01:40 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,5 @@ void	cmd_export(t_general *gen)
 			gen->env = ft_change_env(env, gen->token->str[1], result);
 		}
 	}
-	signal_code = flag;
+	g_signal_code = flag;
 }

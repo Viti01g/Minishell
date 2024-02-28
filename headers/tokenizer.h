@@ -6,9 +6,9 @@
 // Structs
 typedef struct s_token
 {
-	int				words;  //"2"  
-	int				type;	//"cmd"		"cmd"
-	char			**str;  //"str[0]: ls; str[1]: -la"   "echo hola"
+	int				words;
+	int				type;	
+	char			**str;	
 	char			*path;
 	struct s_token	*next;
 }	t_token;

@@ -32,7 +32,7 @@ void	ft_signal_quit(void)
 void	ft_signal_reset_prompt(int signal)
 {
 	(void) signal;
-	signal_code = 130;
+	g_signal_code = 130;
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);

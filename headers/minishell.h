@@ -5,26 +5,24 @@
 # include <readline/readline.h> 
 # include <readline/history.h>
 # include <signal.h>
-# include <stdlib.h>			/* Para malloc, free */
-# include <unistd.h>			/* Para write, access, open, read, close, fork, exit, getcwd, chdir */
-# include <sys/wait.h>		    /* Para wait, waitpid, wait3, wait4 */
-# include <signal.h>			/* Para signal, sigaction, kill */
-# include <sys/stat.h>		    /* Para stat, lstat, fstat */
-# include <fcntl.h>		    	/* Para unlink, execve, dup, dup2, pipe */
-# include <dirent.h>			/* Para opendir, readdir, closedir */
-# include <string.h>			/* Para strerror */
-# include <errno.h>			    /* Para perror */
-# include <termios.h>		    /* Para tcsetattr, tcgetattr */
-# include <curses.h>			/* Para tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs */
+# include <stdlib.h>			
+# include <unistd.h>			
+# include <sys/wait.h>		    
+# include <signal.h>			
+# include <sys/stat.h>		   
+# include <fcntl.h>		    	
+# include <dirent.h>			
+# include <string.h>			
+# include <errno.h>			   
+# include <termios.h>		    
+# include <curses.h>			
 # include <limits.h>
-
 
 // Our libraries
 
 # include "../libft/libft.h"
 # include "tokenizer.h"
 # include "expander.h"
-
 
 # define GREEN "\e[1;32m"
 # define RESET "\e[0m"
@@ -107,12 +105,8 @@ enum	e_bash_error
 
 typedef struct s_inf
 {
-	struct 	termios	termios;		//disable (ctrl + c) printing ^C
+	struct termios	termios;		//disable (ctrl + c) printing ^C
 }	t_inf;	
-
-int				signal_code;
-
-
 
 typedef struct s_general
 {
@@ -135,7 +129,8 @@ typedef struct s_general
 	t_inf	*inf;
 }	t_general;
 
-
+t_general	g_gen;
+int			g_signal_code;
 
 void	ft_signals(void);
 void	ft_signal_interrupt(void);
@@ -179,17 +174,11 @@ void	ft_file_type(t_token *tmp, t_general *gen);
 void	heredoc(t_token *tok, t_general *gen);
 int		ft_is_builtin(t_token *token, t_general *gen);
 
-
 // MORRALLA
 void	ft_leaks(void);
 void	ft_error(char *error);
 
-
 // Other libraries need to go after the structs
 
 
-
-t_general	g_gen;
-
 #endif
- 

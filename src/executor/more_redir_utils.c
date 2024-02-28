@@ -37,7 +37,7 @@ int	ft_open_files(t_token *tok, int type)
 		fd = open(*tok->next->str, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 	{
-		signal_code = 1;
+		g_signal_code = 1;
 		exit(EXIT_FAILURE);
 	}
 	return (fd);

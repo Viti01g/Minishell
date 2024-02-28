@@ -107,4 +107,3 @@ int	check_valid_var(char *str, int start, int len)
 	}
 	return (1);
 }
-

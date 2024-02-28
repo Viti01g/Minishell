@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:08:44 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/01/11 17:07:16 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:01:40 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,5 @@ void	cmd_unset(t_general *gen)
 	}
 	free_matriz(gen->env);
 	gen->env = env;
-	signal_code = 0;
+	g_signal_code = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:41:23 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/02/23 11:17:06 by drubio-m         ###   ########.fr       */
+/*   Updated: 2024/02/28 09:53:05 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
-}t_list;
+}	t_list;
 
 typedef struct s_string_info
 {
 	char	*s;
 	size_t	*i;
 	char	current_quote;
-}t_info;
+}	t_info;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -85,7 +85,6 @@ void	p_quotes_cmd(char *s, size_t *i, int *in_quotes, char *current_quote);
 int		ft_is_whitespace(char c);
 int		ft_skip_spaces(char *str);
 char	*ft_strcpy(char *dst, const char *src);
-
 
 // Lists
 t_list	*ft_lstnew(void *content);
