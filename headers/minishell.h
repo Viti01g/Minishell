@@ -51,7 +51,7 @@ enum	e_tok
 	FLCH_DRCH,		// >
 	D_FLCH_IZQ,		// <<
 	D_FLCH_DRCH,	// >>
-	TXT,
+	CMD,
 	DELM,
 	INFILE,
 	OUTFILE

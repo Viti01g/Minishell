@@ -118,10 +118,10 @@ int	cont_pipes(t_token **token)
 {
 	t_token	*aux;
 	int		i;
-	aux = *token;
 
+	aux = *token;
 	i = 0;
-	while(aux != NULL)
+	while (aux != NULL)
 	{
 		if (aux->type == PIPE)
 			i++;
