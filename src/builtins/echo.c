@@ -6,27 +6,11 @@
 /*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:06:20 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/02/28 10:01:40 by drubio-m         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:52:02 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	*ft_expand_echo(t_general *gen, char *var/* , int pos */)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	var++;
-	while (gen->env[++i])
-	{
-		j = ft_strlen(var);
-		if (!ft_strncmp(gen->env[i], var, ft_strlen(var)))
-			return (ft_substr(gen->env[i], j + 1, ft_strlen(gen->env[i]) - j));
-	}
-	return ("");
-}
 
 static void	ft_ex_echo(t_general *gen, int cond)
 {
@@ -40,15 +24,10 @@ static void	ft_ex_echo(t_general *gen, int cond)
 		i = cond;
 	while (++i < gen->token->words)
 	{
-		if (gen->token->str[i][0] != '$')
-			printf("%s", gen->token->str[i]);
-		if (gen->token->str[i][0] == '$')
-		{
-			var = gen->token->str[i];
-			printf("%s", ft_expand_echo(gen, var));
-		}
 		if (!ft_strcmp(gen->token->str[i], "$?"))
 			printf("%d", g_signal_code);
+		else if (gen->token->str[i][0])
+			printf("%s", gen->token->str[i]);
 		if (gen->token->str[i + 1])
 			printf(" ");
 	}
@@ -56,7 +35,7 @@ static void	ft_ex_echo(t_general *gen, int cond)
 		printf("\n");
 }
 
-static int ft_find_flags(t_general *gen)
+static int	ft_find_flags(t_general *gen)
 {
 	int	i;
 	int	j;
@@ -70,7 +49,7 @@ static int ft_find_flags(t_general *gen)
 		if (!gen->token->str[i][j])
 			i++;
 		else
-			break;
+			break ;
 	}
 	return (i - 1);
 }

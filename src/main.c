@@ -95,7 +95,7 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		input = readline("\e[1;32mminishell$ \e[0m");
-		if (!input || !ft_strcmp(input, "exit"))
+		if (!input)
 			break ;
 		check_quotes(input);
 		input = expander(input);
@@ -104,10 +104,9 @@ int	main(int argc, char **argv, char **env)
 		//* Añadidas para probar lo de eliminar comillas, luego se unifica
 		//* Recuerda que print_tokens está comentada en split_token
 		remove_quotes_from_tokens(gen.token);
-		print_tokens(&gen.token);
-	//	ft_exec_builtins(&gen);
+	//	print_tokens(&gen.token);
+		ft_exec_builtins(&gen);
 		//*****************************************************************
-		//ft_exec_builtins(&gen);
 		free(input);
 		free_tokens(gen.token);
 		gen.token = NULL;
