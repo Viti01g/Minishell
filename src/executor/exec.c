@@ -52,7 +52,7 @@ static void	exec_cmds(t_token *tok, t_general *gen, int *fd)
 			ft_executer(tok, gen, *fd, STDOUT_FILENO);
 		else
 			ft_exec_pipes(tok, gen, *fd);
-//		free(tok->path);
+		free(tok->path);
 		tok = tok->next;
 	}
 }

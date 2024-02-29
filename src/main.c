@@ -312,88 +312,18 @@ int main(int argc, char **argv, char **env)
     return (0);
 } */
 
-int is_command(char *command)
+int	cont_pipes(t_token **token)
 {
-    char *path;
-    char *dir;
-    char *full_path;
-    char *saveptr;
+	t_token	*aux;
+	int		i;
 
-    path = getenv("PATH");
-    if (path == NULL)
-    {
-        return 0;
-    }
-    path = strdup(path);
-    if (path == NULL)
-    {
-        return 0;
-    }
-    for (dir = strtok_r(path, ":", &saveptr); dir != NULL; dir = strtok_r(NULL, ":", &saveptr))
-    {
-        full_path = malloc(strlen(dir) + 1 + strlen(command) + 1);
-        if (full_path == NULL)
-        {
-            free(path);
-            return 0;
-        }
-        strcpy(full_path, dir);
-        strcat(full_path, "/");
-        strcat(full_path, command);
-        if (access(full_path, X_OK) == 0)
-        {
-            free(full_path);
-            free(path);
-            return 1;
-        }
-        free(full_path);
-    }
-    free(path);
-    return 0;
+	aux = *token;
+	i = 0;
+	while (aux != NULL)
+	{
+		if (aux->type == PIPE)
+			i++;
+		aux = aux->next;
+	}
+	return (i);
 }
-
-void categorize_arguments(t_token *tokens)
-{
-    t_token *current_node;
-
-    current_node = tokens;
-    while (current_node != NULL)
-    {
-        if (strcmp(current_node->str[0], ">") == 0 || strcmp(current_node->str[0], ">>") == 0)
-        {
-            current_node = current_node->next;
-            if (current_node == NULL)
-            {
-                printf("Syntax error\n");
-                return;
-            }
-            if (is_command(current_node->str[0]) || access(current_node->str[0], X_OK) == 0) // Check if the file is a command
-            {
-                current_node->type = CMD;
-            }
-            else
-            {
-                current_node->type = OUTFILE;
-            }
-        }
-        else if (strcmp(current_node->str[0], "<") == 0)
-        {
-            current_node = current_node->next;
-            if (current_node == NULL)
-            {
-                printf("Syntax error\n");
-                return;
-            }
-            if (is_command(current_node->str[0]) || access(current_node->str[0], X_OK) == 0) // Check if the file is a command
-            {
-                current_node->type = CMD;
-            }
-            else
-            {
-                current_node->type = INFILE;
-            }
-        }
-        current_node = current_node->next;
-    }
-}
-
