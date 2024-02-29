@@ -72,12 +72,12 @@ void	exec(t_general	*gen)
 		return ;
 	}
 	check_redirs(aux, gen);
-	/* if (gen->delim)
-		heredoc(aux, gen); */ // empezar heredoc.
+	if (gen->delim)
+		heredoc(aux, gen);
 	fd = STDIN_FILENO;
 	exec_cmds(aux, gen, &fd);
 	gen = reset_data(gen);
 	if (fd != STDIN_FILENO)
 		close(fd);
-	
+	wait_child_process(gen->token, gen);
 }

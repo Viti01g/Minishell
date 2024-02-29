@@ -42,20 +42,29 @@ void	set_nodes(t_token **new_head, t_token **new_node, t_token **current_new)
 	}
 }
 
-int	cont_pipes(t_token **token)
+void	wait_child_process(t_token *token, t_general *gen)
 {
-	t_token	*aux;
-	int		i;
-	aux = *token;
+	int	status;
 
-	i = 0;
-	while(aux != NULL)
+	sig_ignore();
+	while (token->next)
+		token = token->next;
+	if (gen->id && gen->id > 0)
 	{
-		if (aux->type == PIPE)
-			i++;
-		aux = aux->next;
+		waitpid(gen->id, &status, 0);
+		if (WIFSIGNALED(status))
+		{
+			waitpid(gen->id, &status, 0);
+			if (WTERMSIG(status) == 3)
+				write(1, "Quit: 3", 7);
+		}
 	}
-	return (i);
+	while (1)
+	{
+		if (waitpid(-1, NULL, 0) == -1)
+			break ;
+	}
+	sig_parent();
 }
 
 int check_cmd_path(t_token *tmp, t_general *gen)
@@ -78,11 +87,11 @@ int check_cmd_path(t_token *tmp, t_general *gen)
 			return (3); //cambiar para que devuelva un error de cmd.
 		else if (aux->str && aux->type == CMD && access(aux->str[0], X_OK) != 0)   // si es tipo comando, no tiene ruta completa (comando normal = ls, cat, etc)
 		{
-			/* if (check_no_path(&gen, &tmp, &aux) == -1)
+			if (check_no_path(&gen, &tmp, &aux) == -1)
 			{
-				printf("tus mu\n");							//descomentar cuando ya esten bien los tipos de token.
+				printf("tus mu\n");
 				return (-1);
-			} */
+			}
 		}	
 		aux = aux->next;
 	}

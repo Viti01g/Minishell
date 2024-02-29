@@ -153,6 +153,7 @@ void		ft_signal_reset_prompt(int signal);
 void		ft_disable_ctrl_c_printing_chars(void);
 void		ft_signal_quit(void);
 void		ft_sig_child(void);
+void		sig_parent(void);
 void		init_vars(t_general *gen, char **env);
 char		**ft_cpy_env(char **env);
 char		*ft_cpy_home(char **env);
@@ -197,10 +198,17 @@ void		check_infile(t_token *token, t_general *gen, int fd_inf);
 void		ft_executer(t_token *token, t_general *gen, int fd_inf, int fd_outf);
 int			ft_exec_pipes(t_token *token, t_general *gen, int st_fd);
 t_general	*reset_data(t_general *gen);
+void		sig_ignore(void);
+void		wait_child_process(t_token *token, t_general *gen);
+void		heredoc(t_token *token, t_general *gen);
+void		count_heredocs(t_token *token, t_general *gen);
+void		free_struct(t_heredoc *hd, int nb_hd);
+void		sig_heredoc(void);
 
 // MORRALLA
 void	ft_leaks(void);
 void	ft_error(char *error);
+int		ft_open_files2(char *str, int type);
 
 // Other libraries need to go after the structs
 

@@ -7,7 +7,6 @@ void	mayor_sign(t_token *tok, t_general *gen)
 	file = 0;
 	if (tok->type == FLCH_DRCH || tok->type == D_FLCH_DRCH)
 	{
-				printf("su\n");
 		if (tok->type == FLCH_DRCH)
 		{
 			gen->dch = tok->str[0];
