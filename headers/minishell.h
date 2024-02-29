@@ -203,10 +203,12 @@ void		wait_child_process(t_token *token, t_general *gen);
 void		heredoc(t_token *token, t_general *gen);
 void		count_heredocs(t_token *token, t_general *gen);
 void		free_struct(t_heredoc *hd, int nb_hd);
+void		sig_heredoc(void);
 
 // MORRALLA
 void	ft_leaks(void);
 void	ft_error(char *error);
+int		ft_open_files2(char *str, int type);
 
 // Other libraries need to go after the structs
 

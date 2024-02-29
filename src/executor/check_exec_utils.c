@@ -4,7 +4,7 @@ void	check_infile(t_token *token, t_general *gen, int fd_inf)
 {
 	if (token->next && (gen->infile || gen->delim))
 	{
-		printf("si\n");
+		printf("si entra en el if de check infile\n");
 		if (gen->db_izq && ft_strcmp(gen->db_izq, "<<") == 0)
 			fd_inf = gen->heredc[gen->num_herdoc - 1].fd[READ];
 		else if (gen->izq && ft_strcmp(gen->izq, "<") == 0)
@@ -38,8 +38,9 @@ void	check_outfile(t_token *token, t_general *gen, int fd_outf)
 	}
 	else if (token->next && (gen->outfile))
 	{
-		if (ft_strcmp(gen->dch, ">") == 0)
-			fd_outf = ft_open_files(token, 1);
+		if (ft_strcmp(gen->dch, ">") == 0){
+			fd_outf = ft_open_files2(gen->outfile, 1);
+		}
 		else if (ft_strcmp(gen->db_dch, ">>") == 0)
 			fd_outf = ft_open_files(token, 2);
 		if (dup2(fd_outf, STDOUT_FILENO) == -1)

@@ -38,7 +38,7 @@ int	prueba_builtin(t_token *token, t_general *gen)
 	return (STDIN_FILENO);
 }
 
-static void	exec_cmds(t_token *tok, t_general *gen, int *fd)
+static void	 exec_cmds(t_token *tok, t_general *gen, int *fd)
 {
 	int	i;
 
