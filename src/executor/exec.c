@@ -38,6 +38,7 @@ int	prueba_builtin(t_token *token, t_general *gen)
 	return (STDIN_FILENO);
 }
 
+// ****** REVISAR EL FREE COMENTADO
 static void	 exec_cmds(t_token *tok, t_general *gen, int *fd)
 {
 	int	i;
@@ -51,7 +52,7 @@ static void	 exec_cmds(t_token *tok, t_general *gen, int *fd)
 			ft_executer(tok, gen, *fd, STDOUT_FILENO);
 		else
 			ft_exec_pipes(tok, gen, *fd);
-		free(tok->path);
+//		free(tok->path);
 		tok = tok->next;
 	}
 }
