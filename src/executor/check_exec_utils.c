@@ -4,6 +4,7 @@ void	check_infile(t_token *token, t_general *gen, int fd_inf)
 {
 	if (token->next && (gen->infile || gen->delim))
 	{
+		printf("si\n");
 		if (gen->db_izq && ft_strcmp(gen->db_izq, "<<") == 0)
 			fd_inf = gen->heredc[gen->num_herdoc - 1].fd[READ];
 		else if (gen->izq && ft_strcmp(gen->izq, "<") == 0)
