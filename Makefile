@@ -1,6 +1,6 @@
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Wextra -I ./headers -I ./libft/libft.h #-g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -I ./headers -I ./libft/libft.h -g3 #-fsanitize=address
 
 #Cosas realine mac casa
 
@@ -17,7 +17,7 @@ SRC_SRC = init_utils.c init_vars.c main.c parsing.c probar_cosas.c utils.c
 EXP_SRC = expander.c expander_utils.c
 EXE_SRC = exec_pipes.c exec_utils.c exec.c exec_utils_2.c redir_utils.c more_redir_utils.c more_exec_utils.c check_exec_utils.c
 
-SRC = $(TKN_SRC) $(SIG_SRC) $(SRC_SRC) $(BUI_SRC) $(EXP_SRC) #$(EXE_SRC) 
+SRC = $(TKN_SRC) $(SIG_SRC) $(SRC_SRC) $(BUI_SRC) $(EXP_SRC) $(EXE_SRC) 
 
 INCLUDES = ./headers/minishell.h ./libft/libft.h
 LIBFT_DIR = libft/

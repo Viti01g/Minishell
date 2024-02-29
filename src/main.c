@@ -81,86 +81,6 @@ void	view_prompt(void)
     return (0);
 } */
 
-/* void categorize_arguments(t_token *tokens)
-{
-    t_token *current_node;
-
-    current_node = tokens;
-    while (current_node != NULL)
-    {
-        if (strcmp(current_node->str[0], ">") == 0 || strcmp(current_node->str[0], ">>") == 0)
-        {
-          //  current_node->type = FLCH_DRCH;
-            current_node = current_node->next;
-            if (current_node == NULL)
-            {
-                printf("Syntax error\n");
-                return;
-            }
-            current_node->type = OUTFILE;
-        }
-        else if (strcmp(current_node->str[0], "<") == 0 || strcmp(current_node->str[0], ">>") == 0)
-        {
-            current_node->type = FLCH_IZQ;
-            current_node = current_node->next;
-            if (current_node == NULL)
-            {
-                printf("Syntax error\n");
-                return;
-            }
-            current_node->type = INFILE;
-        }
-        current_node = current_node->next;
-    }
-} */
-
-/* void categorize_arguments(t_token *tokens)
-{
-    t_token *current_node;
-
-    current_node = tokens;
-    while (current_node != NULL)
-    {
-        if (strcmp(current_node->str[0], ">") == 0 || strcmp(current_node->str[0], ">>") == 0)
-        {
-            //current_node->type = REDIRECTION;
-            current_node = current_node->next;
-            if (current_node == NULL)
-            {
-                printf("Syntax error\n");
-                return;
-            }
-            if (access(current_node->str[0], X_OK) == 0) // Check if the file is executable
-            {
-                current_node->type = CMD;
-            }
-            else
-            {
-                current_node->type = OUTFILE;
-            }
-        }
-        else if (strcmp(current_node->str[0], "<") == 0)
-        {
-          //  current_node->type = REDIRECTION;
-            current_node = current_node->next;
-            if (current_node == NULL)
-            {
-                printf("Syntax error\n");
-                return;
-            }
-            if (access(current_node->str[0], X_OK) == 0) // Check if the file is executable
-            {
-                current_node->type = CMD;
-            }
-            else
-            {
-                current_node->type = INFILE;
-            }
-        }
-        current_node = current_node->next;
-    }
-} */
-
 int is_command(char *command)
 {
     char *path;
@@ -270,27 +190,11 @@ int	main(int argc, char **argv, char **env)
         remove_quotes_from_tokens(gen.token);
         categorize_arguments(gen.token);
         print_tokens(&gen.token);
-        ft_exec_builtins(&gen);
-        //*****************************************************************
+		exec(&gen);       
+		//*****************************************************************
         free(input);
         free_tokens(gen.token);
         gen.token = NULL;
     }
     return (0);
-}
-
-int	cont_pipes(t_token **token)
-{
-    t_token	*aux;
-    int		i;
-
-    aux = *token;
-    i = 0;
-    while (aux != NULL)
-    {
-        if (aux->type == PIPE)
-            i++;
-        aux = aux->next;
-    }
-    return (i);
 }
