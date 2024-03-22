@@ -169,7 +169,7 @@ void		cmd_unset(t_general *gen);
 void		cmd_echo(t_general *gen);
 int			split_token(char *input, t_token **tokens);
 void		free_tokens(t_token *tokens);
-void		ft_exec_builtins(t_general *gen, t_token *tok, int fd);
+void		ft_exec_builtins(t_general *gen);
 int			count_txt(char **str);
 void		ft_print_export(t_general *gen);
 int			invalid_value(char **env);

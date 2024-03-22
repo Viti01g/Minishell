@@ -15,7 +15,7 @@ int	ft_built_pips(t_token *token, t_general *gen)
 		else
 			dup2(fd[WRITE], STDOUT_FILENO);
 		close(fd[WRITE]);
-		ft_exec_builtins(gen, token, STDOUT_FILENO);
+		ft_exec_builtins(gen);
 		exit(0);
 	}
 	close(fd[WRITE]);
@@ -28,7 +28,7 @@ int	prueba_builtin(t_token *token, t_general *gen)
 	{
 		if ((!token->next) && gen->outfile == NULL)
 		{
-			ft_exec_builtins(gen, token, STDOUT_FILENO);
+			ft_exec_builtins(gen);
 			return (STDIN_FILENO);
 		}
 		else
@@ -39,7 +39,7 @@ int	prueba_builtin(t_token *token, t_general *gen)
 }
 
 // ****** REVISAR EL FREE COMENTADO
-static void	 exec_cmds(t_token *tok, t_general *gen, int *fd)
+static void	 exec_cmds(t_token *tok, t_general *gen, int fd)
 {
 	int	i;
 
@@ -47,11 +47,18 @@ static void	 exec_cmds(t_token *tok, t_general *gen, int *fd)
 	while (tok && (++i <= gen->num_pipes))
 	{
 		if (ft_is_builtin(tok, gen) == 0)
-			*fd = prueba_builtin(tok, gen);
+			fd = prueba_builtin(tok, gen);
 		else if (i == gen->num_pipes)
-			ft_executer(tok, gen, *fd, STDOUT_FILENO);
+		{
+			printf("valor defd antes de else if de executer es %d\n", fd);
+			ft_executer(tok, gen, fd, STDOUT_FILENO);
+			printf("valor defd despues de else if de executer es %d\n", fd);
+		}
 		else
-			ft_exec_pipes(tok, gen, *fd);
+		{
+			fd = ft_exec_pipes(tok, gen, fd);
+			sleep(3);
+		}
 //		free(tok->path);
 		tok = tok->next;
 	}
@@ -72,12 +79,14 @@ void	exec(t_general	*gen)
 		return ;
 	}
 	check_redirs(aux, gen);
-	if (gen->delim)
+	if (*gen->delim)
 		heredoc(aux, gen);
+	aux = first;
 	fd = STDIN_FILENO;
-	exec_cmds(aux, gen, &fd);
+	exec_cmds(aux, gen, fd);
 	gen = reset_data(gen);
 	if (fd != STDIN_FILENO)
 		close(fd);
+	printf("se\n");
 	wait_child_process(gen->token, gen);
 }

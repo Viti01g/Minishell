@@ -56,11 +56,12 @@ void	wait_child_process(t_token *token, t_general *gen)
 		{
 			waitpid(gen->id, &status, 0);
 			if (WTERMSIG(status) == 3)
-				write(1, "Quit: 3", 7);
+				write(1, "Quit: 3\n", 8);
 		}
 	}
 	while (1)
 	{
+		printf("sea\n");
 		if (waitpid(-1, NULL, 0) == -1)
 			break ;
 	}
@@ -85,6 +86,8 @@ int check_cmd_path(t_token *tmp, t_general *gen)
 			aux->path = ft_strdup(aux->str[0]);
 		else if (buscar_var_env("PATH", gen->env) == NULL)
 			return (3); //cambiar para que devuelva un error de cmd.
+		else if (aux->type == D_FLCH_IZQ && aux->next)
+			aux->next->type = DELM;
 		else if (aux->str && aux->type == CMD && access(aux->str[0], X_OK) != 0)   // si es tipo comando, no tiene ruta completa (comando normal = ls, cat, etc)
 		{
 			if (check_no_path(&gen, &tmp, &aux) == -1)

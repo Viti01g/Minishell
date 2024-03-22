@@ -19,7 +19,7 @@ void	hd_delims(t_token *token, t_heredoc *hd)
 	}
 }
 
-void	put_content_hd(int index, t_heredoc *hd, t_general *data)
+void	put_content_hd(int index, t_heredoc *hd)
 {
 	char	*line;
 	char	*line_aux;
@@ -29,7 +29,7 @@ void	put_content_hd(int index, t_heredoc *hd, t_general *data)
 	{
 		if (ft_strncmp(line, hd[index].delimi, ft_strlen(line) + 1) == 0)
 			break ;
-		//line_aux = ft_expand(data, line);
+		line_aux = expander(line);
 		line = ft_strtrim(line_aux, "\"");
 		free(line_aux);
 		ft_putendl_fd(line, hd[index].fd[WRITE]);
@@ -50,7 +50,8 @@ void	do_here_doc(t_general *gen, pid_t pid)
 		sig_heredoc();
 		i = -1;
 		while (++i < gen->num_herdoc)
-			put_content_hd(i, gen->heredc, gen);
+			put_content_hd(i, gen->heredc);
+
 		while (++i < gen->num_herdoc)
 			free_struct(gen->heredc, i);
 		exit(1);

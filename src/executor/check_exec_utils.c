@@ -2,7 +2,8 @@
 
 void	check_infile(t_token *token, t_general *gen, int fd_inf)
 {
-	if (token->next && (gen->infile || gen->delim))
+	printf("fd_if es %d\n", fd_inf);
+	if (token->next && (!gen->infile || !gen->delim))
 	{
 		printf("si entra en el if de check infile\n");
 		if (gen->db_izq && ft_strcmp(gen->db_izq, "<<") == 0)
@@ -24,6 +25,7 @@ void	check_infile(t_token *token, t_general *gen, int fd_inf)
 	}
 	else if (fd_inf != STDIN_FILENO)
 	{
+		printf("entra en else if de infile\n");
 		dup2(fd_inf, STDIN_FILENO);
 		close(fd_inf);
 	}
@@ -33,11 +35,24 @@ void	check_outfile(t_token *token, t_general *gen, int fd_outf)
 {
 	if (fd_outf != STDOUT_FILENO)
 	{
+		printf("fd_outf es %d\n", fd_outf);
+		printf("entra en if de outfile\n");
 		dup2(fd_outf, STDOUT_FILENO);
+		{
+			perror("Error caca dup");
+			g_signal_code = 1;
+			exit(EXIT_FAILURE);
+		}
 		close(fd_outf);
+		{
+			perror("Error caca");
+			g_signal_code = 1;
+			exit(EXIT_FAILURE);
+		}
 	}
 	else if (token->next && (gen->outfile))
 	{
+		printf("entra en else if de outfile\n");
 		if (ft_strcmp(gen->dch, ">") == 0){
 			fd_outf = ft_open_files2(gen->outfile, 1);
 		}
@@ -77,7 +92,9 @@ void	ft_executer(t_token *token, t_general *gen, int fd_inf, int fd_outf)
 	if (gen->id == 0)
 	{
 		ft_sig_child();
+		printf("fd_inf antes de check infile es %d\n", fd_inf);
 		check_infile(token, gen, fd_inf);
+		printf("fd_inf despues de check infile es %d\n", fd_inf);
 		check_outfile(token, gen, fd_outf);
 		if (token->next && token->next->type == CMD)
 			close(gen->fd[READ]);
@@ -85,7 +102,7 @@ void	ft_executer(t_token *token, t_general *gen, int fd_inf, int fd_outf)
 			;//exec_exit_error(2, token->str[0]);
 		if (execve(token->path, token->str, gen->env) == -1)
 		{
-			printf("entro\n");
+			//printf("entrooon\n");
 			//free_view(gen);
 			g_signal_code = 127;
 			exit(1);

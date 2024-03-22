@@ -247,7 +247,7 @@ int main(int argc, char **argv, char **env)
 
 	(void)argv;
 	gen.token = NULL;
-	atexit(ft_leaks);
+	//atexit(ft_leaks);
 	ft_disable_ctrl_c_printing_chars();
 	view = "a";
 	init_vars(&gen, env);
@@ -275,9 +275,10 @@ int main(int argc, char **argv, char **env)
 			t_token *current = gen.token;
 			while (current != NULL)
 				current = current->next;
+			//printf("gen delim en main [%s]\n", gen.delim[0]);
 			exec(&gen);
 			//ft_exec_builtins(&gen, gen.token, STDOUT_FILENO);
-			free_tokens(gen.token);
+			//free_tokens(gen.token);
 			gen.token = gen.token->next;
 		}
 		free(view);

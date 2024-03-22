@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:06:20 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/02/28 22:02:07 by drubio-m         ###   ########.fr       */
+/*   Updated: 2024/03/21 16:53:23 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	ft_ex_echo(t_general *gen, int cond)
 {
 	int		i;
-	char	*var;
 	int		h;
 
 	i = 0;
