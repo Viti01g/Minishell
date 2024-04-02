@@ -20,7 +20,6 @@ void	ft_file_type(t_token *tmp, t_general *gen)
 			free(gen->outfile);
 			gen->outfile = NULL;
 			(gen)->outfile = (tmp)->str[0];
-			printf("outfile es %s\n", (gen)->outfile);
 		}
 	}
 }
@@ -48,7 +47,6 @@ int	ft_open_files(t_token *tok, int type)
 	int	fd;
 
 	fd = 0;
-	printf("GUARRA: %s\n", *tok->next->str);
 	if (type == 0)
 		fd = open(*tok->next->str, O_RDONLY, 0644);
 	else if (type == 1)

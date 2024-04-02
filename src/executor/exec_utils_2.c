@@ -61,7 +61,6 @@ void	wait_child_process(t_token *token, t_general *gen)
 	}
 	while (1)
 	{
-		printf("sea\n");
 		if (waitpid(-1, NULL, 0) == -1)
 			break ;
 	}
@@ -91,10 +90,7 @@ int check_cmd_path(t_token *tmp, t_general *gen)
 		else if (aux->str && aux->type == CMD && access(aux->str[0], X_OK) != 0)   // si es tipo comando, no tiene ruta completa (comando normal = ls, cat, etc)
 		{
 			if (check_no_path(&gen, &tmp, &aux) == -1)
-			{
-				printf("tus mu\n");
 				return (-1);
-			}
 		}	
 		aux = aux->next;
 	}

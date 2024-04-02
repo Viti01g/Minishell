@@ -247,6 +247,8 @@ int main(int argc, char **argv, char **env)
 
 	(void)argv;
 	gen.token = NULL;
+	gen.infile = NULL;
+	gen.delim = NULL;
 	//atexit(ft_leaks);
 	ft_disable_ctrl_c_printing_chars();
 	view = "a";
@@ -261,13 +263,10 @@ int main(int argc, char **argv, char **env)
 			break;
 		view = ft_strtrim(view, " \n\t\r\v\f");
 		check_quotes(view);
-		//********
 		view = expander(view);
-		//*****
 		gen.num_pipes = split_token(view, &gen.token);
 		remove_quotes_from_tokens(gen.token);
 		categorize_arguments(gen.token);
-		//print_tokens(&gen.token);
 		if (ft_strlen(view) != 0)
 		{
 			gen.args = count_txt(gen.token->str);
@@ -275,10 +274,8 @@ int main(int argc, char **argv, char **env)
 			t_token *current = gen.token;
 			while (current != NULL)
 				current = current->next;
-			//printf("gen delim en main [%s]\n", gen.delim[0]);
 			exec(&gen);
-			//ft_exec_builtins(&gen, gen.token, STDOUT_FILENO);
-			//free_tokens(gen.token);
+			//free_tokens(gen.token);	// Da seg_fault
 			gen.token = gen.token->next;
 		}
 		free(view);

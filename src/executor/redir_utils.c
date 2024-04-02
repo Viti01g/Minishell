@@ -42,7 +42,6 @@ void	minor_sign(t_token *tok, t_general *gen)
 		else if (tok->type == D_FLCH_IZQ)
 		{
 			gen->db_izq = tok->str[0];
-			printf("else if de check_redir\n");
 			gen->delim = tok->next->str;
 		}
 	}

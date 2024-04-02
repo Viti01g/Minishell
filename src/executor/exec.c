@@ -49,16 +49,9 @@ static void	 exec_cmds(t_token *tok, t_general *gen, int fd)
 		if (ft_is_builtin(tok, gen) == 0)
 			fd = prueba_builtin(tok, gen);
 		else if (i == gen->num_pipes)
-		{
-			printf("valor defd antes de else if de executer es %d\n", fd);
 			ft_executer(tok, gen, fd, STDOUT_FILENO);
-			printf("valor defd despues de else if de executer es %d\n", fd);
-		}
 		else
-		{
 			fd = ft_exec_pipes(tok, gen, fd);
-			sleep(3);
-		}
 //		free(tok->path);
 		tok = tok->next;
 	}
@@ -79,7 +72,7 @@ void	exec(t_general	*gen)
 		return ;
 	}
 	check_redirs(aux, gen);
-	if (*gen->delim)
+	if (gen->delim && *gen->delim)
 		heredoc(aux, gen);
 	aux = first;
 	fd = STDIN_FILENO;
@@ -87,6 +80,5 @@ void	exec(t_general	*gen)
 	gen = reset_data(gen);
 	if (fd != STDIN_FILENO)
 		close(fd);
-	printf("se\n");
 	wait_child_process(gen->token, gen);
 }
