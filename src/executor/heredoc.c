@@ -1,4 +1,16 @@
-# include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/10 13:34:42 by vruiz-go          #+#    #+#             */
+/*   Updated: 2024/04/10 13:35:03 by vruiz-go         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
 
 void	hd_delims(t_token *token, t_heredoc *hd)
 {
@@ -51,7 +63,6 @@ void	do_here_doc(t_general *gen, pid_t pid)
 		i = -1;
 		while (++i < gen->num_herdoc)
 			put_content_hd(i, gen->heredc);
-
 		while (++i < gen->num_herdoc)
 			free_struct(gen->heredc, i);
 		exit(1);

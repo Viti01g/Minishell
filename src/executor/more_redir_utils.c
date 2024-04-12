@@ -1,4 +1,16 @@
-# include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   more_redir_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/10 13:35:45 by vruiz-go          #+#    #+#             */
+/*   Updated: 2024/04/10 17:23:44 by vruiz-go         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
 
 void	ft_file_type(t_token *tmp, t_general *gen)
 {
@@ -23,6 +35,7 @@ void	ft_file_type(t_token *tmp, t_general *gen)
 		}
 	}
 }
+
 int	ft_open_files2(char *str, int type)
 {
 	int	fd;

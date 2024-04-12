@@ -275,9 +275,11 @@ int main(int argc, char **argv, char **env)
 			while (current != NULL)
 				current = current->next;
 			exec(&gen);
-			//free_tokens(gen.token);	// Da seg_fault
+			//ft_free_tokens(gen.token);	// Da seg_fault
 			gen.token = gen.token->next;
+			//system("leaks -q minishell");
 		}
+
 		free(view);
 		gen.token = NULL;
 	}

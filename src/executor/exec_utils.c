@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/10 13:33:42 by vruiz-go          #+#    #+#             */
+/*   Updated: 2024/04/10 13:33:46 by vruiz-go         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	pos_path(char **env)
@@ -68,7 +80,8 @@ int	check_no_path(t_general **gen, t_token **toke, t_token **aux)
 	if (!(*aux)->path)
 	{
 		str = (*aux)->str[0];
-		return (no_path(toke, aux), -1);
+		return (no_path(toke, aux), ft_put_msg((*gen)->token->str[0],
+				"command not found\n"), -1);
 	}
 	return (0);
 }
