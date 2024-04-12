@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_utils_2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/10 13:32:34 by vruiz-go          #+#    #+#             */
+/*   Updated: 2024/04/10 15:46:47 by vruiz-go         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_token	*copy_no_pipe(t_token *token)
@@ -56,7 +68,7 @@ void	wait_child_process(t_token *token, t_general *gen)
 		{
 			waitpid(gen->id, &status, 0);
 			if (WTERMSIG(status) == 3)
-				write(1, "Quit: 3", 7);
+				write(1, "Quit: 3\n", 8);
 		}
 	}
 	while (1)
@@ -67,33 +79,27 @@ void	wait_child_process(t_token *token, t_general *gen)
 	sig_parent();
 }
 
-int check_cmd_path(t_token *tmp, t_general *gen)
+int	check_cmd_path(t_token *tmp, t_general *gen)
 {
-	t_token	*aux;
+	t_token	*au;
 
-	aux = tmp;
-	while (aux != NULL)
+	au = tmp;
+	while (au != NULL)
 	{
-		if (check_if_builtin(aux->str[0]) == 1)
-		{
-			if (aux->next)
-				aux = aux->next;
-			else
-				return (0);
-		}
-		if (access(aux->str[0], X_OK) == 0)
-			aux->path = ft_strdup(aux->str[0]);
+		if (check_some_built(au) == 0)
+			return (0);
+		if (access(au->str[0], X_OK) == 0)
+			au->path = ft_strdup(au->str[0]);
 		else if (buscar_var_env("PATH", gen->env) == NULL)
-			return (3); //cambiar para que devuelva un error de cmd.
-		else if (aux->str && aux->type == CMD && access(aux->str[0], X_OK) != 0)   // si es tipo comando, no tiene ruta completa (comando normal = ls, cat, etc)
+			return (ft_put_msg(gen->token->str[0], "command not found\n"), -1);
+		else if (au->type == D_FLCH_IZQ && au->next)
+			au->next->type = DELM;
+		else if (au->str && au->type == CMD && access(au->str[0], X_OK) != 0)
 		{
-			if (check_no_path(&gen, &tmp, &aux) == -1)
-			{
-				printf("tus mu\n");
+			if (check_no_path(&gen, &tmp, &au) == -1)
 				return (-1);
-			}
-		}	
-		aux = aux->next;
+		}
+		au = au->next;
 	}
 	return (0);
 }

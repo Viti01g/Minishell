@@ -1,4 +1,16 @@
-# include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redir_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/10 13:36:01 by vruiz-go          #+#    #+#             */
+/*   Updated: 2024/04/10 17:22:27 by vruiz-go         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
 
 void	mayor_sign(t_token *tok, t_general *gen)
 {
@@ -35,7 +47,8 @@ void	minor_sign(t_token *tok, t_general *gen)
 				gen->infile = tok->next->str[0];
 			if (access(gen->infile, F_OK) == -1)
 			{
-				return ; //error de infile no existe
+				ft_error("Error opening infile");
+				g_signal_code = 1;
 				gen->infile = NULL;
 			}
 		}

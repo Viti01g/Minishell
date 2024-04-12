@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/10 13:22:07 by vruiz-go          #+#    #+#             */
+/*   Updated: 2024/04/12 17:48:46 by vruiz-go         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_built_pips(t_token *token, t_general *gen)
@@ -15,7 +27,7 @@ int	ft_built_pips(t_token *token, t_general *gen)
 		else
 			dup2(fd[WRITE], STDOUT_FILENO);
 		close(fd[WRITE]);
-		ft_exec_builtins(gen, token, STDOUT_FILENO);
+		ft_exec_builtins(gen);
 		exit(0);
 	}
 	close(fd[WRITE]);
@@ -28,7 +40,7 @@ int	prueba_builtin(t_token *token, t_general *gen)
 	{
 		if ((!token->next) && gen->outfile == NULL)
 		{
-			ft_exec_builtins(gen, token, STDOUT_FILENO);
+			ft_exec_builtins(gen);
 			return (STDIN_FILENO);
 		}
 		else
@@ -38,8 +50,34 @@ int	prueba_builtin(t_token *token, t_general *gen)
 	return (STDIN_FILENO);
 }
 
-// !MIRAR EL FREE COMENTADO
-static void	exec_cmds(t_token *tok, t_general *gen, int *fd)
+static pid_t	ft_single(t_token *token, t_general *gen, int fdin, int fdout)
+{
+	pid_t	pd;
+
+	pd = fork();
+	if (pd == -1)
+		ft_error("fork() error");
+	if (pd == 0)
+	{
+		check_infile(token, gen, fdin);
+		check_outfile(token, gen, fdout);
+		check_some_exec(token, gen);
+		if (fdin > 0)
+		{
+			dup2(fdin, STDIN_FILENO);
+			close(fdin);
+		}
+		if (fdout > 1)
+			dup2(fdout, STDOUT_FILENO);
+		if (execve(token->path, token->str, gen->env) == -1)
+			exit(1);
+	}
+	close(fdin);
+	return (pd);
+}
+
+// ****** REVISAR EL FREE COMENTADO
+static void	exec_cmds(t_token *tok, t_general *gen, int fd)
 {
 	int	i;
 
@@ -47,12 +85,14 @@ static void	exec_cmds(t_token *tok, t_general *gen, int *fd)
 	while (tok && (++i <= gen->num_pipes))
 	{
 		if (ft_is_builtin(tok, gen) == 0)
-			*fd = prueba_builtin(tok, gen);
+			fd = prueba_builtin(tok, gen);
+		else if (i == gen->num_pipes && gen->num_pipes == 0)
+			ft_executer(tok, gen, fd, STDOUT_FILENO);
 		else if (i == gen->num_pipes)
-			ft_executer(tok, gen, *fd, STDOUT_FILENO);
+			fd = ft_single(tok, gen, fd, STDOUT_FILENO);
 		else
-			ft_exec_pipes(tok, gen, *fd);
-		free(tok->path);
+			fd = ft_exec_pipes(tok, gen, fd);
+		//free(tok->path);
 		tok = tok->next;
 	}
 }
@@ -65,17 +105,17 @@ void	exec(t_general	*gen)
 
 	aux = copy_no_pipe(gen->token);
 	first = aux;
-	int i = check_cmd_path(aux, gen); // Cambiar cuando diego meta los tipo inf, out, cmd.
-	if (i != 0)
+	if (check_cmd_path(aux, gen) != 0)
 	{
 		free_tokens_no_mtx(aux);
 		return ;
 	}
 	check_redirs(aux, gen);
-	if (gen->delim)
+	if (gen->delim && *gen->delim)
 		heredoc(aux, gen);
+	aux = first;
 	fd = STDIN_FILENO;
-	exec_cmds(aux, gen, &fd);
+	exec_cmds(aux, gen, fd);
 	gen = reset_data(gen);
 	if (fd != STDIN_FILENO)
 		close(fd);

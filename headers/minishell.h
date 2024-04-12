@@ -168,8 +168,9 @@ void		cmd_export(t_general *gen);
 void		cmd_unset(t_general *gen);
 void		cmd_echo(t_general *gen);
 int			split_token(char *input, t_token **tokens);
+void		ft_free_tokens(t_token *tokens);
 void		free_tokens(t_token *tokens);
-void		ft_exec_builtins(t_general *gen, t_token *tok, int fd);
+void		ft_exec_builtins(t_general *gen);
 int			count_txt(char **str);
 void		ft_print_export(t_general *gen);
 int			invalid_value(char **env);
@@ -204,6 +205,10 @@ void		heredoc(t_token *token, t_general *gen);
 void		count_heredocs(t_token *token, t_general *gen);
 void		free_struct(t_heredoc *hd, int nb_hd);
 void		sig_heredoc(void);
+void		ft_per(char *var, char *s, int i);
+void		ft_put_msg(char *var, char *s);
+void		check_some_exec(t_token *token, t_general *gen);
+int			check_some_built(t_token *aux);
 
 // MORRALLA
 void	ft_leaks(void);
