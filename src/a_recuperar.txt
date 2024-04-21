@@ -16,7 +16,113 @@ void	view_prompt(void)
 
 
 
-/* int is_command(char *command)
+/* int	main(int argc, char **argv, char **env)
+{
+	char		*input;
+	t_general	gen;
+
+	(void)argv;
+	(void)argc;
+//  atexit(ft_leaks);
+	gen.token = NULL;
+	init_vars(&gen, env);
+	while (1)
+	{
+		input = readline("\e[1;32mminishell$ \e[0m");
+		if (!input || !ft_strcmp(input, "exit"))
+			break ;
+		check_quotes(input);
+		input = expander(input);
+		split_token(input, &gen.token);
+		ft_exec_builtins(&gen);
+		free(input);
+		free_tokens(gen.token);
+		gen.token = NULL;
+	}
+	return (0);
+} */
+
+/* void categorize_arguments(t_token *tokens)
+{
+	t_token *current_node;
+
+	current_node = tokens;
+	while (current_node != NULL)
+	{
+		if (strcmp(current_node->str[0], ">") == 0 || strcmp(current_node->str[0], ">>") == 0)
+		{
+		  //  current_node->type = FLCH_DRCH;
+			current_node = current_node->next;
+			if (current_node == NULL)
+			{
+				printf("Syntax error\n");
+				return;
+			}
+			current_node->type = OUTFILE;
+		}
+		else if (strcmp(current_node->str[0], "<") == 0 || strcmp(current_node->str[0], ">>") == 0)
+		{
+			current_node->type = FLCH_IZQ;
+			current_node = current_node->next;
+			if (current_node == NULL)
+			{
+				printf("Syntax error\n");
+				return;
+			}
+			current_node->type = INFILE;
+		}
+		current_node = current_node->next;
+	}
+} */
+
+/* void categorize_arguments(t_token *tokens)
+{
+	t_token *current_node;
+
+	current_node = tokens;
+	while (current_node != NULL)
+	{
+		if (strcmp(current_node->str[0], ">") == 0 || strcmp(current_node->str[0], ">>") == 0)
+		{
+			//current_node->type = REDIRECTION;
+			current_node = current_node->next;
+			if (current_node == NULL)
+			{
+				printf("Syntax error\n");
+				return;
+			}
+			if (access(current_node->str[0], X_OK) == 0) // Check if the file is executable
+			{
+				current_node->type = CMD;
+			}
+			else
+			{
+				current_node->type = OUTFILE;
+			}
+		}
+		else if (strcmp(current_node->str[0], "<") == 0)
+		{
+		  //  current_node->type = REDIRECTION;
+			current_node = current_node->next;
+			if (current_node == NULL)
+			{
+				printf("Syntax error\n");
+				return;
+			}
+			if (access(current_node->str[0], X_OK) == 0) // Check if the file is executable
+			{
+				current_node->type = CMD;
+			}
+			else
+			{
+				current_node->type = INFILE;
+			}
+		}
+		current_node = current_node->next;
+	}
+} */
+
+int is_command(char *command)
 {
 	char *path;
 	char *dir;
@@ -25,10 +131,14 @@ void	view_prompt(void)
 
 	path = getenv("PATH");
 	if (path == NULL)
+	{
 		return 0;
+	}
 	path = strdup(path);
 	if (path == NULL)
+	{
 		return 0;
+	}
 	for (dir = strtok_r(path, ":", &saveptr); dir != NULL; dir = strtok_r(NULL, ":", &saveptr))
 	{
 		full_path = malloc(strlen(dir) + 1 + strlen(command) + 1);
@@ -50,7 +160,7 @@ void	view_prompt(void)
 	}
 	free(path);
 	return 0;
-} */
+}
 
 void categorize_arguments(t_token *tokens)
 {
@@ -65,12 +175,16 @@ void categorize_arguments(t_token *tokens)
 			if (current_node == NULL)
 			{
 				printf("Syntax error\n");
-				return ;
+				return;
 			}
 			if (is_command(current_node->str[0]) || access(current_node->str[0], X_OK) == 0) // Check if the file is a command
+			{
 				current_node->type = CMD;
+			}
 			else
+			{
 				current_node->type = OUTFILE;
+			}
 		}
 		else if (strcmp(current_node->str[0], "<") == 0)
 		{
@@ -78,18 +192,54 @@ void categorize_arguments(t_token *tokens)
 			if (current_node == NULL)
 			{
 				printf("Syntax error\n");
-				return ;
+				return;
 			}
 			if (is_command(current_node->str[0]) || access(current_node->str[0], X_OK) == 0) // Check if the file is a command
+			{
 				current_node->type = CMD;
+			}
 			else
+			{
 				current_node->type = INFILE;
+			}
 		}
 		current_node = current_node->next;
 	}
 }
 
+/* int	main(int argc, char **argv, char **env)
+{
+	char		*input;
+	t_general	gen;
 
+	(void)argv;
+	(void)argc;
+//  atexit(ft_leaks);
+	gen.token = NULL;
+	init_vars(&gen, env);
+	while (1)
+	{
+		input = readline("\e[1;32mminishell$ \e[0m");
+		if (!input)
+			break ;
+		check_quotes(input);
+		input = expander(input);
+		split_token(input, &gen.token);
+		//-------------------------------------------------------------/
+		//------ Añadidas para probar lo de eliminar comillas, luego se unifica
+		//----- Recuerda que print_tokens está comentada en split_token
+		remove_quotes_from_tokens(gen.token);
+		categorize_arguments(gen.token);
+		print_tokens(&gen.token);
+		//ft_exec_builtins(&gen);
+		exec(&gen);
+		//-------------------------------------------------------------/
+		free(input);
+		free_tokens(gen.token);
+		gen.token = NULL;
+	}
+	return (0);
+} */
 int main(int argc, char **argv, char **env)
 {
 	char		*view;
@@ -99,7 +249,7 @@ int main(int argc, char **argv, char **env)
 	gen.token = NULL;
 	gen.infile = NULL;
 	gen.delim = NULL;
-//	atexit(ft_leaks);
+	//atexit(ft_leaks);
 	ft_disable_ctrl_c_printing_chars();
 	view = "a";
 	init_vars(&gen, env);
@@ -124,10 +274,10 @@ int main(int argc, char **argv, char **env)
 			t_token *current = gen.token;
 			while (current != NULL)
 				current = current->next;
-			print_tokens(&gen.token);
-		//	exec(&gen);
-			ft_free_tokens(gen.token);	// Da seg_fault
+			exec(&gen);
+			//ft_free_tokens(gen.token);	// Da seg_fault
 			gen.token = gen.token->next;
+			//system("leaks -q minishell");
 		}
 
 		free(view);

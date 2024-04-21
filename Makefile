@@ -1,6 +1,7 @@
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -I ./headers -I ./libft/libft.h -g3 -fsanitize=address
+#CFLAGS = -Wall -Werror -Wextra -I ./headers -I ./libft/libft.h -g3 -fsanitize=address
+CFLAGS = -I ./headers -I ./libft/libft.h #-g3 -fsanitize=address
 
 #Cosas realine mac casa
 
@@ -13,11 +14,12 @@ RM = rm -f
 TKN_SRC = tokenizer.c token_utils.c token_memory.c token_operators.c quotes.c quotes_utils.c delete_quotes.c
 SIG_SRC = signal.c signal_child.c signal_parent.c
 BUI_SRC = cd.c echo.c env.c exec_builtins.c exit.c export.c pwd.c unset.c export_utils.c
-SRC_SRC = init_utils.c init_vars.c main.c parsing.c probar_cosas.c utils.c more_utils.c
+SRC_SRC = init_utils.c init_vars.c main.c parsing.c utils.c more_utils.c
 EXP_SRC = expander.c expander_utils.c
 EXE_SRC = exec_utils.c exec.c exec_utils_2.c redir_utils.c more_redir_utils.c more_exec_utils.c check_exec_utils.c heredoc.c her_utils.c
+PRS_SRC = is_command.c
 
-SRC = $(TKN_SRC) $(SIG_SRC) $(SRC_SRC) $(BUI_SRC) $(EXP_SRC) $(EXE_SRC) 
+SRC = $(TKN_SRC) $(SIG_SRC) $(SRC_SRC) $(BUI_SRC) $(EXP_SRC) $(EXE_SRC) $(PRS_SRC)
 
 INCLUDES = ./headers/minishell.h ./libft/libft.h
 LIBFT_DIR = libft/
@@ -30,6 +32,7 @@ SIG_DIR = $(SRC_DIR)signals/
 TKN_DIR = $(SRC_DIR)tokenizer/
 BUI_DIR = $(SRC_DIR)builtins/
 EXP_DIR = $(SRC_DIR)expander/
+PRS_DIR = $(SRC_DIR)parser/
 OBJ_DIR = ./obj/
 
 OBJ_FILES = $(SRC:.c=.o)
@@ -77,6 +80,9 @@ $(OBJ_DIR)%.o: $(EXE_DIR)%.c
 	@$(CC) $(CFLAGS) $(RLINE_INC) $(CPPFLAGS) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(EXP_DIR)%.c
+	@$(CC) $(CFLAGS) $(RLINE_INC) $(CPPFLAGS) -c $< -o $@
+
+$(OBJ_DIR)%.o: $(PRS_DIR)%.c
 	@$(CC) $(CFLAGS) $(RLINE_INC) $(CPPFLAGS) -c $< -o $@
 
 # basic library compiled

@@ -23,6 +23,7 @@
 # include "../libft/libft.h"
 # include "tokenizer.h"
 # include "expander.h"
+# include "parser.h"
 
 # define GREEN "\e[1;32m"
 # define RESET "\e[0m"
