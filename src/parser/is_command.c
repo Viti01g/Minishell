@@ -4,7 +4,7 @@ char* get_path()
 {
     char *path;
 
-	path = getenv("PATH");
+    path = getenv("PATH");
     if (path == NULL)
         return NULL;
     path = ft_strdup(path);
@@ -35,62 +35,45 @@ int check_command_access(char *full_path)
         return (1);
     return (0);
 }
-
-/* int is_command(char *command)
+int process_dirs(char **dirs, char *path, char *command)
 {
-    char *path;
-    char *dir;
     char *full_path;
-    char *saveptr;
+    int i = 0;
 
-    path = get_path();
-    if (path == NULL)
-        return 0;
-    for (dir = strtok_r(path, ":", &saveptr); dir != NULL; dir = strtok_r(NULL, ":", &saveptr))
-	{
-        full_path = create_full_path(dir, command);
+    while (dirs[i] != NULL)
+    {
+        full_path = create_full_path(dirs[i], command);
         if (full_path == NULL) {
             free(path);
+            free(dirs);
             return 0;
         }
         if (check_command_access(full_path)) {
             free(full_path);
             free(path);
+            free(dirs);
             return 1;
         }
         free(full_path);
+        i++;
     }
     free(path);
+    free(dirs);
     return (0);
-} */
+}
 
 int is_command(char *command)
 {
     char *path;
-    char *dir;
-    char *full_path;
-    char *saveptr;
+    char **dirs;
 
     path = get_path();
     if (path == NULL)
         return 0;
-    dir = strtok_r(path, ":", &saveptr);
-    while (dir != NULL)
-    {
-        full_path = create_full_path(dir, command);
-        if (full_path == NULL) {
-            free(path);
-            return 0;
-        }
-        if (check_command_access(full_path)) {
-            free(full_path);
-            free(path);
-            return 1;
-        }
-        free(full_path);
-        dir = strtok_r(NULL, ":", &saveptr);
+    dirs = ft_split(path, ':');
+    if (dirs == NULL) {
+        free(path);
+        return 0;
     }
-    free(path);
-    return (0);
+    return process_dirs(dirs, path, command);
 }
-
