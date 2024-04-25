@@ -52,7 +52,9 @@ void	until_single(char *input, int *i, int *single_flag)
 	}
 }
 
-void	check_quotes(char *input)
+
+
+int	check_quotes(char *input)
 {
 	int	double_flag;
 	int	single_flag;
@@ -67,7 +69,12 @@ void	check_quotes(char *input)
 		until_single(input, &i, &single_flag);
 	}
 	if (double_flag || single_flag)
-		ft_error("Quotes are not closed");
+	{
+		error_quote(0);
+		return 0;
+//		ft_error("Quotes are not closed");
+	}
+	return 1;
 }
 /* 
 int	main(void)

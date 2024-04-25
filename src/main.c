@@ -73,21 +73,19 @@ int main(int argc, char **argv, char **env)
 		view = readline("\e[1;32mminishell$ \e[0m");
 		if (!view)
 			break;
-		//view = ft_strtrim(view, " \n\t\r\v\f");
-		check_quotes(view);
-		view = expander(view);
-		gen.num_pipes = split_token(view, &gen.token);
-		remove_quotes_from_tokens(gen.token);
-		categorize_arguments(gen.token);
-		if (ft_strlen(view) != 0)
+		if (ft_strlen(view) != 0 && check_quotes(view) == 1)
 		{
+			view = expander(view);
+			gen.num_pipes = split_token(view, &gen.token);
+			remove_quotes_from_tokens(gen.token);
+			categorize_arguments(gen.token);
 			gen.args = count_txt(gen.token->str);
 			add_history(view);
 			t_token *current = gen.token;
 			while (current != NULL)
 				current = current->next;
-			print_tokens(&gen.token);
-		//	exec(&gen);
+		//	print_tokens(&gen.token);
+			exec(&gen);
 			ft_free_tokens(gen.token);// Da seg_fault
 			gen.token = gen.token->next;
 		}
