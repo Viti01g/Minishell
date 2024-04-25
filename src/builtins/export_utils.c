@@ -1,6 +1,18 @@
-# include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/24 16:48:19 by vruiz-go          #+#    #+#             */
+/*   Updated: 2024/04/24 16:54:18 by vruiz-go         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static char **ft_ord_alf(char **env)
+#include "minishell.h"
+
+static char	**ft_ord_alf(char **env)
 {
 	int		i;
 	int		j;

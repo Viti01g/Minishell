@@ -6,7 +6,7 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:22:07 by vruiz-go          #+#    #+#             */
-/*   Updated: 2024/04/12 17:48:46 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/04/24 18:59:21 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static void	exec_cmds(t_token *tok, t_general *gen, int fd)
 			fd = ft_single(tok, gen, fd, STDOUT_FILENO);
 		else
 			fd = ft_exec_pipes(tok, gen, fd);
-		//free(tok->path);
+		free(tok->path);
 		tok = tok->next;
 	}
 }
@@ -103,6 +103,7 @@ void	exec(t_general	*gen)
 	t_token	*aux;
 	int		fd;
 
+	gen->token->path = NULL;
 	aux = copy_no_pipe(gen->token);
 	first = aux;
 	if (check_cmd_path(aux, gen) != 0)
@@ -117,6 +118,7 @@ void	exec(t_general	*gen)
 	fd = STDIN_FILENO;
 	exec_cmds(aux, gen, fd);
 	gen = reset_data(gen);
+	free_tokens_no_mtx(first);
 	if (fd != STDIN_FILENO)
 		close(fd);
 	wait_child_process(gen->token, gen);
