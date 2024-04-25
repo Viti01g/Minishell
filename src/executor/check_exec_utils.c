@@ -6,7 +6,7 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 12:38:44 by vruiz-go          #+#    #+#             */
-/*   Updated: 2024/04/10 18:42:55 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/04/24 16:28:17 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,5 @@ void	ft_executer(t_token *token, t_general *gen, int fd_inf, int fd_outf)
 			g_signal_code = 127;
 			exit(1);
 		}
-		//free_view(gen);
 	}
 }

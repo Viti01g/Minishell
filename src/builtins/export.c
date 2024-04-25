@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/24 16:47:26 by vruiz-go          #+#    #+#             */
+/*   Updated: 2024/04/24 16:53:39 by vruiz-go         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -88,14 +98,14 @@ char	**ft_change_env(char **env, char *str, enum e_expt flag)
 
 void	cmd_export(t_general *gen)
 {
-	int	i;
+	int			i;
 	enum e_expt	result;
-	char **env;
-	int	flag;
+	char		**env;
+	int			flag;
 
 	i = -1;
 	if (gen->args == 1)
-		return(ft_print_export(gen));
+		return (ft_print_export(gen));
 	while (gen->token->str[++i])
 	{
 		env = ft_cpy_env(gen->env);

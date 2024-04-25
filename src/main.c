@@ -252,16 +252,16 @@ int main(int argc, char **argv, char **env)
 	//atexit(ft_leaks);
 	ft_disable_ctrl_c_printing_chars();
 	view = "a";
-	init_vars(&gen, env);
 	if (argc < 1)
 		exit(EXIT_FAILURE);
+	init_vars(&gen, env);
 	while (1)
 	{
 		ft_signals();
 		view = readline("\e[1;32mminishell$ \e[0m");
 		if (!view)
 			break;
-		view = ft_strtrim(view, " \n\t\r\v\f");
+		//view = ft_strtrim(view, " \n\t\r\v\f");
 		check_quotes(view);
 		view = expander(view);
 		gen.num_pipes = split_token(view, &gen.token);
@@ -275,15 +275,14 @@ int main(int argc, char **argv, char **env)
 			while (current != NULL)
 				current = current->next;
 			exec(&gen);
-			//ft_free_tokens(gen.token);	// Da seg_fault
+			ft_free_tokens(gen.token);// Da seg_fault
 			gen.token = gen.token->next;
-			//system("leaks -q minishell");
 		}
-
 		free(view);
 		gen.token = NULL;
+		//system("leaks -q minishell");
 	}
-	return (EXIT_SUCCESS); 
+	return (EXIT_SUCCESS);
 }
 
 /* int	main(int argc, char **argv, char **env)

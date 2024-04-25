@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/24 17:05:24 by vruiz-go          #+#    #+#             */
+/*   Updated: 2024/04/24 17:09:51 by vruiz-go         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -111,7 +123,7 @@ typedef struct s_inf
 	struct termios	termios;		//disable (ctrl + c) printing ^C
 }	t_inf;	
 
-int				g_signal_code;
+int	g_signal_code;
 
 typedef struct s_heredoc
 {
@@ -144,8 +156,8 @@ typedef struct s_general
 	t_inf		*inf;
 }	t_general;
 
-t_general	g_gen;
-int			g_signal_code;
+//t_general	g_gen;
+//int			g_signal_code;
 
 void		ft_signals(void);
 void		ft_signal_interrupt(void);
@@ -211,11 +223,10 @@ void		check_some_exec(t_token *token, t_general *gen);
 int			check_some_built(t_token *aux);
 
 // MORRALLA
-void	ft_leaks(void);
-void	ft_error(char *error);
-int		ft_open_files2(char *str, int type);
+void		ft_leaks(void);
+void		ft_error(char *error);
+int			ft_open_files2(char *str, int type);
 
 // Other libraries need to go after the structs
-
 
 #endif
