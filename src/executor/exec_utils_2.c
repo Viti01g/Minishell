@@ -6,7 +6,7 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:32:34 by vruiz-go          #+#    #+#             */
-/*   Updated: 2024/04/24 19:02:46 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:05:05 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,17 @@ t_token	*copy_no_pipe(t_token *token)
 	return (new_head);
 }
 
-void	set_nodes(t_token **new_head, t_token **new_node, t_token **current_new)
+void	set_nodes(t_token **new_head, t_token **nw_nod, t_token **cur_new)
 {
 	if ((*new_head) == NULL)
 	{
-		(*new_head) = (*new_node);
-		(*current_new) = (*new_node);
+		(*new_head) = (*nw_nod);
+		(*cur_new) = (*nw_nod);
 	}
 	else
 	{
-		(*current_new)->next = (*new_node);
-		(*current_new) = (*new_node);
+		(*cur_new)->next = (*nw_nod);
+		(*cur_new) = (*nw_nod);
 	}
 }
 
@@ -91,7 +91,7 @@ int	check_cmd_path(t_token *tmp, t_general *gen)
 		if (access(au->str[0], X_OK) == 0)
 			au->path = ft_strdup(au->str[0]);
 		else if (buscar_var_env("PATH", gen->env) == NULL)
-			return (ft_put_msg(gen->token->str[0], "command not found\n"), -1);
+			return (ft_put_msg(au->str[0], "command not found\n"), -1);
 		else if (au->type == D_FLCH_IZQ && au->next)
 			au->next->type = DELM;
 		else if (au->str && au->type == CMD && access(au->str[0], X_OK) != 0)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/25 22:01:23 by vruiz-go          #+#    #+#             */
+/*   Updated: 2024/04/25 22:01:25 by vruiz-go         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	ft_leaks(void)
@@ -31,10 +43,10 @@ int	split_token(char *input, t_token **tokens)
 	}
 	if (j < i)
 		process_simple_operator(input, tokens, &i, &j);
-	//print_tokens(tokens);
 	return (cont_pipes(tokens));
 }
 
+	//print_tokens(tokens);
 /* int	main(void)
 {
 	char	*input;
