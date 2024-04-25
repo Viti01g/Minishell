@@ -1,38 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   categorize_arguments.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/25 19:03:55 by vruiz-go          #+#    #+#             */
+/*   Updated: 2024/04/25 19:03:58 by vruiz-go         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void categorize_arguments(t_token *tokens)
 {
-	t_token *current_node;
+	t_token *cur;
 
-	current_node = tokens;
-	while (current_node != NULL)
+	cur = tokens;
+	while (cur != NULL)
 	{
-		if (strcmp(current_node->str[0], ">") == 0 || strcmp(current_node->str[0], ">>") == 0)
+		if (strcmp(cur->str[0], ">") == 0 || strcmp(cur->str[0], ">>") == 0)
 		{
-			current_node = current_node->next;
-			if (current_node == NULL)
+			cur = cur->next;
+			if (cur == NULL)
 			{
 				printf("Syntax error\n");
 				return ;
 			}
-			if (is_command(current_node->str[0]) || access(current_node->str[0], X_OK) == 0) // Check if the file is a command
-				current_node->type = CMD;
+			if (is_command(cur->str[0]) || access(cur->str[0], X_OK) == 0)
+				cur->type = CMD;
 			else
-				current_node->type = OUTFILE;
+				cur->type = OUTFILE;
 		}
-		else if (strcmp(current_node->str[0], "<") == 0)
+		else if (strcmp(cur->str[0], "<") == 0)
 		{
-			current_node = current_node->next;
-			if (current_node == NULL)
+			cur = cur->next;
+			if (cur == NULL)
 			{
 				printf("Syntax error\n");
 				return ;
 			}
-			if (is_command(current_node->str[0]) || access(current_node->str[0], X_OK) == 0) // Check if the file is a command
-				current_node->type = CMD;
+			if (is_command(cur->str[0]) || access(cur->str[0], X_OK) == 0)
+				cur->type = CMD;
 			else
-				current_node->type = INFILE;
+				cur->type = INFILE;
 		}
-		current_node = current_node->next;
+		cur = cur->next;
 	}
 }
