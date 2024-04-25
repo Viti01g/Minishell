@@ -6,7 +6,7 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:40:13 by vruiz-go          #+#    #+#             */
-/*   Updated: 2024/04/24 19:05:27 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/04/25 19:33:48 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,15 @@ static void	ft_new_pwd(t_general *gen, char *old_pwd, char *new_pwd)
 	ft_update(gen);
 }
 
+static void	do_this(t_general *gen)
+{
+	gen->env_oldpwd = buscar_var_env("OLDPWD", gen->env);
+	gen->env_oldpwd = ft_substr(gen->env_oldpwd,
+			7, ft_strlen(gen->env_oldpwd));
+	if (chdir(gen->env_oldpwd) != 0)
+		ft_per(gen->token->str[0], gen->token->str[1], 1);
+}
+
 // char *path = ft_strjoin(gen->env_home, ft_strchr(gen, '~') + 1);
 // str_append  = realloc src
 // capacidad
@@ -67,13 +76,7 @@ void	cmd_cd(t_general *gen)
 			ft_per(gen->token->str[0], gen->token->str[1], 1);
 	}
 	else if (gen->token->str[1][0] == '-')
-	{
-		gen->env_oldpwd = buscar_var_env("OLDPWD", gen->env);
-		gen->env_oldpwd = ft_substr(gen->env_oldpwd,
-				7, ft_strlen(gen->env_oldpwd));
-		if (chdir(gen->env_oldpwd) != 0)
-			ft_per(gen->token->str[0], gen->token->str[1], 1);
-	}
+		do_this(gen);
 	else if (chdir(gen->token->str[1]) != 0)
 		ft_per(gen->token->str[0], gen->token->str[1], 1);
 	old_pwd = ft_strdup(gen->env_pwd);

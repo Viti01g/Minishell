@@ -91,7 +91,7 @@ int main(int argc, char **argv, char **env)
 		}
 		free(view);
 		gen.token = NULL;
-		//system("leaks -q minishell");
+		system("leaks -q minishell");
 	}
 	return (EXIT_SUCCESS);
 }

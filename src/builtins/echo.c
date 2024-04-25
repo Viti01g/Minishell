@@ -6,7 +6,7 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:06:20 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/03/21 16:53:23 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/04/25 19:27:14 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ void	cmd_echo(t_general *gen)
 		return ;
 	}
 	ft_ex_echo(gen, ft_find_flags(gen));
+	g_signal_code = 0;
 }
