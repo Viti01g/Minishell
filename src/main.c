@@ -86,7 +86,8 @@ int main(int argc, char **argv, char **env)
 			t_token *current = gen.token;
 			while (current != NULL)
 				current = current->next;
-			exec(&gen);
+			print_tokens(&gen.token);
+		//	exec(&gen);
 			ft_free_tokens(gen.token);// Da seg_fault
 			gen.token = gen.token->next;
 		}
