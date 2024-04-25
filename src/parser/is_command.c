@@ -43,16 +43,18 @@ int process_dirs(char **dirs, char *path, char *command)
     while (dirs[i] != NULL)
     {
         full_path = create_full_path(dirs[i], command);
-        if (full_path == NULL) {
+        if (full_path == NULL)
+		{
             free(path);
             free(dirs);
-            return 0;
+            return (0);
         }
-        if (check_command_access(full_path)) {
+        if (check_command_access(full_path))
+		{
             free(full_path);
             free(path);
             free(dirs);
-            return 1;
+            return (1);
         }
         free(full_path);
         i++;
@@ -71,9 +73,10 @@ int is_command(char *command)
     if (path == NULL)
         return 0;
     dirs = ft_split(path, ':');
-    if (dirs == NULL) {
+    if (dirs == NULL)
+	{
         free(path);
         return 0;
     }
-    return process_dirs(dirs, path, command);
+    return (process_dirs(dirs, path, command));
 }

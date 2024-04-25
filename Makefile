@@ -17,7 +17,7 @@ BUI_SRC = cd.c echo.c env.c exec_builtins.c exit.c export.c pwd.c unset.c export
 SRC_SRC = init_utils.c init_vars.c main.c parsing.c utils.c more_utils.c
 EXP_SRC = expander.c expander_utils.c
 EXE_SRC = exec_utils.c exec.c exec_utils_2.c redir_utils.c more_redir_utils.c more_exec_utils.c check_exec_utils.c heredoc.c her_utils.c
-PRS_SRC = is_command.c
+PRS_SRC = is_command.c categorize_arguments.c
 
 SRC = $(TKN_SRC) $(SIG_SRC) $(SRC_SRC) $(BUI_SRC) $(EXP_SRC) $(EXE_SRC) $(PRS_SRC)
 

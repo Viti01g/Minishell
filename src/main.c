@@ -14,45 +14,7 @@ void	view_prompt(void)
 	write(1, RESET, ft_strlen(RESET));
 }
 
-
-
-/* int is_command(char *command)
-{
-	char *path;
-	char *dir;
-	char *full_path;
-	char *saveptr;
-
-	path = getenv("PATH");
-	if (path == NULL)
-		return 0;
-	path = strdup(path);
-	if (path == NULL)
-		return 0;
-	for (dir = strtok_r(path, ":", &saveptr); dir != NULL; dir = strtok_r(NULL, ":", &saveptr))
-	{
-		full_path = malloc(strlen(dir) + 1 + strlen(command) + 1);
-		if (full_path == NULL)
-		{
-			free(path);
-			return 0;
-		}
-		strcpy(full_path, dir);
-		strcat(full_path, "/");
-		strcat(full_path, command);
-		if (access(full_path, X_OK) == 0)
-		{
-			free(full_path);
-			free(path);
-			return 1;
-		}
-		free(full_path);
-	}
-	free(path);
-	return 0;
-} */
-
-void categorize_arguments(t_token *tokens)
+/* void categorize_arguments(t_token *tokens)
 {
 	t_token *current_node;
 
@@ -87,7 +49,7 @@ void categorize_arguments(t_token *tokens)
 		}
 		current_node = current_node->next;
 	}
-}
+} */
 
 
 int main(int argc, char **argv, char **env)
