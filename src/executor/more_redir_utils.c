@@ -6,7 +6,7 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:35:45 by vruiz-go          #+#    #+#             */
-/*   Updated: 2024/04/10 17:23:44 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/04/25 19:59:10 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_open_files2(char *str, int type)
 	if (fd == -1)
 	{
 		g_signal_code = 1;
-		exit(EXIT_FAILURE);
+		//exit(EXIT_FAILURE);
 	}
 	return (fd);
 }
@@ -69,7 +69,7 @@ int	ft_open_files(t_token *tok, int type)
 	if (fd == -1)
 	{
 		g_signal_code = 1;
-		exit(EXIT_FAILURE);
+		//exit(EXIT_FAILURE);
 	}
 	return (fd);
 }
