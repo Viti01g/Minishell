@@ -26,7 +26,7 @@ t_token	*ft_lstnew_addback(t_token **token, char *str, int type)
 	return (new);
 }
 
-void	free_tokens(t_token *tokens)
+/* void	free_tokens(t_token *tokens)
 {
 	t_token	*tmp;
 	int		i;
@@ -41,4 +41,24 @@ void	free_tokens(t_token *tokens)
 		free(tmp->str);
 		free(tmp);
 	}
+} */
+
+void free_tokens(t_token *tokens)
+{
+    t_token *tmp;
+    int i;
+
+    while (tokens)
+    {
+        tmp = tokens;
+        tokens = tokens->next;
+        if (tmp->str)
+        {
+            i = -1;
+            while (tmp->str[++i])
+                free(tmp->str[i]);
+            free(tmp->str);
+        }
+        free(tmp);
+    }
 }

@@ -11,8 +11,16 @@ int		check_command_access(char *full_path);
 int		process_dirs(char **dirs, char *path, char *command);
 int		is_command(char *command);
 
-void handle_syntax_error(t_token *current_node);
-void set_node_type(t_token *current_node);
-void handle_redirection(t_token **current_node);
-void categorize_arguments(t_token *tokens);
+
+void	set_node_type(t_token *current_node);
+int	handle_syntax_error(t_token *current_node);
+int	categorize_arguments(t_token *tokens);
+int	handle_redirection(t_token **current_node);
+int check_syntax(t_token *tokens);
+
+int check_redirection(t_token *current_node);
+int check_pipe(t_token *current_node);
+int handle_pipe(t_token **current_node, t_token *tokens);
+int categorize_arguments(t_token *tokens);
+
 #endif
