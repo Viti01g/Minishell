@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:03:31 by vruiz-go          #+#    #+#             */
-/*   Updated: 2024/04/26 14:22:45 by drubio-m         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:39:43 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	count_txt(char **str)
 {
-    int	i;
+	int	i;
 
-    if (str == NULL)
-        return (0);
-    i = 0;
-    while (str[i] != NULL)
-        i++;
-    return (i);
+	if (str == NULL)
+		return (0);
+	i = 0;
+	while (str[i] != NULL)
+		i++;
+	return (i);
 }
 
 void	free_matriz(char **str)

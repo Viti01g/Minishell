@@ -6,7 +6,7 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 11:00:38 by vruiz-go          #+#    #+#             */
-/*   Updated: 2024/04/26 11:00:51 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:36:58 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ void	until_single(char *input, int *i, int *single_flag)
 	}
 }
 
-
-
 int	check_quotes(char *input)
 {
 	int	double_flag;
@@ -83,10 +81,9 @@ int	check_quotes(char *input)
 	if (double_flag || single_flag)
 	{
 		error_quote(0);
-		return 0;
-//		ft_error("Quotes are not closed");
+		return (0);
 	}
-	return 1;
+	return (1);
 }
 /* 
 int	main(void)

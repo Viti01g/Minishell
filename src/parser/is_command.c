@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_command.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:56:19 by vruiz-go          #+#    #+#             */
-/*   Updated: 2024/04/26 10:50:16 by drubio-m         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:29:28 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,22 @@ char	*get_path(void)
 
 char	*create_full_path(char *dir, char *command)
 {
-    char	*full_path;
-    char	*temp;
+	char	*full_path;
+	char	*temp;
 
-    if (dir == NULL || command == NULL)
-        return (NULL);
-    full_path = malloc(strlen(dir) + 1 + strlen(command) + 1);
-    if (full_path == NULL)
-        return (NULL);
-    ft_strcpy(full_path, dir);
-    temp = full_path;
-    full_path = ft_strjoin(full_path, "/");
-    free(temp);
-    temp = full_path;
-    full_path = ft_strjoin(full_path, command);
-    free(temp);
-    return (full_path);
+	if (dir == NULL || command == NULL)
+		return (NULL);
+	full_path = malloc(strlen(dir) + 1 + strlen(command) + 1);
+	if (full_path == NULL)
+		return (NULL);
+	ft_strcpy(full_path, dir);
+	temp = full_path;
+	full_path = ft_strjoin(full_path, "/");
+	free(temp);
+	temp = full_path;
+	full_path = ft_strjoin(full_path, command);
+	free(temp);
+	return (full_path);
 }
 
 int	check_command_access(char *full_path)
