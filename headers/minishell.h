@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:05:24 by vruiz-go          #+#    #+#             */
-/*   Updated: 2024/04/26 10:25:47 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/04/26 12:39:16 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,6 +227,13 @@ int			check_some_built(t_token *aux);
 void		ft_leaks(void);
 void		ft_error(char *error);
 int			ft_open_files2(char *str, int type);
+
+
+
+
+
+
+int error_quote();
 
 // Other libraries need to go after the structs
 

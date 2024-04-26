@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:04:31 by vruiz-go          #+#    #+#             */
-/*   Updated: 2024/04/24 17:04:33 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/04/25 20:59:49 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,11 @@ void	ft_err_msg(char *s)
 {
 	ft_putendl_fd(s, 2);
 	g_signal_code = 1;
+}
+
+int	error_quote(int code)
+{
+	printf("Quotes are not closed\n");
+	g_signal_code = 1;
+	return (code);
 }

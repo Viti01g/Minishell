@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_command.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:56:19 by vruiz-go          #+#    #+#             */
-/*   Updated: 2024/04/25 18:56:20 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/04/25 19:14:01 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ int	check_command_access(char *full_path)
 int	process_dirs(char **dirs, char *path, char *command)
 {
 	char	*full_path;
-	int		i = 0;
+	int		i;
 
-	while (dirs[i] != NULL)
+	i = -1;
+	while (dirs[++i] != NULL)
 	{
 		full_path = create_full_path(dirs[i], command);
 		if (full_path == NULL)
@@ -70,7 +71,6 @@ int	process_dirs(char **dirs, char *path, char *command)
 			return (1);
 		}
 		free(full_path);
-		i++;
 	}
 	free(path);
 	free(dirs);

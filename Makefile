@@ -1,6 +1,7 @@
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -I ./headers -I ./libft/libft.h #-g3 -fsanitize=address
+#CFLAGS = -Wall -Werror -Wextra -I ./headers -I ./libft/libft.h #-g3 -fsanitize=address
+CFLAGS = -I ./headers -I ./libft/libft.h #-g3 -fsanitize=address
 
 #Cosas realine mac casa
 
