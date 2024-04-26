@@ -6,7 +6,7 @@
 /*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:05:24 by vruiz-go          #+#    #+#             */
-/*   Updated: 2024/04/25 22:06:51 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/04/26 10:25:47 by vruiz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ void		ft_disable_ctrl_c_printing_chars(void);
 void		ft_signal_quit(void);
 void		ft_sig_child(void);
 void		sig_parent(void);
-void		init_vars(t_general *gen, char **env);
+void		init_vars(t_general *gen, char **env, char **view);
 char		**ft_cpy_env(char **env);
 char		*ft_cpy_home(char **env);
 char		*ft_cpy_path(char **env);
