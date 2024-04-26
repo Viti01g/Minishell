@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/25 22:01:52 by vruiz-go          #+#    #+#             */
+/*   Updated: 2024/04/26 12:38:58 by drubio-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSER_H
 # define PARSER_H
 
@@ -5,8 +17,8 @@
 
 typedef struct s_general	t_general;
 
-char*	get_path();
-char*	create_full_path(char *dir, char *command);
+char	*get_path(void);
+char	*create_full_path(char *dir, char *command);
 int		check_command_access(char *full_path);
 int		process_dirs(char **dirs, char *path, char *command);
 int		is_command(char *command);

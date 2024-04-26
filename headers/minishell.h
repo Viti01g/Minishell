@@ -6,7 +6,7 @@
 /*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:05:24 by vruiz-go          #+#    #+#             */
-/*   Updated: 2024/04/25 20:33:42 by drubio-m         ###   ########.fr       */
+/*   Updated: 2024/04/26 12:39:16 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ void		ft_disable_ctrl_c_printing_chars(void);
 void		ft_signal_quit(void);
 void		ft_sig_child(void);
 void		sig_parent(void);
-void		init_vars(t_general *gen, char **env);
+void		init_vars(t_general *gen, char **env, char **view);
 char		**ft_cpy_env(char **env);
 char		*ft_cpy_home(char **env);
 char		*ft_cpy_path(char **env);
@@ -192,7 +192,7 @@ char		**ft_change_env(char **env, char *str, enum e_expt flag);
 int			check_if_builtin(char *str);
 t_token		*copy_no_pipe(t_token *token);
 void		exec(t_general	*gen);
-void		set_nodes(t_token **new_head, t_token **new_node, t_token **current_new);
+void		set_nodes(t_token **new_head, t_token **nw_nod, t_token **cur_new);
 int			cont_pipes(t_token **token);
 int			check_if_builtin(char *str);
 int			check_cmd_path(t_token *tmp, t_general *gen);
@@ -209,7 +209,7 @@ pid_t		ft_fork(void);
 void		check_outfile(t_token *token, t_general *data, int fd_outf);
 int			prueba_builtin(t_token *token, t_general *gen);
 void		check_infile(t_token *token, t_general *gen, int fd_inf);
-void		ft_executer(t_token *token, t_general *gen, int fd_inf, int fd_outf);
+void		ft_executer(t_token *tok, t_general *gen, int fd_inf, int fd_outf);
 int			ft_exec_pipes(t_token *token, t_general *gen, int st_fd);
 t_general	*reset_data(t_general *gen);
 void		sig_ignore(void);
