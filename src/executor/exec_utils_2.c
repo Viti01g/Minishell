@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:32:34 by vruiz-go          #+#    #+#             */
-/*   Updated: 2024/04/25 22:05:05 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/04/26 12:49:21 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_token	*copy_no_pipe(t_token *token)
 	current_new = NULL;
 	while (struct_cpy != NULL)
 	{
-		if (struct_cpy->type != PIPE)
+		if (struct_cpy && struct_cpy->type != PIPE)
 		{
 			new_node = (t_token *)malloc(sizeof(t_token));
 			if (new_node == NULL)

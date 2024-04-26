@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:33:42 by vruiz-go          #+#    #+#             */
-/*   Updated: 2024/04/25 21:57:39 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/04/26 12:51:43 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int	check_no_path(t_general **gen, t_token **toke, t_token **aux)
 
 int	check_if_builtin(char *str)
 {
+	if (str == NULL)
+		return (0);
 	if (ft_strcmp(str, "cd") == 0)
 		return (1);
 	else if (ft_strcmp(str, "echo") == 0)

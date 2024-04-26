@@ -6,7 +6,7 @@
 /*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 12:30:21 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/04/26 12:30:41 by drubio-m         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:23:08 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ int handle_pipe(t_token **current_node, t_token *tokens)
     *current_node = (*current_node)->next;
     if (*current_node == NULL || (*current_node)->str[0] == NULL)
 	{
-        printf("Syntax error\n");
+		printf("syntax error near unexpected token '|' \n");
+		g_signal_code = 1;
         free_tokens(tokens);
         return (1);
     }
     if (check_redirection(*current_node))
 	{
-        printf("Syntax error\n");
+		printf("syntax error near unexpected token '|' \n");
+		g_signal_code = 1;
         free_tokens(tokens);
         return (1);
     }

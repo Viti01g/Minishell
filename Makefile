@@ -1,20 +1,13 @@
 NAME = minishell
 CC = gcc
-#CFLAGS = -Wall -Werror -Wextra -I ./headers -I ./libft/libft.h #-g3 -fsanitize=address
-CFLAGS = -I ./headers -I ./libft/libft.h -g3 #-fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -I ./headers -I ./libft/libft.h #-g3 -fsanitize=address
 
-#Cosas realine mac casa
-
-#export LDFLAGS="-L/opt/homebrew/opt/readline/lib"
-#export CPPFLAGS="-I/opt/homebrew/opt/readline/include"
-
-#DEBUG = -g3 -fsanitize=address
 RM = rm -f
 
 TKN_SRC = tokenizer.c token_utils.c token_memory.c token_operators.c quotes.c quotes_utils.c delete_quotes.c
 SIG_SRC = signal.c signal_child.c signal_parent.c
 BUI_SRC = cd.c echo.c env.c exec_builtins.c exit.c export.c pwd.c unset.c export_utils.c
-SRC_SRC = init_utils.c init_vars.c main.c parsing.c utils.c more_utils.c
+SRC_SRC = init_utils.c init_vars.c main.c utils.c more_utils.c
 EXP_SRC = expander.c expander_utils.c
 EXE_SRC = exec_utils.c exec.c exec_utils_2.c redir_utils.c more_redir_utils.c more_exec_utils.c check_exec_utils.c heredoc.c her_utils.c
 PRS_SRC = is_command.c categorize_arguments.c parser_utils.c

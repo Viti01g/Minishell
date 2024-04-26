@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:03:31 by vruiz-go          #+#    #+#             */
-/*   Updated: 2024/04/24 17:03:32 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:22:45 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	count_txt(char **str)
 {
-	int	i;
+    int	i;
 
-	i = 0;
-	if (str[i] == NULL)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
+    if (str == NULL)
+        return (0);
+    i = 0;
+    while (str[i] != NULL)
+        i++;
+    return (i);
 }
 
 void	free_matriz(char **str)
@@ -77,41 +77,3 @@ void	ft_free_tokens(t_token *tokens)
 	free_matriz(tokens->str);
 	free(tokens);
 }
-
-/* void	free_view(t_general *gen)
-{
-	t_token	*aux;
-
-	aux = gen->token;
-	free(gen->);
-		gen->line = NULL;
-} */
-
-/* void	type_args(t_token **tok)
-{
-	t_token	**prueba;
-	int		i;
-
-	prueba = tok;
-	while (prueba)
-	{
-		i = 0;
-		if ((*prueba)->str[i] == '|')
-			(*tok)->type = PIPE;
-		else if ((*prueba)->str[i] == '<' && (*prueba)->str[i + 1] == '<')
-			(*tok)->type = D_FLCH_IZQ;
-		else if ((*prueba)->str[i] == '>' && (*prueba)->str[i + 1] == '>')
-			(*tok)->type = D_FLCH_DRCH;
-		else if ((*prueba)->str[i] == '<')
-			(*tok)->type = FLCH_IZQ;
-		else if ((*prueba)->str[i] == '>')
-			(*tok)->type = FLCH_DRCH;
-		else
-		{
-			(*tok)->words = count_txt((*tok)->str);
-			(*tok)->type = TXT;
-		}
-		(*prueba) = (*prueba)->next;
-	}
-	return ; 
-}*/

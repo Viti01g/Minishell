@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 22:01:02 by vruiz-go          #+#    #+#             */
-/*   Updated: 2024/04/25 22:01:04 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:54:44 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,6 @@ t_token	*ft_lstnew_addback(t_token **token, char *str, int type)
 	}
 	return (new);
 }
-
-/* void	free_tokens(t_token *tokens)
-{
-	t_token	*tmp;
-	int		i;
-
-	while (tokens)
-	{
-		tmp = tokens;
-		tokens = tokens->next;
-		i = -1;
-		while (tmp->str[++i])
-			free(tmp->str[i]);
-		free(tmp->str);
-		free(tmp);
-	}
-} */
 
 void free_tokens(t_token *tokens)
 {
