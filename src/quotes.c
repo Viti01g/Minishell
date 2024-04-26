@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 11:00:38 by vruiz-go          #+#    #+#             */
-/*   Updated: 2024/04/26 14:36:58 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:51:28 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,26 +85,3 @@ int	check_quotes(char *input)
 	}
 	return (1);
 }
-/* 
-int	main(void)
-{
-	char	*input;
-	char	*si;
-
-	while (1)
-	{
-		input = readline("\e[1;32mminishell$ \e[0m");
-		printf("%p\n", input);
-		if (!input || !ft_strcmp(input, "exit"))
-			break ;
-//		check_quotes(input);
-		si = retrieve_double_quote(input);
-		free(si);
-		free(input);
-	}
-	//system("leaks -q minishell");
-	atexit(ft_leaks);
-	return (0);
-} */
-
-// wqeqw"ssdff""<"

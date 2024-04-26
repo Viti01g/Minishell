@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   categorize_arguments.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vruiz-go <vruiz-go@student.42.fr>          +#+  +:+       +#+        */
+/*   By: drubio-m <drubio-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:02:06 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/04/26 14:44:55 by vruiz-go         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:03:32 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,22 @@ int	handle_redirection(t_token **current_node)
 
 int	check_syntax(t_token *tokens)
 {
-	t_token	*current;
+    t_token	*current;
 
-	current = tokens;
-	while (current != NULL)
-	{
-		if ((current->type == PIPE || current->type == FLCH_IZQ
-				|| current->type == FLCH_DRCH
-				|| current->type == D_FLCH_DRCH)
-			&& (current->next == NULL
-				|| (current->next && current->next->type != CMD)))
-		{
-			printf("Error: syntax error near unexpected token `%s'\n",
-				current->str[0]);
-			g_signal_code = 1;
-			return (1);
-		}
-		current = current->next;
-	}
-	return (0);
+    current = tokens;
+    while (current != NULL)
+    {
+        if ((current->type == PIPE || current->type == FLCH_IZQ
+                || current->type == FLCH_DRCH
+                || current->type == D_FLCH_DRCH)
+            && (current->next == NULL))
+        {
+            printf("Error: syntax error near unexpected token `%s'\n",
+                current->str[0]);
+            g_signal_code = 1;
+            return (1);
+        }
+        current = current->next;
+    }
+    return (0);
 }
