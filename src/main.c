@@ -80,6 +80,7 @@ int	main(int argc, char **argv, char **env)
 		view = readline("\e[1;32mminishell$ \e[0m");
 		if (!view)
 			break ;
+		view = ft_strtrim(view, " \n\t\r\v\f");
 		if (ft_strlen(view) != 0 && check_quotes(view) == 1)
 			things_main(&gen, view, &should_free_view);
 		if (should_free_view)
